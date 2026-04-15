@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class SimpleBusTickSchedulerTest {
+public class SimpleBusTest {
 
     @Test
     public void testEventStorage() {
