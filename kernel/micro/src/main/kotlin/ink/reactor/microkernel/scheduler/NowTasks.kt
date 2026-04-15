@@ -1,5 +1,7 @@
 package ink.reactor.microkernel.scheduler
 
+import java.util.Arrays
+
 internal class NowTasks {
     private var tasks = arrayOfNulls<Runnable>(16)
     private var backTasks = arrayOfNulls<Runnable>(16)
@@ -30,5 +32,10 @@ internal class NowTasks {
         }
 
         backTasks = temp
+    }
+
+    fun cleanup() {
+        Arrays.fill(backTasks, 0)
+        Arrays.fill(tasks, null)
     }
 }

@@ -7,6 +7,7 @@ import ink.reactor.launcher.logger.LoggersLoader
 import ink.reactor.launcher.network.NetworkLoader
 import ink.reactor.microkernel.event.simplebus.SimpleEventBus
 import ink.reactor.microkernel.logger.SimpleLoggerFactory
+import ink.reactor.microkernel.scheduler.KernelSchedulerProvider
 import ink.reactor.sdk.bundled.config.yaml.YamlConfigService
 import ink.reactor.sdk.config.ConfigServiceRegistry
 
@@ -29,7 +30,8 @@ class MinimalReactorLauncher internal constructor() {
         Reactor.init(
             logger,
             SimpleLoggerFactory(logger),
-            SimpleEventBus(logger)
+            SimpleEventBus(logger),
+            KernelSchedulerProvider()
         )
 
         NetworkLoader(logger).load(yamlConfigService)

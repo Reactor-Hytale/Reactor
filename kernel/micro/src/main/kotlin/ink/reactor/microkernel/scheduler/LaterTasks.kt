@@ -1,11 +1,13 @@
 package ink.reactor.microkernel.scheduler
 
+import java.util.Arrays
+
 internal class LaterTasks {
     private var runnables = arrayOfNulls<Runnable>(16)
-    private var delays = IntArray(16)
+    private var delays = LongArray(16)
     private var size = 0
 
-    fun addTask(task: Runnable, delay: Int) {
+    fun addTask(task: Runnable, delay: Long) {
         if (size >= runnables.size) {
             val newSize = runnables.size * 2
             runnables = runnables.copyOf(newSize)
@@ -40,5 +42,10 @@ internal class LaterTasks {
             writeIndex++
         }
         size = writeIndex
+    }
+
+    fun cleanup() {
+        Arrays.fill(delays, 0)
+        Arrays.fill(runnables, null)
     }
 }

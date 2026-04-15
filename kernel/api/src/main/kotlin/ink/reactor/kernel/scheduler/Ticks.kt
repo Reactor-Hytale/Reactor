@@ -1,22 +1,29 @@
 package ink.reactor.kernel.scheduler
 
-import java.time.Duration
+import kotlin.time.Duration
 
 @JvmInline
-value class Ticks(val duration: Int) : Comparable<Ticks> {
+value class Ticks(val duration: Long) : Comparable<Ticks> {
+    init {
+        require(duration >= 0) { "Ticks cannot be negative." }
+    }
 
     companion object {
-        val NONE = Ticks(0)
-        const val MILLIS_PER_TICK = 50L
+        val ZERO = Ticks(0)
 
-        fun ofMillis(millis: Number) = Ticks((millis.toLong() / MILLIS_PER_TICK).toInt())
-        fun ofSeconds(seconds: Number) = ofMillis(seconds.toLong() * 1000)
-        fun ofMinutes(minutes: Number) = ofSeconds(minutes.toLong() * 60)
-        fun ofHours(hours: Number) = ofMinutes(hours.toLong() * 60)
-        fun ofDays(days: Number) = ofHours(days.toLong() * 24)
-        fun ofYears(years: Number) = ofDays(years.toLong() * 365)
+        fun builder(tickDuration: Duration) = Builder(tickDuration)
+    }
 
-        fun from(duration: Duration) = ofMillis(duration.toMillis())
+    class Builder(val tickDuration: Duration) {
+        private var duration: Long = 0
+
+        fun fromHours(hours: Long) = apply { duration = (hours * 60 * 60 * 1000) / tickDuration.inWholeMilliseconds }
+        fun fromMinutes(minutes: Long) = apply { duration = (minutes * 60 * 1000) / tickDuration.inWholeMilliseconds }
+        fun fromSeconds(seconds: Long) = apply { duration = (seconds * 1000) / tickDuration.inWholeMilliseconds }
+        fun fromMillis(millis: Long) = apply { duration = millis / tickDuration.inWholeMilliseconds }
+        fun fromDuration(duration: Duration) = apply { this.duration = duration.inWholeMilliseconds / tickDuration.inWholeMilliseconds }
+
+        fun build() = Ticks(duration)
     }
 
     operator fun plus(other: Ticks) = Ticks(duration + other.duration)

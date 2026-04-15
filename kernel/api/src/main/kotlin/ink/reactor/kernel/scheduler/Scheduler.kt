@@ -9,7 +9,7 @@ interface Scheduler {
      * Executes the task immediately in the current tick.
      * @param task The task to execute.
      */
-    fun runNow(task: Runnable)
+    fun runNow(task: () -> Unit)
 
     /**
      * Schedules a task to execute at an exact tick number.
@@ -20,7 +20,7 @@ interface Scheduler {
      * @param task The task to schedule (non-null).
      * @param tickToExecute The absolute tick number for execution (e.g., 2 = tick 2).
      */
-    fun runAtTick(task: Runnable, tickToExecute: Ticks)
+    fun runAtTick(task: () -> Unit, tickToExecute: Ticks)
 
     /**
      * Schedules a repeating task to execute at fixed tick intervals, starting immediately.
@@ -33,8 +33,8 @@ interface Scheduler {
      * @param executeInTheTick Fixed interval between executions (e.g., 3 = every 3 ticks).
      * @return A unique task ID for cancellation.
      */
-    fun scheduleAtTick(task: Runnable, executeInTheTick: Ticks): Int {
-        return scheduleAtTick(task, Ticks.NONE, executeInTheTick)
+    fun scheduleEvery(task: () -> Unit, executeInTheTick: Ticks): Int {
+        return scheduleEvery(task, Ticks.ZERO, executeInTheTick)
     }
 
     /**
@@ -50,7 +50,7 @@ interface Scheduler {
      * @param executeInTheTick Fixed interval between executions (e.g., 3 = every 3 ticks).
      * @return A unique task ID for cancellation.
      */
-    fun scheduleAtTick(task: Runnable, tickToStart: Ticks, executeInTheTick: Ticks): Int
+    fun scheduleEvery(task: () -> Unit, tickToStart: Ticks, executeInTheTick: Ticks): Int
 
     /**
      * Schedules a task to execute after a delay (relative to current tick).
@@ -62,7 +62,7 @@ interface Scheduler {
      * @param task The task to schedule (non-null).
      * @param delay Ticks to wait before execution (e.g., 2 = execute after 2 ticks).
      */
-    fun runAfterDelay(task: Runnable, delay: Ticks)
+    fun runAfterDelay(task: () -> Unit, delay: Ticks)
 
     /**
      * Schedules a repeating task with a fixed delay between executions, starting immediately.
@@ -77,8 +77,8 @@ interface Scheduler {
      * @param delayBetweenExecute Ticks to wait between executions (e.g., 3 = every 3 ticks).
      * @return A unique task ID for cancellation.
      */
-    fun scheduleWithDelayBetween(task: Runnable, delayBetweenExecute: Ticks): Int {
-        return scheduleWithDelayBetween(task, Ticks.NONE, delayBetweenExecute)
+    fun scheduleWithDelayBetween(task: () -> Unit, delayBetweenExecute: Ticks): Int {
+        return scheduleWithDelayBetween(task, Ticks.ZERO, delayBetweenExecute)
     }
 
     /**
@@ -97,7 +97,7 @@ interface Scheduler {
      * @param delayBetweenExecute Ticks to wait between executions (e.g., 3 = every 3 ticks; 0 = no repetition).
      * @return A unique task ID for cancellation.
      */
-    fun scheduleWithDelayBetween(task: Runnable, delayFirstExecute: Ticks, delayBetweenExecute: Ticks): Int
+    fun scheduleWithDelayBetween(task: () -> Unit, delayFirstExecute: Ticks, delayBetweenExecute: Ticks): Int
 
     /**
      * Cancels a scheduled task.
@@ -107,8 +107,8 @@ interface Scheduler {
     fun cancelScheduleTask(taskId: Int): Boolean
 
     /**
-     * Create an instance of this class
-     * @return empty scheduler
+     * Shuts down the scheduler, optionally canceling pending tasks.
+     * @param cancelPendingTasks If true, all pending tasks will be canceled. If false, they may still execute if the scheduler allows it.
      */
-    fun createNewScheduler(): Scheduler
+    fun shutdown(cancelPendingTasks: Boolean = true)
 }

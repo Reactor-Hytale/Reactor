@@ -5,11 +5,17 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.time.Duration
 
 class TickSchedulerTest {
+
+    fun createDefaultScheduler(): TickScheduler {
+        return TickScheduler(Ticks.ZERO, Duration.ZERO)
+    }
+
     @Test
     fun testNowTasks() {
-        val tickScheduler = TickScheduler()
+        val tickScheduler = createDefaultScheduler()
         val executed = AtomicInteger()
 
         tickScheduler.runNow { executed.incrementAndGet() }
@@ -23,14 +29,14 @@ class TickSchedulerTest {
 
     @Test
     fun testLaterTasks() {
-        val tickScheduler = TickScheduler()
+        val tickScheduler = createDefaultScheduler()
         val ticksElapsed = AtomicInteger()
 
         val task1 = AtomicBoolean()
         val task2 = AtomicBoolean()
         val task3 = AtomicBoolean()
 
-        tickScheduler.runAfterDelay({ task1.set(true) }, Ticks.NONE)
+        tickScheduler.runAfterDelay({ task1.set(true) }, Ticks.ZERO)
         tickScheduler.runAfterDelay({ task2.set(true) }, Ticks(2))
         tickScheduler.runAtTick({ task3.set(true) }, Ticks(3))
 
@@ -56,7 +62,7 @@ class TickSchedulerTest {
 
     @Test
     fun testScheduleAfterTasks() {
-        val tickScheduler = TickScheduler()
+        val tickScheduler = createDefaultScheduler()
         val task1 = AtomicInteger()
         val task2 = AtomicInteger()
 
@@ -66,7 +72,7 @@ class TickSchedulerTest {
             Ticks(3)
         )
 
-        val secondTaskId = tickScheduler.scheduleAtTick(
+        val secondTaskId = tickScheduler.scheduleEvery(
             { task2.incrementAndGet() },
             Ticks(1),
             Ticks(3)

@@ -1,10 +1,12 @@
 package ink.reactor.microkernel.scheduler
 
+import java.util.Arrays
+
 internal class ScheduleTasks {
     private var runnables = arrayOfNulls<Runnable>(16)
     private var ids = IntArray(16)
-    private var delays = IntArray(16)
-    private var countdowns = IntArray(16)
+    private var delays = LongArray(16)
+    private var countdowns = LongArray(16)
 
     private var taskIdCount = 0
     private var size = 0
@@ -24,7 +26,7 @@ internal class ScheduleTasks {
         }
     }
 
-    fun addTask(runnable: Runnable, startDelay: Int, delay: Int): Int {
+    fun addTask(runnable: Runnable, startDelay: Long, delay: Long): Int {
         ensureCapacity()
         val id = ++taskIdCount
         runnables[size] = runnable
@@ -65,5 +67,10 @@ internal class ScheduleTasks {
             delays = delays.copyOf(newSize)
             countdowns = countdowns.copyOf(newSize)
         }
+    }
+
+    fun cleanup() {
+        Arrays.fill(delays, 0)
+        Arrays.fill(runnables, null)
     }
 }
