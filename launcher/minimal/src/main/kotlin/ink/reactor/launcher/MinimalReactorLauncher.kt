@@ -11,11 +11,18 @@ import ink.reactor.microkernel.scheduler.KernelSchedulerProvider
 import ink.reactor.sdk.bundled.config.yaml.YamlConfigService
 import ink.reactor.sdk.config.ConfigServiceRegistry
 
-fun main() {
-    MinimalReactorLauncher().startServer()?.run()
+fun start(args: Array<String>) {
+    MinimalReactorLauncher.start()
 }
 
 class MinimalReactorLauncher internal constructor() {
+
+    companion object {
+        @JvmStatic
+        fun start() {
+            MinimalReactorLauncher().startServer()?.run()
+        }
+    }
 
     internal fun startServer(): Console? {
         val startTime = System.currentTimeMillis()

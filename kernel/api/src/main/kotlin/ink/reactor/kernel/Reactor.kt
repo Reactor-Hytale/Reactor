@@ -27,6 +27,15 @@ class Reactor private constructor(
         private val stopTasks = CopyOnWriteArrayList<() -> Unit>()
         private val shuttingDown = AtomicBoolean(false)
 
+        val logger: Logger get() = instance.logger
+        val loggerFactory: LoggerFactory get() = instance.loggerFactory
+
+        val bus: EventBus get() = instance.bus
+        val schedulerProvider: SchedulerProvider get() = instance.schedulerProvider
+        /*
+        val pluginCatalog: PluginCatalog get() = instance.pluginCatalog
+        val pluginLifecycleControl: PluginLifecycleControl get() = instance.pluginLifecycleControl*/
+
         fun init(
             logger: Logger,
             loggerFactory: LoggerFactory,
@@ -61,23 +70,5 @@ class Reactor private constructor(
 
         val instance: Reactor
             get() = ref ?: error("Kernel not initialized.")
-
-        val logger: Logger
-            get() = instance.logger
-
-        val loggerFactory: LoggerFactory
-            get() = instance.loggerFactory
-
-        val bus: EventBus
-            get() = instance.bus
-
-        val schedulerProvider: SchedulerProvider
-            get() = instance.schedulerProvider
-/*
-        val pluginCatalog: PluginCatalog
-            get() = instance.pluginCatalog
-
-        val pluginLifecycleControl: PluginLifecycleControl
-            get() = instance.pluginLifecycleControl*/
     }
 }

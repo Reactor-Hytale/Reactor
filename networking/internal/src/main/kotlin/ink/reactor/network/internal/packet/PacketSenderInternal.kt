@@ -1,11 +1,12 @@
 package ink.reactor.network.internal.packet
 
-import ink.reactor.network.api.packet.CachedPacket
+import ink.reactor.kernel.Reactor
 import ink.reactor.network.api.packet.Packet
 import ink.reactor.network.api.packet.PacketsSender
 import ink.reactor.network.api.player.PlayerConnection
 import ink.reactor.network.internal.io.PacketEncoder
 import ink.reactor.network.internal.io.frame.PacketFramer
+import ink.reactor.network.internal.player.NettyPlayerConnection
 
 class PacketSenderInternal: PacketsSender {
 
@@ -13,30 +14,41 @@ class PacketSenderInternal: PacketsSender {
         connections: Collection<PlayerConnection>,
         packet: Packet
     ) {
-        if (connections.isEmpty()) return
-
-        val targets = connections.filter { it.isOnline() }
-        if (targets.isEmpty()) return
+        if (connections.isEmpty()) {
+            return
+        }
 
         val buf = PacketEncoder.allocateBuf(packet) ?: return
+        val cachedPacket = CachedPacket(buf, connections.size)
+
         try {
             PacketFramer.writeFramedPacket(packet, buf)
-            val cached = CachedPacket(buf, targets.size)
-
-            for (connection in targets) {
-                connection.sendCachedPacket(cached)
-            }
         } catch (e: Exception) {
-            if (buf.refCnt() > 0) buf.release()
-            throw e
+            repeat(connections.size) { cachedPacket.onCompleteWrite() }
+            Reactor.logger.error("Failed to write packet to buffer", e)
+            return
         }
+
+        var sentCount = 0
+        for (connection in connections) {
+            if (connection is NettyPlayerConnection) {
+                connection.sendCachedPacket(cachedPacket)
+                sentCount++
+            }
+        }
+
+        // Release TTLs for connections that weren't NettyPlayerConnection
+        val unsentCount = connections.size - sentCount
+        repeat(unsentCount) { cachedPacket.onCompleteWrite() }
     }
 
     override fun sendPackets(
         connections: Collection<PlayerConnection>,
         vararg packets: Packet
     ) {
-        if (connections.isEmpty()) return
+        if (connections.isEmpty() || packets.isEmpty()) {
+            return
+        }
 
         for (packet in packets) {
             sendPacket(connections, packet)

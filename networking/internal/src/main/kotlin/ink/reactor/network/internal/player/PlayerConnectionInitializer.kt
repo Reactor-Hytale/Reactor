@@ -12,14 +12,13 @@ import io.netty.channel.ChannelInitializer
 import io.netty.handler.timeout.ReadTimeoutHandler
 import io.netty.incubator.codec.quic.QuicChannel
 import io.netty.incubator.codec.quic.QuicStreamChannel
-import java.security.cert.X509Certificate
 
 class PlayerConnectionInitializer(private val logger: Logger): ChannelInitializer<Channel>() {
 
     override fun initChannel(ch: Channel) {
         if (ch is QuicStreamChannel) {
             val parentChannel: QuicChannel = ch.parent()
-            val clientCert = parentChannel.attr<X509Certificate>(QuicTransport.CLIENT_CERTIFICATE_ATTR).get()
+            val clientCert = parentChannel.attr(QuicTransport.CLIENT_CERTIFICATE_ATTR).get()
 
             if (clientCert != null) {
                 ch.attr(QuicTransport.CLIENT_CERTIFICATE_ATTR).set(clientCert)

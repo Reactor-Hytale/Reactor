@@ -27,7 +27,8 @@ class NetworkInternalConnector private constructor(
             ref = NetworkInternalConnector(config, connection)
             NetworkConnector.init(
                 StatePacketHandlerStorage(PacketRegistry.MAX_PACKETS),
-                PacketSenderInternal())
+                PacketSenderInternal()
+            )
 
             connection.init(config)
         }

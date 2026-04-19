@@ -1,8 +1,9 @@
 package ink.reactor.network.protocol.connection
 
+import ink.reactor.network.api.buffer.ReadBuffer
+import ink.reactor.network.api.buffer.WriteBuffer
 import ink.reactor.network.api.packet.Packet
 
-import io.netty.buffer.ByteBuf
 import java.util.*
 
 class ConnectPacket(
@@ -21,11 +22,11 @@ class ConnectPacket(
         GAME, EDITOR
     }
 
-    override fun write(buf: ByteBuf) {
+    override fun write(buf: WriteBuffer) {
         TODO("Not yet implemented")
     }
 
-    override fun read(buf: ByteBuf) {
+    override fun read(buf: ReadBuffer) {
         TODO("Not yet implemented")
     }
 

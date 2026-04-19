@@ -1,10 +1,11 @@
 package ink.reactor.network.api.packet
 
-import io.netty.buffer.ByteBuf
+import ink.reactor.network.api.buffer.ReadBuffer
+import ink.reactor.network.api.buffer.WriteBuffer
 
 interface Packet {
-    fun write(buf: ByteBuf)
-    fun read(buf: ByteBuf)
+    fun write(buf: WriteBuffer)
+    fun read(buf: ReadBuffer)
 
     fun maxSize(): Int
     fun size(): Int

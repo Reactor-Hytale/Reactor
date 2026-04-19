@@ -4,6 +4,8 @@ import com.github.luben.zstd.Zstd
 import ink.reactor.network.api.packet.Packet
 import ink.reactor.network.internal.io.compression.PacketCompression
 import ink.reactor.network.internal.io.compression.ProtocolException
+import ink.reactor.network.internal.packet.buffer.NettyReadBuffer
+import ink.reactor.network.internal.packet.buffer.NettyWriteBuffer
 import ink.reactor.network.protocol.data.DataSize
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
@@ -25,7 +27,7 @@ object PacketFramer {
         val payloadStart = out.writerIndex()
 
         if (!packet.needCompression()) {
-            packet.write(out)
+            packet.write(NettyWriteBuffer(out))
 
             val payloadSize = out.writerIndex() - payloadStart
             if (payloadSize > packet.maxSize()) {
@@ -40,7 +42,7 @@ object PacketFramer {
         val payloadBuf = out.alloc().buffer(initialCapacity)
 
         try {
-            packet.write(out)
+            packet.write(NettyWriteBuffer(payloadBuf))
             val uncompressedSize = payloadBuf.readableBytes()
 
             if (uncompressedSize > packet.maxSize()) {
@@ -88,7 +90,7 @@ object PacketFramer {
                 payload = Unpooled.EMPTY_BUFFER
             }
 
-            packet.read(buf)
+            packet.read(NettyReadBuffer(payload))
 
         } catch (e: Exception) {
             if (payload == null && buf.readableBytes() >= payloadLength) {

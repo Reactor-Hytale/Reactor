@@ -1,44 +1,74 @@
 package ink.reactor.network.internal.player
 
 import ink.reactor.kernel.logger.Logger
-import ink.reactor.network.api.packet.CachedPacket
 import ink.reactor.network.api.packet.Packet
 import ink.reactor.network.api.player.PlayerConnection
+import ink.reactor.network.internal.packet.CachedPacket
 import io.netty.channel.Channel
 
 class NettyPlayerConnection(
-    private val ctx: Channel,
+    val ctx: Channel,
     private val logger: Logger
 ) : PlayerConnection {
 
     override fun sendPacket(packet: Packet) {
         if (!isOnline()) return
 
-        ctx.writeAndFlush(packet)
+        if (ctx.eventLoop().inEventLoop()) {
+            ctx.writeAndFlush(packet)
+        } else {
+            ctx.eventLoop().execute { ctx.writeAndFlush(packet) }
+        }
     }
 
     override fun sendPackets(vararg packets: Packet) {
         if (!isOnline()) return
 
-        for (packet in packets) {
-            ctx.write(packet)
-        }
-        ctx.flush()
-    }
-
-    override fun sendCachedPacket(packet: CachedPacket) {
-        if (!isOnline()) {
-            packet.onWriteComplete()
+        if (ctx.eventLoop().inEventLoop()) {
+            for (packet in packets) {
+                ctx.write(packet)
+            }
+            ctx.flush()
             return
         }
 
-        val buf = packet.retainForWrite() ?: return
-
-        ctx.writeAndFlush(buf).addListener { future ->
-            packet.onWriteComplete()
-            if (!future.isSuccess) {
-                logger.warn("Failed to send cached packet: ${future.cause()?.message}")
+        ctx.eventLoop().execute {
+            for (packet in packets) {
+                ctx.write(packet)
             }
+            ctx.flush()
+        }
+    }
+
+    fun sendCachedPacket(packet: CachedPacket) {
+        if (!isOnline()) {
+            packet.onCompleteWrite()
+            return
+        }
+
+        val buf = packet.retainForWrite()
+        if (buf == null) {
+            packet.onCompleteWrite()
+            return
+        }
+
+        val writeTask = {
+            ctx.writeAndFlush(buf).addListener { future ->
+                try {
+                    if (!future.isSuccess) {
+                        logger.warn("Failed to send cached packet: ${future.cause()?.message}")
+                    }
+                } finally {
+                    packet.onCompleteWrite()
+                }
+            }
+            Unit
+        }
+
+        if (ctx.eventLoop().inEventLoop()) {
+            writeTask()
+        } else {
+            ctx.eventLoop().execute(writeTask)
         }
     }
 

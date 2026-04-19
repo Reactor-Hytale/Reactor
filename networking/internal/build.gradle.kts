@@ -12,7 +12,6 @@ dependencies {
     api("io.netty.incubator:netty-incubator-codec-native-quic:0.0.74.Final")
     api("io.netty.incubator:netty-incubator-codec-native-quic:0.0.74.Final:windows-x86_64")
     api("io.netty.incubator:netty-incubator-codec-native-quic:0.0.74.Final:linux-x86_64")
-    api("io.netty.incubator:netty-incubator-codec-native-quic:0.0.74.Final:osx-aarch_64")
 
     api("io.netty:netty-transport-native-epoll:4.2.9.Final:linux-x86_64")
     api("io.netty:netty-transport-native-epoll:4.2.9.Final:linux-aarch_64")

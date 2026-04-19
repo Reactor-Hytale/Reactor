@@ -16,7 +16,7 @@ class NetworkConnector private constructor(
 
         fun init(
             packetHandlers: PacketHandlerStorage,
-            packetsSender: PacketsSender
+            packetsSender: PacketsSender,
         ) {
             if (ref != null) {
                 error("Network connector already initialized")

@@ -19,6 +19,7 @@ class PacketEncoder: MessageToMessageEncoder<Packet>() {
             else
                 packet.size()
 
+        fun allocateBuf(size: Int): ByteBuf? = PooledByteBufAllocator.DEFAULT.buffer(size)
         fun allocateBuf(packet: Packet): ByteBuf? = PooledByteBufAllocator.DEFAULT.buffer(estimatePacketSize(packet))
         fun allocateBuf(packet: Packet, ctx: ChannelHandlerContext): ByteBuf? = ctx.alloc().buffer(estimatePacketSize(packet))
     }

@@ -1,8 +1,6 @@
 package ink.reactor.network.api.player
 
-import ink.reactor.network.api.packet.CachedPacket
 import ink.reactor.network.api.packet.Packet
-import io.netty.resolver.InetSocketAddressResolver
 
 /**
  * Represents a network connection to a player.
@@ -29,8 +27,6 @@ interface PlayerConnection {
      * @param packets The packets to send.
      */
     fun sendPackets(vararg packets: Packet)
-
-    fun sendCachedPacket(packet: CachedPacket)
 
     /**
      * Disconnects the player with the specified reason.

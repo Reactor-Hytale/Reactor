@@ -1,3 +1,3 @@
 dependencies {
-    implementation(project(":kernel:api"))
+    compileOnly(project(":kernel:api"))
 }
