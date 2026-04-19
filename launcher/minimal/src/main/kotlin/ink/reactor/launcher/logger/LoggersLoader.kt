@@ -2,7 +2,7 @@ package ink.reactor.launcher.logger
 
 import ink.reactor.kernel.Reactor
 import ink.reactor.kernel.logger.Logger
-import ink.reactor.launcher.logger.file.FileGZIPCompressor
+import ink.reactor.launcher.logger.file.LogCompressor
 import ink.reactor.launcher.logger.file.FileLogProcessorThread
 import ink.reactor.launcher.logger.file.FileWriter
 import ink.reactor.launcher.logger.type.ConsoleLogger
@@ -11,6 +11,7 @@ import ink.reactor.launcher.logger.type.NoneLogger
 import ink.reactor.launcher.logger.type.ReactorLogger
 import ink.reactor.microkernel.logger.JavaLoggerFormatter
 import ink.reactor.sdk.config.ConfigService
+import java.io.IOException
 import java.io.PrintWriter
 import java.nio.channels.FileChannel
 import java.nio.file.Files
@@ -66,7 +67,7 @@ class LoggersLoader(
         }
 
         val path = Path.of("${logs.logsFolder}/latest.log")
-        val channel = createLogChannel(path, logs.gzip) ?: return null
+        val channel = createLogChannel(path, logs.compression) ?: return null
 
         val fileWriter = FileWriter(logs.maxFileSize, logs.bufferSize, channel)
         val autoFlush = logs.autoFlush
@@ -86,18 +87,18 @@ class LoggersLoader(
         return FileLogger(logs.levels, fileWriter)
     }
 
-    private fun createLogChannel(path: Path, gzip: GzipConfig): FileChannel? {
+    private fun createLogChannel(path: Path, compression: Boolean): FileChannel? {
         return try {
             if (path.exists() && path.fileSize() > 0) {
-                val level = if (gzip.enable) gzip.level else -1
-                FileGZIPCompressor.compress(path, level)
+                LogCompressor.compress(path, compression)
             }
 
             path.parent?.let { Files.createDirectories(it) }
 
             FileChannel.open(path, StandardOpenOption.CREATE, StandardOpenOption.WRITE)
-        } catch (e: Exception) {
-            System.err.println("Can't start file logger: ${e.message}")
+        } catch (e: IOException) {
+            System.err.println("Can't start file logger")
+            e.printStackTrace(System.err)
             null
         }
     }

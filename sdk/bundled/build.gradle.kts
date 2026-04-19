@@ -3,5 +3,5 @@ plugins {
 }
 dependencies {
     api(project(":sdk:common"))
-    implementation("org.snakeyaml:snakeyaml-engine:3.0.1")
+    implementation("org.snakeyaml:snakeyaml-engine:${findProperty("snakeYamlVersion") ?: "3.0.1"}")
 }

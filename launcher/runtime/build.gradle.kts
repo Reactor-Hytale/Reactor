@@ -8,19 +8,16 @@ plugins {
     id("com.gradleup.shadow") version "9.4.1"
 }
 
-val publicProjectPaths = listOf(
-    ":kernel:api",
-    ":networking:api",
-    ":sdk:common"
-)
+val publicProjectPathsStr = findProperty("publicProjectPaths")?.toString() ?: ":kernel:api,:networking:api,:sdk:common"
+val internalProjectPathsStr = findProperty("internalProjectPaths")?.toString() ?: ":kernel:micro,:networking:protocol,:networking:internal,:sdk:bundled,:launcher:minimal"
 
-val internalProjectPaths = listOf(
-    ":kernel:micro",
-    ":networking:protocol",
-    ":networking:internal",
-    ":sdk:bundled",
-    ":launcher:minimal"
-)
+val publicProjectPaths = publicProjectPathsStr.split(",")
+    .map { it.trim() }
+    .filter { it.isNotEmpty() }
+
+val internalProjectPaths = internalProjectPathsStr.split(",")
+    .map { it.trim() }
+    .filter { it.isNotEmpty() }
 
 fun existingProject(path: String): Project? {
     val project = rootProject.findProject(path)

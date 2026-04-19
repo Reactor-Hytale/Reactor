@@ -15,10 +15,10 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("org.jetbrains:annotations:26.0.2")
+        compileOnly("org.jetbrains:annotations:${findProperty("jetbrainsAnnotationsVersion") ?: "26.0.2"}")
 
-        testImplementation("org.junit.jupiter:junit-jupiter:6.0.0")
-        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+        testImplementation("org.junit.jupiter:junit-jupiter:${findProperty("junitJupiterVersion") ?: "6.0.0"}")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher:${findProperty("junitPlatformVersion") ?: "6.0.0"}")
 
         testImplementation(kotlin("test"))
     }
@@ -31,16 +31,18 @@ allprojects {
 allprojects {
     apply<JavaPlugin>()
 
+    val javaToolchainVersion = (findProperty("javaToolchain") as? String ?: "25").toInt()
+
     tasks.withType<JavaCompile> {
         options.encoding = Charsets.UTF_8.name()
-        options.release.set(25)
+        options.release.set(javaToolchainVersion)
     }
 
     configure<JavaPluginExtension> {
-        toolchain.languageVersion.set(JavaLanguageVersion.of(25))
+        toolchain.languageVersion.set(JavaLanguageVersion.of(javaToolchainVersion))
     }
 
     configure<org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension> {
-        jvmToolchain(25)
+        jvmToolchain(javaToolchainVersion)
     }
 }

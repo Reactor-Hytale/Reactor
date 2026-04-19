@@ -46,20 +46,15 @@ class FileLogsConfig(section: ConfigSection) {
     val bufferSize  by section.delegate(8192)
 
     val maxFileSize by section.delegate(5_000_000L)
+    val compression by section.delegate(true)
 
-    val levels    = LoggerLevels(section.getOrCreateSection("levels"))
-    val autoFlush = AutoFlushConfig(section.getOrCreateSection("auto-flush"))
-    val gzip      = GzipConfig(section.getOrCreateSection("gzip"))
+    val levels      = LoggerLevels(section.getOrCreateSection("levels"))
+    val autoFlush   = AutoFlushConfig(section.getOrCreateSection("auto-flush"))
 }
 
 class AutoFlushConfig(section: ConfigSection) {
     val enable by section.delegate(true)
     val interval = TimeFormatter.parseToSeconds(section.getString("interval") ?: "10s")
-}
-
-class GzipConfig(section: ConfigSection) {
-    val enable by section.delegate(true)
-    val level by section.delegate(6)
 }
 
 class LoggerLevels(section: ConfigSection) {

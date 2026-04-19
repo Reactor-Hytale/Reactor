@@ -3,19 +3,16 @@ plugins {
     id("com.gradleup.shadow") version "9.4.1"
 }
 
-val publicProjectPaths = listOf(
-    ":kernel:api",
-    ":networking:api",
-    ":sdk:common"
-)
+val publicProjectPathsStr = findProperty("publicProjectPaths").toString()
+val internalProjectPathsStr = findProperty("internalProjectPaths").toString()
 
-val internalProjectPaths = listOf(
-    ":kernel:micro",
-    ":networking:protocol",
-    ":networking:internal",
-    ":sdk:bundled",
-    ":launcher:minimal"
-)
+val publicProjectPaths = publicProjectPathsStr.split(",")
+    .map { it.trim() }
+    .filter { it.isNotEmpty() }
+
+val internalProjectPaths = internalProjectPathsStr.split(",")
+    .map { it.trim() }
+    .filter { it.isNotEmpty() }
 
 dependencies {
     publicProjectPaths.forEach { path ->

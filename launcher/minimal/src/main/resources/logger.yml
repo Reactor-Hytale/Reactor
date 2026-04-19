@@ -56,9 +56,7 @@ logs:
     interval: 10s
 
   # Automatic compression for old log files
-  gzip:
-    enable: true
-    level: 6 # 0 (No compression) to 9 (Max compression)
+  compression: true
 
   levels:
     debug: true # Usually useful to keep debug in files
