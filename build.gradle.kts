@@ -15,10 +15,10 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("org.jetbrains:annotations:${findProperty("jetbrainsAnnotationsVersion") ?: "26.0.2"}")
+        compileOnly("org.jetbrains:annotations:${findProperty("jetbrainsAnnotationsVersion")}")
 
-        testImplementation("org.junit.jupiter:junit-jupiter:${findProperty("junitJupiterVersion") ?: "6.0.0"}")
-        testRuntimeOnly("org.junit.platform:junit-platform-launcher:${findProperty("junitPlatformVersion") ?: "6.0.0"}")
+        testImplementation("org.junit.jupiter:junit-jupiter:${findProperty("junitJupiterVersion")}")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher:${findProperty("junitPlatformVersion")}")
 
         testImplementation(kotlin("test"))
     }
@@ -31,7 +31,7 @@ allprojects {
 allprojects {
     apply<JavaPlugin>()
 
-    val javaToolchainVersion = (findProperty("javaToolchain") as? String ?: "25").toInt()
+    val javaToolchainVersion = (findProperty("javaToolchain") as String).toInt()
 
     tasks.withType<JavaCompile> {
         options.encoding = Charsets.UTF_8.name()

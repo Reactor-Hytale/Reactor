@@ -5,8 +5,9 @@ plugins {
 dependencies {
     implementation(kotlin("stdlib"))
 
-    implementation("org.jline:jline-terminal:${findProperty("jlineVersion") ?: "3.30.4"}")
-    implementation("org.jline:jline-reader:${findProperty("jlineVersion") ?: "3.30.4"}")
+    val jline = findProperty("jlineVersion")
+    implementation("org.jline:jline-terminal:$jline")
+    implementation("org.jline:jline-reader:$jline")
 
     compileOnly(project(":kernel:api"))
     compileOnly(project(":kernel:micro"))

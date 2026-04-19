@@ -8,8 +8,8 @@ plugins {
     id("com.gradleup.shadow") version "9.4.1"
 }
 
-val publicProjectPathsStr = findProperty("publicProjectPaths")?.toString() ?: ":kernel:api,:networking:api,:sdk:common"
-val internalProjectPathsStr = findProperty("internalProjectPaths")?.toString() ?: ":kernel:micro,:networking:protocol,:networking:internal,:sdk:bundled,:launcher:minimal"
+val publicProjectPathsStr = findProperty("publicProjectPaths").toString()
+val internalProjectPathsStr = findProperty("internalProjectPaths").toString()
 
 val publicProjectPaths = publicProjectPathsStr.split(",")
     .map { it.trim() }
