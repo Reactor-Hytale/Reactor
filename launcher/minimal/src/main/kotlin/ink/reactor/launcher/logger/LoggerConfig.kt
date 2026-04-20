@@ -56,8 +56,6 @@ class FileLogsConfig(section: ConfigSection) {
 }
 
 class AutoFlushConfig(section: ConfigSection) {
-    val enable by section.boolean(true)
-
     val interval by section.duration(10.seconds)
 }
 

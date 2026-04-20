@@ -75,10 +75,7 @@ class LoggersLoader(
         val autoFlush = logs.autoFlush
 
         val processor = FileLogProcessorThread(fileWriter, autoFlush.interval.inWholeSeconds)
-        if (autoFlush.enable) {
-            processor.start()
-        }
-
+        processor.start()
         Reactor.addStopTask{
             processor.shutdown()
             try {

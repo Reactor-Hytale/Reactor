@@ -52,7 +52,6 @@ logs:
   maxFileSize: 5e6
 
   autoFlush:
-    enable: true
     interval: 10s
 
   # Automatic compression for old log files
