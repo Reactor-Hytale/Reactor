@@ -2,7 +2,6 @@ package ink.reactor.launcher.network
 
 import ink.reactor.kernel.Reactor
 import ink.reactor.kernel.logger.Logger
-import ink.reactor.launcher.MinimalReactorLauncher
 import ink.reactor.network.internal.NetworkInternalConnector
 import ink.reactor.network.internal.config.NetworkConfig
 import ink.reactor.network.internal.config.QuicConfig
@@ -15,7 +14,7 @@ class NetworkLoader(
     private val logger: Logger,
 ) {
     fun load(configService: ConfigService) {
-        val config = configService.createIfAbsentAndLoad("network.yml", javaClass.classLoader);
+        val config = configService.createIfAbsentAndLoad("network");
         val quicSection = config.getOrCreateSection("quic")
 
         val quicConfig = QuicConfig(

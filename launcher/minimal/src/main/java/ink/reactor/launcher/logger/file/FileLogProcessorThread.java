@@ -8,7 +8,7 @@ public final class FileLogProcessorThread extends Thread {
     private final long intervalNanos;
     private volatile boolean running = true;
 
-    public FileLogProcessorThread(FileWriter fileWriter, int intervalSeconds) {
+    public FileLogProcessorThread(FileWriter fileWriter, long intervalSeconds) {
         super("Log-Processor-Thread");
         this.fileWriter = fileWriter;
         this.intervalNanos = TimeUnit.SECONDS.toNanos(intervalSeconds);

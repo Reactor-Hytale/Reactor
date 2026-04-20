@@ -26,7 +26,7 @@ class LoggersLoader(
 ) {
 
     fun load(configService: ConfigService): Logger {
-        val config = LoggerConfig(configService.createIfAbsentAndLoad("logger.yml", javaClass.classLoader));
+        val config = LoggerConfig(configService.createIfAbsentAndLoad("logger"));
         if (!config.enable) {
             return NoneLogger();
         }
@@ -67,17 +67,20 @@ class LoggersLoader(
         }
 
         val path = Path.of("${logs.logsFolder}/latest.log")
-        val channel = createLogChannel(path, logs.compression) ?: return null
+
+        compressOldLog(path, logs.compression)
+        val channel = createLogChannel(path) ?: return null
 
         val fileWriter = FileWriter(logs.maxFileSize, logs.bufferSize, channel)
         val autoFlush = logs.autoFlush
 
-        val processor = FileLogProcessorThread(fileWriter, autoFlush.interval.toInt())
+        val processor = FileLogProcessorThread(fileWriter, autoFlush.interval.inWholeSeconds)
         if (autoFlush.enable) {
             processor.start()
         }
 
-        Reactor.addStopTask{processor.shutdown()
+        Reactor.addStopTask{
+            processor.shutdown()
             try {
                 processor.join(5000)
             } catch (_: InterruptedException) {}
@@ -87,14 +90,20 @@ class LoggersLoader(
         return FileLogger(logs.levels, fileWriter)
     }
 
-    private fun createLogChannel(path: Path, compression: Boolean): FileChannel? {
-        return try {
+    private fun compressOldLog(path: Path, compression: Boolean) {
+        try {
             if (path.exists() && path.fileSize() > 0) {
                 LogCompressor.compress(path, compression)
             }
+        } catch (e: IOException) {
+            System.err.println("Can't compress old log file")
+            e.printStackTrace(System.err)
+        }
+    }
 
+    private fun createLogChannel(path: Path): FileChannel? {
+        return try {
             path.parent?.let { Files.createDirectories(it) }
-
             FileChannel.open(path, StandardOpenOption.CREATE, StandardOpenOption.WRITE)
         } catch (e: IOException) {
             System.err.println("Can't start file logger")

@@ -2,26 +2,28 @@ package ink.reactor.launcher.logger
 
 import ink.reactor.sdk.config.ConfigSection
 import ink.reactor.sdk.util.TimeFormatter
+import kotlin.time.Duration.Companion.seconds
 
 class LoggerConfig(section: ConfigSection) {
-    val enable by section.delegate(true)
+    val enable by section.boolean(true)
+
     val prefix = PrefixConfig(section.getOrCreateSection("prefix"))
     val console = ConsoleConfig(section.getOrCreateSection("console"))
     val logs = FileLogsConfig(section.getOrCreateSection("logs"))
 }
 
 class PrefixConfig(section: ConfigSection) {
-    val dateFormatter by section.delegate("HH:mm:ss")
+    val dateFormatter by section.string("HH:mm:ss")
 
-    val debug by section.delegate("[DEBUG %time%] ")
-    val log   by section.delegate("[LOG %time%] ")
-    val info  by section.delegate("[INFO %time%] ")
-    val warn  by section.delegate("[WARN %time%] ")
-    val error by section.delegate("[ERROR %time%] ")
+    val debug by section.string("[DEBUG %time%] ")
+    val log   by section.string("[LOG %time%] ")
+    val info  by section.string("[INFO %time%] ")
+    val warn  by section.string("[WARN %time%] ")
+    val error by section.string("[ERROR %time%] ")
 }
 
 class ConsoleConfig(section: ConfigSection) {
-    val enable by section.delegate(true)
+    val enable by section.boolean(true)
     val levels = LoggerLevels(section.getOrCreateSection("levels"))
     val styles = StylesConfig(section.getOrCreateSection("styles"))
 }
@@ -35,32 +37,34 @@ class StylesConfig(section: ConfigSection) {
 }
 
 class ConsoleStyle(section: ConfigSection) {
-    val prefix by section.delegate("")
-    val text by section.delegate("")
-    val afterText by section.delegate("")
+    val prefix by section.string("")
+    val text by section.string("")
+    val afterText by section.string("")
 }
 
 class FileLogsConfig(section: ConfigSection) {
-    val enable      by section.delegate(true)
-    val logsFolder  by section.delegate("logs")
-    val bufferSize  by section.delegate(8192)
+    val enable by section.boolean(true)
+    val logsFolder by section.string("logs")
 
-    val maxFileSize by section.delegate(5_000_000L)
-    val compression by section.delegate(true)
+    val bufferSize by section.unsignedInt(8192)
+    val maxFileSize by section.unsignedLong(5_000_000L)
 
-    val levels      = LoggerLevels(section.getOrCreateSection("levels"))
-    val autoFlush   = AutoFlushConfig(section.getOrCreateSection("auto-flush"))
+    val compression by section.boolean(true)
+
+    val levels = LoggerLevels(section.getOrCreateSection("levels"))
+    val autoFlush = AutoFlushConfig(section.getOrCreateSection("auto-flush"))
 }
 
 class AutoFlushConfig(section: ConfigSection) {
-    val enable by section.delegate(true)
-    val interval = TimeFormatter.parseToSeconds(section.getString("interval") ?: "10s")
+    val enable by section.boolean(true)
+
+    val interval by section.duration(10.seconds)
 }
 
 class LoggerLevels(section: ConfigSection) {
-    val debug by section.delegate(false)
-    val log   by section.delegate(true)
-    val info  by section.delegate(true)
-    val warn  by section.delegate(true)
-    val error by section.delegate(true)
+    val debug by section.boolean(false)
+    val log   by section.boolean(true)
+    val info  by section.boolean(true)
+    val warn  by section.boolean(true)
+    val error by section.boolean(true)
 }

@@ -2,7 +2,7 @@ package ink.reactor.sdk.bundled.config.yaml
 
 import ink.reactor.sdk.bundled.config.AbstractConfigService
 import ink.reactor.sdk.config.ConfigSection
-import ink.reactor.sdk.config.MapConfigSection
+import ink.reactor.sdk.config.section.MapConfigSection
 import ink.reactor.sdk.config.SaveOptions
 import org.snakeyaml.engine.v2.api.Load
 import org.snakeyaml.engine.v2.api.LoadSettings
@@ -10,7 +10,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 class YamlConfigService : AbstractConfigService() {
-    override val fileExtensions = listOf("yaml", "yml")
+    override val fileExtensions = listOf("yml", "yaml")
 
     private val loader: Load by lazy {
         val settings = LoadSettings.builder()
