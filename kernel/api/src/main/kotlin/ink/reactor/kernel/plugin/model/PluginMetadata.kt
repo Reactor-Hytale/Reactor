@@ -10,7 +10,7 @@ data class PluginMetadata(
     val version: Version,
     val description: String? = null,
     val authors: Set<String> = emptySet(),
-    val dependencies: Set<PluginDependency> = emptySet()
+    val dependencies: Collection<PluginDependency> = emptySet()
 ) {
     val requiredDependencies: Set<PluginDependency>
         get() = dependencies.filterTo(linkedSetOf()) { it.kind == DependencyKind.REQUIRED }
