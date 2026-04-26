@@ -49,3 +49,4 @@ network.yml
 /certs/**
 /plugins/
 /cache/
+plugins.yml
