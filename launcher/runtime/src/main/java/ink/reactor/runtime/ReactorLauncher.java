@@ -139,7 +139,7 @@ public final class ReactorLauncher {
                  try {
                      Files.delete(path);
                  } catch (Exception _) {}
-             });
+            });
         }
     }
 }

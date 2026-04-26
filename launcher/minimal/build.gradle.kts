@@ -1,7 +1,3 @@
-plugins {
-    kotlin("jvm") version "2.3.0"
-}
-
 dependencies {
     implementation(kotlin("stdlib"))
 

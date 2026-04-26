@@ -1,6 +1,6 @@
 plugins {
     `java-gradle-plugin`
-    `kotlin-dsl`
+    id("org.gradle.kotlin.kotlin-dsl") version "6.5.2"
 }
 repositories {
     mavenCentral()
