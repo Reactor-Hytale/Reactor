@@ -1,4 +1,4 @@
-package ink.reactor.microkernel.event.simplebus;
+package ink.reactor.microkernel.event.bus;
 
 import ink.reactor.kernel.event.EventExecutor;
 import ink.reactor.kernel.event.ListenerPhase;

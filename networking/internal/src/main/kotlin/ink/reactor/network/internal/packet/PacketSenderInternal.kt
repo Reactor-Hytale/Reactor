@@ -25,7 +25,7 @@ class PacketSenderInternal: PacketsSender {
             PacketFramer.writeFramedPacket(packet, buf)
         } catch (e: Exception) {
             repeat(connections.size) { cachedPacket.onCompleteWrite() }
-            Reactor.logger.error("Failed to write packet to buffer", e)
+            Reactor.globalLogger.error("Failed to write packet to buffer", e)
             return
         }
 

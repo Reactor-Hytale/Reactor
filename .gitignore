@@ -47,3 +47,5 @@ logs
 logger.yml
 network.yml
 /certs/**
+/plugins/
+/cache/

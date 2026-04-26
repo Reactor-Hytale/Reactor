@@ -4,5 +4,7 @@ import ink.reactor.launcher.MinimalReactorLauncher
 
 fun main() {
     println("Debug Launcher Starting...")
-    MinimalReactorLauncher.start()
+
+    // No isolation in debug mode
+    MinimalReactorLauncher.start(Thread.currentThread().contextClassLoader)
 }

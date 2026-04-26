@@ -21,7 +21,7 @@ public final class ReactorLauncher {
     private static final String ENTRYPOINT_CLASS =
         "ink.reactor.launcher.MinimalReactorLauncherKt";
 
-    static void main(String[] args) throws Throwable {
+    static void main() throws Throwable {
         final Path reactorJar = resolveOwnJar();
         final Path publicJar = extractEmbeddedPublicJar(reactorJar);
 
@@ -43,7 +43,7 @@ public final class ReactorLauncher {
         thread.setContextClassLoader(internalLoader);
 
         try {
-            launchEntrypoint(internalLoader, args);
+            launchEntrypoint(internalLoader, publicLoader);
         } finally {
             thread.setContextClassLoader(previous);
         }
@@ -51,7 +51,7 @@ public final class ReactorLauncher {
 
     private static void launchEntrypoint(
         final ClassLoader internalLoader,
-        final String[] args
+        final ClassLoader publicLoader
     ) throws Throwable {
         final Class<?> entrypointClass = Class.forName(
             ENTRYPOINT_CLASS,
@@ -59,16 +59,16 @@ public final class ReactorLauncher {
             internalLoader
         );
 
-        final Method mainMethod = entrypointClass.getMethod(MAIN_FUNCTION, String[].class);
+        final Method mainMethod = entrypointClass.getMethod(MAIN_FUNCTION, ClassLoader.class);
 
         if (!Modifier.isStatic(mainMethod.getModifiers())) {
             throw new IllegalStateException(
-                "Entrypoint " + MAIN_FUNCTION + "(String[] args) must be static: " + ENTRYPOINT_CLASS
+                "Entrypoint " + MAIN_FUNCTION + "(ClassLoader[] publicClassLoader) must be static: " + ENTRYPOINT_CLASS
             );
         }
 
         try {
-            mainMethod.invoke(null, (Object) args);
+            mainMethod.invoke(null, publicLoader);
         } catch (InvocationTargetException ex) {
             throw ex.getCause();
         }

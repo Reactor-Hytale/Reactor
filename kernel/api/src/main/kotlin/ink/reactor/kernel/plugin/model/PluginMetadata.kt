@@ -6,7 +6,6 @@ import ink.reactor.kernel.plugin.model.version.Version
 
 data class PluginMetadata(
     val id: PluginId,
-    val name: String,
     val version: Version,
     val description: String? = null,
     val authors: Set<String> = emptySet(),

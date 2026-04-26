@@ -26,7 +26,7 @@ abstract class ReactorPluginMetadataExtension @Inject constructor(
 
     val outputFileName: Property<String> =
         objects.property(String::class.java)
-            .convention("plugin.properties")
+            .convention("manifest.properties")
 
     val failOnMultiplePlugins: Property<Boolean> =
         objects.property(Boolean::class.java).convention(false)

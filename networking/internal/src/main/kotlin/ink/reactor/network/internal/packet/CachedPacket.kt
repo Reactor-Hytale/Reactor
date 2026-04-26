@@ -19,20 +19,23 @@ import io.netty.buffer.ByteBuf
  */
 class CachedPacket(
     private val serializedBuf: ByteBuf,
-    @Volatile private var ttl: Int
+    private var ttl: Int
 ) {
+    private val lock = Any()
 
-    @Synchronized
-    fun retainForWrite(): ByteBuf? {
+    fun retainForWrite(): ByteBuf? = synchronized(lock) {
         if (ttl <= 0 || serializedBuf.refCnt() <= 0) return null
-        return serializedBuf.retainedDuplicate()
+        return serializedBuf.duplicate().retain()
     }
 
-    @Synchronized
-    fun onCompleteWrite() {
-        ttl--
-        if (ttl <= 0 && serializedBuf.refCnt() > 0) {
-            serializedBuf.release()
+    fun onCompleteWrite() = synchronized(lock) {
+        if (ttl > 0) {
+            ttl--
+            if (ttl <= 0) {
+                if (serializedBuf.refCnt() > 0) {
+                    serializedBuf.release()
+                }
+            }
         }
     }
 }

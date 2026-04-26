@@ -15,7 +15,7 @@ public class SimpleLoggerFactory implements LoggerFactory {
 
     @Override
     public @NotNull Logger createLogger(final @NotNull String prefix) {
-        return new WrappedLogger("", prefix.endsWith(" ") ? prefix : prefix + " ", defaultLogger, defaultLogger.getLoggerFormatter());
+        return new WrappedLogger(defaultLogger, prefix.endsWith(" ") ? prefix : prefix + " ", "", defaultLogger.getLoggerFormatter());
     }
 
     @Override
@@ -23,10 +23,24 @@ public class SimpleLoggerFactory implements LoggerFactory {
         final String prefix = builder.getPrefix();
         final String suffix = builder.getSuffix();
         return new WrappedLogger(
-            suffix.startsWith(" ") ? suffix : " " + suffix,
-            prefix.endsWith(" ") ? prefix : prefix + " ",
             defaultLogger,
+            prefix.endsWith(" ") ? prefix : prefix + " ",
+            suffix.startsWith(" ") ? suffix : " " + suffix,
             builder.getFormatter() != null ? builder.getFormatter() : defaultLogger.getLoggerFormatter()
         );
+    }
+
+    @Override
+    public @NotNull Logger acquire(final @NotNull Object owner) {
+        return acquire(owner.getClass());
+    }
+
+    @Override
+    public @NotNull Logger acquire(final @NotNull Class<?> ownerClass) {
+        final String simpleName = ownerClass.getSimpleName();
+        final String name = simpleName.isBlank()
+            ? ownerClass.getName()
+            : simpleName;
+        return createLogger(name);
     }
 }

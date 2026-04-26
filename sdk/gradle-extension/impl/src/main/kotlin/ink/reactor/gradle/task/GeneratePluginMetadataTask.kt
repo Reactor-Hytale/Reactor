@@ -1,8 +1,7 @@
 package ink.reactor.gradle.task
 
-import ink.reactor.gradle.model.DependencyAnnotationData
-import ink.reactor.gradle.model.PluginAnnotationData
 import ink.reactor.gradle.scanner.PluginClassScanner
+import ink.reactor.gradle.validation.Validator
 import ink.reactor.gradle.writer.PluginPropertiesWriter
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
@@ -86,12 +85,13 @@ abstract class GeneratePluginMetadataTask : DefaultTask() {
         val pluginData = scanResult.pluginClass.pluginData
             ?: throw GradleException("Internal error: @Plugin class was found but no annotation data was extracted")
 
-        validatePluginData(pluginData, scanResult.pluginClass.className)
+        Validator.validatePluginData(pluginData, scanResult.pluginClass.className)
 
         val outputFile = outputDirectory.get().asFile.resolve(outputFileName.get())
         PluginPropertiesWriter().write(
             outputFile,
             pluginData,
+            scanResult.pluginClass.className,
             scanResult.bootstrapClass?.className
         )
 
@@ -101,36 +101,6 @@ abstract class GeneratePluginMetadataTask : DefaultTask() {
             scanResult.pluginClass.className,
             scanResult.bootstrapClass?.let { ", @Boostrap=${it.className}" } ?: ""
         )
-    }
-
-    private fun validatePluginData(plugin: PluginAnnotationData, ownerClassName: String) {
-        if (plugin.id.isBlank()) {
-            throw GradleException("@Plugin.id cannot be blank on $ownerClassName")
-        }
-        if (plugin.version.isBlank()) {
-            throw GradleException("@Plugin.version cannot be blank on $ownerClassName")
-        }
-
-        validateDependencies("Required Dependency", ownerClassName, plugin.dependencies)
-        validateDependencies("Soft Dependency", ownerClassName, plugin.dependencies)
-    }
-
-    private fun validateDependencies(
-        type: String,
-        ownerClassName: String,
-        dependencies: MutableList<DependencyAnnotationData>
-    ) {
-        dependencies.forEach { dependency ->
-            if (dependency.id.isBlank()) {
-                throw GradleException("$type id cannot be blank on $ownerClassName")
-            }
-            if (dependency.version.isBlank()) {
-                throw GradleException(
-                    "$type '${dependency.id}' on $ownerClassName has blank version. " +
-                        "The current runtime deserializer expects 'pluginId:version'."
-                )
-            }
-        }
     }
 
     private fun cleanOutputDirectory() {

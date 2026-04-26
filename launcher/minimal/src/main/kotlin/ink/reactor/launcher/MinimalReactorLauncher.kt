@@ -1,30 +1,28 @@
 package ink.reactor.launcher
 
-import ink.reactor.kernel.Reactor
 import ink.reactor.launcher.console.Console
 import ink.reactor.launcher.console.JLineConsole.createConsole
 import ink.reactor.launcher.logger.LoggersLoader
 import ink.reactor.launcher.network.NetworkLoader
-import ink.reactor.microkernel.event.simplebus.SimpleEventBus
-import ink.reactor.microkernel.logger.SimpleLoggerFactory
-import ink.reactor.microkernel.scheduler.KernelSchedulerProvider
+import ink.reactor.launcher.plugin.PluginConfigLoader
+import ink.reactor.microkernel.Microkernel
 import ink.reactor.sdk.bundled.config.yaml.YamlConfigService
 import ink.reactor.sdk.config.ConfigServiceRegistry
 
-fun start(args: Array<String>) {
-    MinimalReactorLauncher.start()
+fun start(publicClassLoader: ClassLoader) {
+    MinimalReactorLauncher.start(publicClassLoader)
 }
 
 class MinimalReactorLauncher internal constructor() {
 
     companion object {
         @JvmStatic
-        fun start() {
-            MinimalReactorLauncher().startServer()?.run()
+        fun start(publicClassLoader: ClassLoader) {
+            MinimalReactorLauncher().startServer(publicClassLoader)?.run()
         }
     }
 
-    internal fun startServer(): Console? {
+    internal fun startServer(publicClassLoader: ClassLoader): Console? {
         val startTime = System.currentTimeMillis()
 
         val console = createConsole() ?: return null
@@ -34,11 +32,10 @@ class MinimalReactorLauncher internal constructor() {
 
         val logger = LoggersLoader(console.terminal.writer()).load(yamlConfigService)
 
-        Reactor.init(
-            logger,
-            SimpleLoggerFactory(logger),
-            SimpleEventBus(logger),
-            KernelSchedulerProvider()
+        Microkernel.init(
+            logger = logger,
+            kernelPluginConfig = PluginConfigLoader().load(yamlConfigService),
+            parentClassLoader = publicClassLoader
         )
 
         NetworkLoader(logger).load(yamlConfigService)

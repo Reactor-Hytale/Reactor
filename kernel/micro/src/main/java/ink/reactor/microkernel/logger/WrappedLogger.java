@@ -4,16 +4,29 @@ import ink.reactor.kernel.logger.Logger;
 import ink.reactor.kernel.logger.LoggerFormatter;
 import org.jetbrains.annotations.NotNull;
 
-public record WrappedLogger(
-    String suffix,
-    String prefix,
-    Logger logger,
-    LoggerFormatter loggerFormatter
-) implements Logger {
+public final class WrappedLogger implements Logger {
+    private final String prefix, suffix;
+    private final LoggerFormatter formatter;
+    private volatile @NotNull Logger logger;
+
+    public WrappedLogger(final @NotNull Logger logger, final String prefix, final String suffix, final LoggerFormatter formatter) {
+        this.logger = logger;
+        this.prefix = prefix;
+        this.suffix = suffix;
+        this.formatter = formatter;
+    }
+
+    public @NotNull Logger getLogger() {
+        return logger;
+    }
+
+    public void setLogger(@NotNull final Logger logger) {
+        this.logger = logger;
+    }
 
     @Override
     public @NotNull LoggerFormatter getLoggerFormatter() {
-        return loggerFormatter;
+        return formatter;
     }
 
     @Override

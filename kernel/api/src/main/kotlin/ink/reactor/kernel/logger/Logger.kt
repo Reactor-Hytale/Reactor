@@ -28,4 +28,14 @@ interface Logger {
     fun error(message: String, throwable: Throwable, vararg toFormat: Any?) {
         error(this.loggerFormatter.format(message, *toFormat), throwable)
     }
+
+    fun log(level: LogLevel, message: String) {
+        when (level) {
+            LogLevel.LOG -> log(message)
+            LogLevel.DEBUG -> debug(message)
+            LogLevel.ERROR -> error(message)
+            LogLevel.WARN -> warn(message)
+            LogLevel.INFO -> info(message)
+        }
+    }
 }

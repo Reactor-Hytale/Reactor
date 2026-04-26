@@ -4,6 +4,7 @@ plugins {
 
 dependencies {
     compileOnly(project(":sdk:common"))
+    compileOnly("org.apache.commons:commons-lang3:3.20.0")
 }
 
 reactorPluginMetadata {

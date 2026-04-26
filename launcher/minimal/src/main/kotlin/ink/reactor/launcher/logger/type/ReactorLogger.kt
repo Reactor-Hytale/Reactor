@@ -1,9 +1,7 @@
 package ink.reactor.launcher.logger.type
 
-
 import ink.reactor.kernel.logger.Logger
 import ink.reactor.kernel.logger.LoggerFormatter
-import ink.reactor.microkernel.logger.JavaLoggerFormatter
 import java.time.Clock
 import java.time.LocalDateTime
 import java.time.ZoneId

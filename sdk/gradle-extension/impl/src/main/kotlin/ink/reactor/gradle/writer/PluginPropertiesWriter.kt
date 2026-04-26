@@ -10,6 +10,7 @@ class PluginPropertiesWriter {
     fun write(
         outputFile: File,
         plugin: PluginAnnotationData,
+        main: String,
         bootstrapClassName: String?
     ) {
         outputFile.parentFile.mkdirs()
@@ -18,6 +19,7 @@ class PluginPropertiesWriter {
         val optionalDependencies = plugin.softDependencies.joinToString(",") { "${it.id}:${it.version}" }
 
         val content = buildString {
+            appendKeyValue("main", main)
             appendKeyValue("id", plugin.id)
             appendKeyValue("version", plugin.version)
 

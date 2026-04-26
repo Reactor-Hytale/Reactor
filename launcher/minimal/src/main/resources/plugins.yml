@@ -1,0 +1,64 @@
+paths:
+  plugins: "plugins"
+  libraries: "cache/libs"
+
+selection:
+  # Modes:
+  #   ALL       - load every discovered plugin
+  #   WHITELIST - load only listed plugins
+  #   BLACKLIST - load every plugin except listed plugins
+  mode: "ALL"
+
+  # Format:
+  #   plugin-id         - match any version
+  #   plugin-id:version - match exact version
+  plugins: []
+
+loading:
+  # Loads independent dependency graph components in parallel.
+  parallel: true
+
+  # If any dependency graph takes longer than this time to start,
+  # it will stop blocking the main thread and proceed to the next node.
+  # This means that they will be able to enter the server even if the plugin has not finished starting
+  # Only works with parallel loading
+  timeout: "10s"
+
+logging:
+  # Messages like:
+  #  [X-Plugin] is loading.
+  #  [X-Plugin] enabled in 30ms.
+  #  [X-Plugin] Disabled. etc
+  lifecycle-events: true
+
+  startup-buffer:
+    # Buffers startup logs during parallel loading to avoid interleaved output.
+    # Higher values use more memory but reduce dropped lines.
+    enabled: true
+    initial-capacity: 64
+    max-lines: 1000
+
+    # Controls behavior when the buffer reaches max-lines capacity.
+    #
+    # Available strategies:
+    #   DROP_OLDEST - Removes the oldest log entries to make room for new ones.
+    #                 Useful when you want to see the most recent logs.
+    #                 Example: With max-lines: 3, logs [A, B, C] + new log D
+    #                 becomes [B, C, D]
+    #
+    #   DROP_NEWEST - Discards new log entries without storing them.
+    #                 Preserves existing logs without modification.
+    #                 Useful when earlier logs are more important.
+    #                 Example: With max-lines: 3, logs [A, B, C] + new log D
+    #                 becomes [A, B, C], D is counted as skipped
+    #
+    #   FLUSH       - Immediately writes all buffered logs to the initial logger
+    #                 when the buffer becomes full, then continues buffering.
+    #                 Use with caution - may cause interleaved output during
+    #                 parallel loading, defeating the buffer's purpose.
+    #                 Example: Buffer full -> flushes [A, B, C] to console,
+    #                 then adds D to empty buffer
+    #
+    # Note: When lines are dropped (DROP_OLDEST/DROP_NEWEST), a warning
+    #       will be emitted during flush showing how many lines were skipped.
+    overflow-strategy: "DROP_NEWEST" # DROP_NEWEST, DROP_OLDEST, FLUSH

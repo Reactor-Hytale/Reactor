@@ -1,4 +1,4 @@
-package ink.reactor.microkernel.event.simplebus;
+package ink.reactor.microkernel.event.bus;
 
 import ink.reactor.kernel.event.Listener;
 import ink.reactor.kernel.event.ListenerPhase;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class SimpleBusTest {
+public class DefaultBusTest {
 
     @Test
     public void testEventStorage() {
@@ -46,12 +46,12 @@ public class SimpleBusTest {
 
         storage.add(listener1);
         storage.add(listener2);
-        Assertions.assertEquals(2, storage.size);
+        Assertions.assertEquals(2, storage.listeners.length);
     }
 
     @Test
     public void testSimpleEventBus() {
-        final SimpleEventBus eventBus = new SimpleEventBus(new PrintlnLogger());
+        final DefaultEventBus eventBus = new DefaultEventBus(new PrintlnLogger());
         final ExampleListenerWithDifferentPhase differentPhase = new ExampleListenerWithDifferentPhase();
 
         eventBus.register(differentPhase);

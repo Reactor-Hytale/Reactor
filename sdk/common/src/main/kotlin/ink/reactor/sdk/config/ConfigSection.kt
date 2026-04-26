@@ -6,6 +6,7 @@ import ink.reactor.sdk.config.delegate.ConfigProperty
 import ink.reactor.sdk.config.section.MapConfigSection
 import kotlin.time.Duration
 
+
 /**
  * Represents a named configuration section backed by a mutable key-value map.
  *
@@ -29,6 +30,12 @@ interface ConfigSection {
     fun getLong(key: String): Long = (get(key) as? Number)?.toLong() ?: 0L
     fun getDouble(key: String): Double = (get(key) as? Number)?.toDouble() ?: 0.0
     fun getBoolean(key: String): Boolean = get(key) as? Boolean ?: false
+    fun getBoolean(key: String, default: Boolean): Boolean = get(key) as? Boolean ?: default
+
+    fun <T> getList(key: String, clazz: Class<T>): List<T>
+    fun getStringList(key: String): List<String> {
+        return getList(key, String::class.java)
+    }
 
     /**
      * Returns the value associated with the given key, or the provided default value

@@ -46,13 +46,7 @@ internal class PluginClassAnnotationVisitor(
     }
 
     fun toScannedClassInfo(): ScannedClassInfo {
-        return ScannedClassInfo(
-            className = className,
-            packageName = packageName,
-            hasPlugin = hasPlugin,
-            hasBootstrap = hasBootstrap,
-            pluginData = pluginData
-        )
+        return ScannedClassInfo(className, packageName, hasPlugin, hasBootstrap, pluginData)
     }
 
     private class PluginAnnotationReader(
