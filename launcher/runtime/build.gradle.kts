@@ -2,6 +2,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.api.Project
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 import org.gradle.jvm.tasks.Jar
+import java.util.UUID
 
 plugins {
     java
@@ -137,7 +138,8 @@ val reactorJar by tasks.registering(ShadowJar::class) {
 
     manifest {
         attributes(
-            "Main-Class" to "ink.reactor.runtime.ReactorLauncher"
+            "Main-Class" to "ink.reactor.runtime.ReactorLauncher",
+            "compile-id" to UUID.randomUUID().toString()
         )
     }
 

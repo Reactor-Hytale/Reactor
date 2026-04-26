@@ -1,5 +1,6 @@
 package ink.reactor.runtime;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -9,12 +10,14 @@ import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.MessageDigest;
-import java.util.HexFormat;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.jar.Manifest;
+import java.util.stream.Stream;
 
 public final class ReactorLauncher {
+
+    public static final Path CACHE_PATH = Paths.get("cache/public/");
 
     private static final String EMBEDDED_PUBLIC_JAR = "embedded/public.jar";
     private static final String MAIN_FUNCTION = "start";
@@ -93,51 +96,50 @@ public final class ReactorLauncher {
     }
 
     private static Path extractEmbeddedPublicJar(final Path reactorJar) throws Exception {
-        final String hash = sha256(reactorJar).substring(0, 16);
-        final Path cacheDir = defaultCacheDir().resolve(hash);
-        final Path extractedPublicJar = cacheDir.resolve("public.jar");
-
-        if (Files.isRegularFile(extractedPublicJar)) {
-            return extractedPublicJar;
-        }
-
-        Files.createDirectories(cacheDir);
-
         try (JarFile jarFile = new JarFile(reactorJar.toFile())) {
+            final Manifest manifest = jarFile.getManifest();
+            if (manifest == null) {
+                throw new IllegalStateException("No MANIFEST found in jar file. Corrupted jar");
+            }
+
+            final String compileID = manifest.getMainAttributes().getValue("compile-id");
+            if (compileID == null) {
+                throw new IllegalStateException("Missing compile-id in Manifest. Corrupted jar");
+            }
+
+            final Path publicJar = CACHE_PATH.resolve(compileID + ".jar");
+
+            if (Files.isRegularFile(publicJar)) {
+                return publicJar;
+            }
+
+            deleteFilesInCache();
+
             final JarEntry entry = jarFile.getJarEntry(EMBEDDED_PUBLIC_JAR);
-
             if (entry == null) {
-                throw new IllegalStateException(
-                    "Missing embedded public jar: " + EMBEDDED_PUBLIC_JAR
-                );
+                throw new IllegalStateException("Missing embedded jar. Corrupted jar");
             }
 
+            Files.createDirectories(CACHE_PATH);
             try (InputStream input = jarFile.getInputStream(entry)) {
-                Files.copy(input, extractedPublicJar);
+                Files.copy(input, publicJar);
             }
-        }
 
-        if (!Files.isRegularFile(extractedPublicJar)) {
-            throw new IllegalStateException(
-                "Failed to extract embedded public jar to: " + extractedPublicJar
-            );
+            return publicJar;
         }
-
-        return extractedPublicJar;
     }
 
-    private static Path defaultCacheDir() {
-        final String localAppData = System.getenv("LOCALAPPDATA");
-
-        if (localAppData != null && !localAppData.isBlank()) {
-            return Paths.get(localAppData, "Reactor", "cache");
+    private static void deleteFilesInCache() throws IOException {
+        if (!Files.exists(CACHE_PATH)) {
+            return;
         }
 
-        return Paths.get(System.getProperty("user.home"), ".reactor", "cache");
-    }
-
-    private static String sha256(final Path file) throws Exception {
-        final MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        return HexFormat.of().formatHex(digest.digest(Files.readAllBytes(file)));
+        try (final Stream<Path> paths = Files.walk(CACHE_PATH, 1)) {
+            paths.filter(Files::isRegularFile).forEach(path -> {
+                 try {
+                     Files.delete(path);
+                 } catch (Exception _) {}
+             });
+        }
     }
 }
