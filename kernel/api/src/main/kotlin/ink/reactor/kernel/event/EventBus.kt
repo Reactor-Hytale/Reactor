@@ -53,7 +53,7 @@ interface EventBus {
      *
      * @param event The event object to post.
      */
-    fun post(event: Any)
+    fun publish(event: Any)
 
     /**
      * Removes all registered listeners from this bus.

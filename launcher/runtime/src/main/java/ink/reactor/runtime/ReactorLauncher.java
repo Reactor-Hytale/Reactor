@@ -88,7 +88,7 @@ public final class ReactorLauncher {
 
         if (!Files.isRegularFile(codeSource)) {
             throw new IllegalStateException(
-                "ReactorLauncher must be executed from reactor.jar. Compile in gradle using the command: `./gradlew :launcher:runtime:build` and execute the generated jar in `launcher/runtime/build/libs/`"
+                "ReactorLauncher must be executed from reactor.jar. Compile in gradle using the command: `./gradlew :launcher:runtime:build` and execute the generated jar in `launcher/runtime/build/runtime/`"
             );
         }
 

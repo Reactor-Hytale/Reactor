@@ -20,7 +20,7 @@ class BusTest {
 
         eventBus.subscribe<String> { name -> receivedUsername = name }
 
-        eventBus.post("ManoloGaymer")
+        eventBus.publish("ManoloGaymer")
 
         assertEquals("ManoloGaymer", receivedUsername, "The listener should receive the exact event posted")
     }
@@ -38,7 +38,7 @@ class BusTest {
         eventBus.subscribe<ChatEvent>(ListenerPhase.EARLY) { executionOrder.add("EARLY") }
         eventBus.subscribe<ChatEvent>(ListenerPhase.INITIAL) { executionOrder.add("INITIAL") }
 
-        eventBus.post(ChatEvent("Hello Server!"))
+        eventBus.publish(ChatEvent("Hello Server!"))
 
         val expectedOrder = listOf("INITIAL", "EARLY", "DEFAULT_HIGH_PRIORITY", "DEFAULT_LOW_PRIORITY", "LATE", "FINAL", "MONITOR")
         assertEquals(expectedOrder, executionOrder, "Events must be executed following strict Phase and Priority order")
@@ -53,10 +53,10 @@ class BusTest {
         val subscription = eventBus.subscribe<UserJoinEvent> { eventCount++ }
         assertEquals(1, eventBus.size())
 
-        eventBus.post(UserJoinEvent("Player1"))
+        eventBus.publish(UserJoinEvent("Player1"))
         subscription.unsubscribe()
         assertEquals(0, eventBus.size())
-        eventBus.post(UserJoinEvent("Player2"))
+        eventBus.publish(UserJoinEvent("Player2"))
 
         assertEquals(1, eventCount, "Listener must not be triggered after unregister is called")
     }
@@ -68,7 +68,7 @@ class BusTest {
 
         eventBus.subscribe(exampleJoinListener)
 
-        eventBus.post(UserJoinEvent("Spammer"))
+        eventBus.publish(UserJoinEvent("Spammer"))
 
         assertTrue(exampleJoinListener.wasChecked, "Annotated methods must be registered and executed")
     }
@@ -89,7 +89,7 @@ class BusTest {
             ignoreCancelledListenerRan = true
         }
 
-        eventBus.post(DamageEvent(10.0))
+        eventBus.publish(DamageEvent(10.0))
         assertFalse(normalListenerRan, "Normal listeners should skip cancelled events")
         assertTrue(ignoreCancelledListenerRan, "Listeners with ignoreCancelled=true must run")
     }

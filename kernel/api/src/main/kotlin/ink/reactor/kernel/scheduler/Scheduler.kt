@@ -1,114 +1,117 @@
 package ink.reactor.kernel.scheduler
 
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
+
 /**
- * A tick-based scheduler for executing tasks at specific ticks or after delays.
+ * A time-based scheduler for executing tasks at specific moments or after defined delays.
  */
 interface Scheduler {
 
     /**
-     * Executes the task immediately in the current tick.
+     * The smallest time increment supported by this scheduler.
+     * Example: If a tick-scheduler executes a tick every 50ms, this unit is 50ms.
+     */
+    val minPrecisionUnit: Duration
+
+    /**
+     * Executes the task immediately in the current execution cycle.
      * @param task The task to execute.
      */
     fun runNow(task: () -> Unit)
 
     /**
-     * Schedules a task to execute at an exact tick number.
-     * Example (tickToExecute = 2):
-     * <p> Tick 1: No execution  </p>
-     * <p> Tick 2: Task executes </p>
+     * Schedules a task to execute at an exact duration from the scheduler's start.
+     * Example (timeToExecute = 2s):
+     * <p> 1.0s: No execution </p>
+     * <p> 2.0s: Task executes </p>
      *
-     * @param task The task to schedule (non-null).
-     * @param tickToExecute The absolute tick number for execution (e.g., 2 = tick 2).
+     * @param task The task to schedule.
+     * @param timeToExecute The absolute duration from start for execution (e.g., 2s).
      */
-    fun runAtTick(task: () -> Unit, tickToExecute: Ticks)
+    fun runAt(task: () -> Unit, timeToExecute: Duration)
 
     /**
-     * Schedules a repeating task to execute at fixed tick intervals, starting immediately.
-     * Example (executeInTheTick = 2):
-     * <p> Tick 1: First execution   </p>
-     * <p> Tick 2: No execution      </p>
-     * <p> Tick 3: Second execution  </p>
+     * Schedules a repeating task to execute at fixed intervals, starting immediately.
+     * Example (interval = 2s):
+     * <p> 0s: First execution  </p>
+     * <p> 2s: Second execution </p>
+     * <p> 4s: Third execution  </p>
      *
-     * @param task The task to schedule (non-null).
-     * @param executeInTheTick Fixed interval between executions (e.g., 3 = every 3 ticks).
+     * @param task The task to schedule.
+     * @param interval Fixed interval between executions (e.g., 3s = every 3 seconds).
      * @return A unique task ID for cancellation.
      */
-    fun scheduleEvery(task: () -> Unit, executeInTheTick: Ticks): Int {
-        return scheduleEvery(task, Ticks.ZERO, executeInTheTick)
+    fun scheduleEvery(task: () -> Unit, interval: Duration): Task {
+        return scheduleEvery(task, 0.seconds, interval)
     }
 
     /**
-     * Schedules a repeating task to execute at fixed tick intervals, starting at a specific tick.
-     * Example (tickToStart = 2, executeInTheTick = 3):
-     * <p> Tick 1: No execution             </p>
-     * <p> Tick 2: First execution          </p>
-     * <p> Tick 5: Second execution (2 + 3) </p>
-     * <p> Tick 8: Third execution (5 + 3)  </p>
+     * Schedules a repeating task to execute at fixed intervals, starting at a specific duration
+     * from the scheduler's start.
      *
-     * @param task The task to schedule (non-null).
-     * @param tickToStart Absolute tick for first execution (e.g., 2 = tick 2).
-     * @param executeInTheTick Fixed interval between executions (e.g., 3 = every 3 ticks).
+     * Example (startTime = 2s, interval = 3s):
+     * - T=2s: First execution
+     * - T=5s: Second execution (2s + 3s)
+     * - T=8s: Third execution (5s + 3s)
+     *
+     * @param task The task to schedule.
+     * @param startTime Absolute duration from start for the first execution.
+     * @param interval Fixed interval between executions.
      * @return A unique task ID for cancellation.
      */
-    fun scheduleEvery(task: () -> Unit, tickToStart: Ticks, executeInTheTick: Ticks): Int
+    fun scheduleEvery(task: () -> Unit, startTime: Duration, interval: Duration): Task
 
     /**
-     * Schedules a task to execute after a delay (relative to current tick).
-     * Example (delay = 2):
-     * <p> Tick 1: No execution  </p>
-     * <p> Tick 2: No execution  </p>
-     * <p> Tick 3: Task executes </p>
+     * Schedules a task to execute after a specific delay relative to the current time.
+     * Example (delay = 2s):
+     * <p> 0s: Task scheduled    </p>
+     * <p> 1s: No execution      </p>
+     * <p> 2s: Task executes     </p>
      *
-     * @param task The task to schedule (non-null).
-     * @param delay Ticks to wait before execution (e.g., 2 = execute after 2 ticks).
+     * @param task The task to schedule.
+     * @param delay Duration to wait before execution.
      */
-    fun runAfterDelay(task: () -> Unit, delay: Ticks)
+    fun runAfterDelay(task: () -> Unit, delay: Duration)
 
     /**
      * Schedules a repeating task with a fixed delay between executions, starting immediately.
-     * Example (repeat = 3):
-     * <p> Tick 1: First execution               </p>
-     * <p> Tick 2: No execution                  </p>
-     * <p> Tick 3: No execution                  </p>
-     * <p> Tick 4: No execution                  </p>
-     * <p> Tick 7: Second execution (delay = 3) </p>
+     * Example (delay = 3s):
+     * <p> 0s: First execution                  </p>
+     * <p> 3s: Second execution (after 3s delay) </p>
      *
-     * @param task The task to schedule (non-null).
-     * @param delayBetweenExecute Ticks to wait between executions (e.g., 3 = every 3 ticks).
+     * @param task The task to schedule.
+     * @param delayBetweenExecute Duration to wait between executions.
      * @return A unique task ID for cancellation.
      */
-    fun scheduleWithDelayBetween(task: () -> Unit, delayBetweenExecute: Ticks): Int {
-        return scheduleWithDelayBetween(task, Ticks.ZERO, delayBetweenExecute)
+    fun scheduleWithDelay(task: () -> Unit, delayBetweenExecute: Duration): Task {
+        return scheduleWithDelay(task, 0.seconds, delayBetweenExecute)
     }
 
     /**
      * Schedules a repeating task with a delay before the first execution and between subsequent executions.
-     * Example (delayFirstExecute = 2, delayBetweenExecute = 3):
-     * <p> Tick 1: No execution                  </p>
-     * <p> Tick 2: No execution                  </p>
-     * <p> Tick 3: First execution (delay = 2)   </p>
-     * <p> Tick 4: No execution                  </p>
-     * <p> Tick 5: No execution                  </p>
-     * <p> Tick 6: No execution                  </p>
-     * <p> Tick 7: Second execution (delay = 3)  </p>
+     * Example (initialDelay = 2s, delayBetweenExecute = 3s):
+     * <p> 1s: No execution                      </p>
+     * <p> 2s: First execution (after 2s delay)   </p>
+     * <p> 5s: Second execution (after 3s delay)  </p>
      *
-     * @param task The task to schedule (non-null).
-     * @param delayFirstExecute Ticks to wait before first execution (e.g., 2 = after 2 ticks).
-     * @param delayBetweenExecute Ticks to wait between executions (e.g., 3 = every 3 ticks; 0 = no repetition).
+     * @param task The task to schedule.
+     * @param initialDelay Duration to wait before the first execution.
+     * @param delayBetweenExecute Duration to wait between subsequent executions.
      * @return A unique task ID for cancellation.
      */
-    fun scheduleWithDelayBetween(task: () -> Unit, delayFirstExecute: Ticks, delayBetweenExecute: Ticks): Int
+    fun scheduleWithDelay(task: () -> Unit, initialDelay: Duration, delayBetweenExecute: Duration): Task
 
     /**
      * Cancels a scheduled task.
-     * @param taskId The ID returned when scheduling the task.
+     * @param taskId The ID returned when the task was scheduled.
      * @return True if the task was found and canceled, false otherwise.
      */
-    fun cancelScheduleTask(taskId: Int): Boolean
+    fun cancelTask(taskId: Int): Boolean
 
     /**
-     * Shuts down the scheduler, optionally canceling pending tasks.
-     * @param cancelPendingTasks If true, all pending tasks will be canceled. If false, they may still execute if the scheduler allows it.
+     * Shuts down the scheduler.
+     * @param cancelPendingTasks If true, all pending tasks will be canceled.
      */
     fun shutdown(cancelPendingTasks: Boolean = true)
 }

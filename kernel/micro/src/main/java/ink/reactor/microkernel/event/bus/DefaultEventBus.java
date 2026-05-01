@@ -32,7 +32,7 @@ public final class DefaultEventBus implements EventBus {
     }
 
     @Override
-    public void post(final @NotNull Object event) {
+    public void publish(final @NotNull Object event) {
         final EventStorage storage = this.storage.get(event.getClass());
         if (storage != null) {
             storage.execute(event);
