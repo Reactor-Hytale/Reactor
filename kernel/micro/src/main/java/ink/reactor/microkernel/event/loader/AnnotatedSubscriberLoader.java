@@ -1,8 +1,7 @@
 package ink.reactor.microkernel.event.loader;
 
-import ink.reactor.kernel.event.EventExecutor;
 import ink.reactor.kernel.event.Listener;
-import ink.reactor.kernel.event.ListenerPhase;
+import ink.reactor.kernel.event.handler.EventHandler;
 import ink.reactor.kernel.logger.Logger;
 import ink.reactor.microkernel.event.executor.ListenerMethodHandleExecutor;
 
@@ -12,15 +11,17 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class MethodListenerLoader {
+public final class AnnotatedSubscriberLoader {
+
+    private static final MethodHandles.Lookup LOOKUP = MethodHandles.lookup();
 
     private final Logger logger;
 
-    public MethodListenerLoader(final Logger logger) {
+    public AnnotatedSubscriberLoader(final Logger logger) {
         this.logger = logger;
     }
 
-    public List<MethodListener> load(final Object object) {
+    public List<EventHandler> load(final Object object) {
         final Class<?> sourceClass = object.getClass();
         final Method[] methods = sourceClass.getDeclaredMethods();
         if (methods.length == 0) {
@@ -28,7 +29,7 @@ public final class MethodListenerLoader {
             return List.of();
         }
 
-        final List<MethodListener> listeners = new ArrayList<>(methods.length);
+        final List<EventHandler> listeners = new ArrayList<>(methods.length);
 
         for (final Method method : methods) {
             final Listener listener = method.getAnnotation(Listener.class);
@@ -37,33 +38,27 @@ public final class MethodListenerLoader {
             }
 
             if (method.getParameterCount() != 1) {
-                logger.warn("Error trying to load the listener %s in the class %s. The method need be exactly 1 parameter", method.getName(), sourceClass);
+                logger.warn("Error trying to load the listener " + method.getName() + " in the class " + sourceClass + ". The method need be exactly 1 parameter");
                 continue;
             }
 
             final Class<?> firstParameter = method.getParameterTypes()[0];
             final MethodHandle methodHandle;
             try {
-                methodHandle = MethodHandles.publicLookup().unreflect(method);
+                methodHandle = LOOKUP.unreflect(method);
             } catch (final IllegalAccessException e) {
-                logger.error("Error trying to load the listener %s in the class %s", e, method.getName(), sourceClass);
+                logger.error("Error trying to load the listener " + method.getName() + " in the class " + sourceClass, e);
                 continue;
             }
 
-            listeners.add(new MethodListener(
+            listeners.add(new EventHandler(
                 firstParameter,
+                new ListenerMethodHandleExecutor(logger, object, listener.ignoreCancelled(), methodHandle),
                 listener.phase(),
-                listener.priority(),
-                new ListenerMethodHandleExecutor(logger, object, listener.ignoreCancelled(), methodHandle)));
+                listener.priority()
+            ));
         }
 
         return listeners;
     }
-
-    public record MethodListener(
-        Class<?> eventClass,
-        ListenerPhase phase,
-        int priority,
-        EventExecutor executor
-    ){}
 }

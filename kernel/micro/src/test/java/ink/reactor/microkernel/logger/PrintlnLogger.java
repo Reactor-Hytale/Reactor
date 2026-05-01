@@ -8,22 +8,22 @@ public final class PrintlnLogger implements Logger {
     private final JavaLoggerFormatter loggerFormatter = new JavaLoggerFormatter();
 
     @Override
-    public LoggerFormatter getLoggerFormatter() {
+    public @NonNull LoggerFormatter getLoggerFormatter() {
         return loggerFormatter;
     }
 
     @Override
-    public void debug(final String message) {
+    public void debug(final @NonNull String message) {
         System.out.println("[DEBUG]" + message);
     }
 
     @Override
-    public void log(final String message) {
+    public void log(final @NonNull String message) {
         System.out.println("[LOG]" + message);
     }
 
     @Override
-    public void info(final String message) {
+    public void info(final @NonNull String message) {
         System.out.println("[INFO]" + message);
     }
 
@@ -38,7 +38,7 @@ public final class PrintlnLogger implements Logger {
     }
 
     @Override
-    public void error(final String message, final Throwable throwable) {
+    public void error(final @NonNull String message, final Throwable throwable) {
         System.err.println("[ERROR]" + message);
         throwable.printStackTrace(System.err);
     }

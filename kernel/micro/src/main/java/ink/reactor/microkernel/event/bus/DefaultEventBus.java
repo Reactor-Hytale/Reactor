@@ -1,123 +1,39 @@
 package ink.reactor.microkernel.event.bus;
 
 import ink.reactor.kernel.event.EventBus;
-import ink.reactor.kernel.event.EventExecutor;
-import ink.reactor.kernel.event.ListenerPhase;
+import ink.reactor.kernel.event.Subscription;
+import ink.reactor.kernel.event.handler.EventHandler;
+import ink.reactor.kernel.event.handler.ListenerPhase;
 import ink.reactor.kernel.logger.Logger;
-import ink.reactor.microkernel.event.executor.ListenerConsumerExecutor;
-import ink.reactor.microkernel.event.loader.MethodListenerLoader;
+import ink.reactor.microkernel.event.executor.ListenerConsumerFactory;
+import ink.reactor.microkernel.event.loader.AnnotatedSubscriberLoader;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Consumer;
 
 public final class DefaultEventBus implements EventBus {
 
-    private final Map<Class<?>, EventStorage> eventsStorage;
-    private final Map<Object, List<RegisteredListener>> owners;
-    private final MethodListenerLoader methodListenerLoader;
+    private static final Subscription NO_OP_SUBSCRIPTION = new Subscription() {
+        public @NotNull Collection<@NotNull EventHandler> getHandlers() { return List.of(); }
+        public void unsubscribe() {}
+    };
+
+    private final Map<Class<?>, EventStorage> storage;
+    private final AnnotatedSubscriberLoader annotatedSubscriberLoader;
 
     public DefaultEventBus(final Logger logger) {
-        this.eventsStorage = new ConcurrentHashMap<>();
-        this.owners = new ConcurrentHashMap<>();
-        this.methodListenerLoader = new MethodListenerLoader(logger);
-    }
-
-    @Override
-    public void register(final @NotNull Object listener) {
-        final Collection<MethodListenerLoader.MethodListener> methodListeners = methodListenerLoader.load(listener);
-
-        if (methodListeners.isEmpty()) {
-            return;
-        }
-
-        final List<RegisteredListener> registeredListeners = new ArrayList<>(methodListeners.size());
-
-        for (final MethodListenerLoader.MethodListener methodListener : methodListeners) {
-            final Class<?> eventClass = methodListener.eventClass();
-
-            final RegisteredListener registeredListener = new RegisteredListener(
-                methodListener.executor(),
-                eventClass,
-                methodListener.phase(),
-                methodListener.priority()
-            );
-
-            final EventStorage storage = eventsStorage.computeIfAbsent(
-                eventClass,
-                _ -> new EventStorage()
-            );
-
-            storage.addListener(registeredListener);
-            registeredListeners.add(registeredListener);
-        }
-
-        owners.compute(listener, (_, current) -> {
-            if (current == null) {
-                return registeredListeners;
-            }
-
-            final List<RegisteredListener> copy = new ArrayList<>(current.size() + registeredListeners.size());
-            copy.addAll(current);
-            copy.addAll(registeredListeners);
-            return copy;
-        });
-    }
-
-    @Override
-    public <T> void register(final @NotNull Class<T> eventClass, final @NotNull Consumer<T> listener) {
-        register(listener, eventClass, ListenerPhase.DEFAULT, new ListenerConsumerExecutor<>(listener));
-    }
-
-    @Override
-    public void register(
-        final @NotNull Object listener,
-        final @NotNull Class<?> eventClass,
-        final @NotNull ListenerPhase phase,
-        final @NotNull EventExecutor executor
-    ) {
-        final RegisteredListener registeredListener = new RegisteredListener(executor, eventClass, phase, 0);
-        final EventStorage storage = eventsStorage.computeIfAbsent(eventClass, _ -> new EventStorage());
-
-        storage.addListener(registeredListener);
-
-        owners.compute(listener, (_, current) -> {
-            if (current == null) {
-                final List<RegisteredListener> created = new ArrayList<>(1);
-                created.add(registeredListener);
-                return created;
-            }
-
-            final List<RegisteredListener> copy = new ArrayList<>(current.size() + 1);
-            copy.addAll(current);
-            copy.add(registeredListener);
-            return copy;
-        });
-    }
-
-    @Override
-    public void unregister(final @NotNull Object listener) {
-        final List<RegisteredListener> registeredListeners = owners.remove(listener);
-
-        if (registeredListeners == null || registeredListeners.isEmpty()) {
-            return;
-        }
-
-        for (final RegisteredListener registeredListener : registeredListeners) {
-            final EventStorage storage = eventsStorage.get(registeredListener.eventClass());
-            if (storage != null) {
-                storage.remove(registeredListener);
-            }
-        }
+        this.storage = new ConcurrentHashMap<>();
+        this.annotatedSubscriberLoader = new AnnotatedSubscriberLoader(logger);
     }
 
     @Override
     public void post(final @NotNull Object event) {
-        final EventStorage storage = eventsStorage.get(event.getClass());
+        final EventStorage storage = this.storage.get(event.getClass());
         if (storage != null) {
             storage.execute(event);
         }
@@ -125,7 +41,80 @@ public final class DefaultEventBus implements EventBus {
 
     @Override
     public void clear() {
-        owners.clear();
-        eventsStorage.clear();
+        storage.clear();
+    }
+
+    @Override
+    public void unsubscribe(@NotNull final Subscription subscription) {
+        for (final EventHandler handler : subscription.getHandlers()) {
+            storage.computeIfPresent(handler.getEventClass(), (_, eventStorage) -> {
+                if (eventStorage.removeAndIsEmpty(handler)) {
+                    return null;
+                }
+                return eventStorage;
+            });
+        }
+    }
+
+    private void registerHandler(final EventHandler handler) {
+        storage.computeIfAbsent(handler.getEventClass(), _ -> new EventStorage())
+            .addListener(handler);
+    }
+
+    @Override
+    public @NotNull <T> Subscription subscribe(
+        @NotNull final Class<T> eventClass,
+        final boolean ignoreCancelled,
+        final int priority,
+        @NotNull final ListenerPhase phase,
+        @NotNull final Function1<? super T, @NotNull Unit> block
+    ) {
+        return subscribe(new EventHandler(eventClass, ListenerConsumerFactory.create(block, ignoreCancelled), phase, priority));
+    }
+
+    @Override
+    public @NotNull Subscription subscribe(@NotNull final EventHandler handler) {
+        synchronized (this) {
+            registerHandler(handler);
+        }
+
+        return new Subscription() {
+            @Override
+            public void unsubscribe() {
+                DefaultEventBus.this.unsubscribe(this);
+            }
+            @Override
+            public @NotNull Collection<@NotNull EventHandler> getHandlers() {
+                return List.of(handler);
+            }
+        };
+    }
+
+    @Override
+    public @NotNull Subscription subscribe(@NotNull final Object listener) {
+        final Collection<EventHandler> eventHandlers = annotatedSubscriberLoader.load(listener);
+
+        if (eventHandlers.isEmpty()) {
+            return NO_OP_SUBSCRIPTION;
+        }
+
+        for (final EventHandler handler : eventHandlers) {
+            registerHandler(handler);
+        }
+
+        return new Subscription() {
+            @Override
+            public void unsubscribe() {
+                DefaultEventBus.this.unsubscribe(this);
+            }
+            @Override
+            public @NotNull Collection<@NotNull EventHandler> getHandlers() {
+                return eventHandlers;
+            }
+        };
+    }
+
+    int size() {
+        return storage.size();
     }
 }

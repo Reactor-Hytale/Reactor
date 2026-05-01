@@ -1,44 +1,62 @@
 package ink.reactor.kernel.event
 
-import java.util.function.Consumer
+import ink.reactor.kernel.event.handler.EventHandler
+import ink.reactor.kernel.event.handler.ListenerPhase
 
+/**
+ * Manages the registration and dispatching of events.
+ *
+ * <p>The EventBus allows for decoupled communication between components by
+ * providing a centralized system for posting and listening to events.</p>
+ */
 interface EventBus {
     /**
-     * Register all methods that use {@link Listener} as annotation
-     * @param listener object with listener methods
+     * Registers all methods in the given object that are annotated with {@link Listener}.
+     *
+     * @param listener The object containing listener methods.
+     * @return A subscription representing all listeners registered for this object.
      */
-    fun register(listener: Any)
+    fun subscribe(listener: Any): Subscription
 
     /**
-     * Register a simple listener
-     * @param eventClass event to hear
-     * @param listener consumer of the event
+     * Registers a listener with a custom executor for granular control.
+     *
+     * @param eventClass The class of the event to listen for.
+     * @param phase The phase in which this listener will execute.
+     * @return A subscription representing this registration.
      */
-    fun <T> register(eventClass: Class<T>, listener: Consumer<T>)
+    fun <T : Any> subscribe(
+        eventClass: Class<T>,
+        ignoreCancelled: Boolean = false,
+        priority: Int = 0,
+        phase: ListenerPhase = ListenerPhase.DEFAULT,
+        block: (T) -> Unit
+    ): Subscription
 
     /**
-     * Register a listener with custom event executor,
-     * all process of executing the listener is handled by the event-executor
-     * @param listener instance of the listener to register
-     * @param eventClass event to hear
-     * @param phase listener phase
-     * @param executor executor of the listener
+     * Registers a listener with a custom executor for granular control.
+     *
+     * @param handler
+     * @return A subscription representing this registration.
      */
-    fun register(listener: Any, eventClass: Class<*>, phase: ListenerPhase, executor: EventExecutor)
+    fun subscribe(handler: EventHandler): Subscription
 
     /**
-     * @param listener object with listener methods
+     * Unregisters all listeners associated with the given subscription.
+     *
+     * @param subscription The subscription to revoke.
      */
-    fun unregister(listener: Any)
+    fun unsubscribe(subscription: Subscription)
 
     /**
-     * Execute all listeners with the same event-class
-     * @param event Custom event (can be any object)
+     * Dispatches an event to all registered listeners.
+     *
+     * @param event The event object to post.
      */
     fun post(event: Any)
 
     /**
-     * Remove all listener from eventbus
+     * Removes all registered listeners from this bus.
      */
     fun clear()
 }

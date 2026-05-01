@@ -1,5 +1,6 @@
 package ink.reactor.kernel.event
 
+import ink.reactor.kernel.event.handler.ListenerPhase
 import kotlin.annotation.AnnotationTarget.FUNCTION
 import kotlin.annotation.AnnotationRetention.RUNTIME
 
@@ -7,9 +8,9 @@ import kotlin.annotation.AnnotationRetention.RUNTIME
 @Retention(RUNTIME)
 annotation class Listener(
     /**
-     * @return if you can run the listener, ignoring whether the event is canceled or not
+     * The lower the phase, the sooner it will be executed
      */
-    val ignoreCancelled: Boolean = false,
+    val phase: ListenerPhase = ListenerPhase.DEFAULT,
 
     /**
      * Highest priority = Runs before
@@ -19,7 +20,7 @@ annotation class Listener(
     val priority: Int = 0,
 
     /**
-     * The lower the phase, the sooner it will be executed
+     * @return if you can run the listener, ignoring whether the event is canceled or not
      */
-    val phase: ListenerPhase = ListenerPhase.DEFAULT
+    val ignoreCancelled: Boolean = false,
 )

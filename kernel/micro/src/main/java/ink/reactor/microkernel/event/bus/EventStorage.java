@@ -1,6 +1,7 @@
 package ink.reactor.microkernel.event.bus;
 
-import ink.reactor.kernel.event.ListenerPhase;
+import ink.reactor.kernel.event.handler.EventHandler;
+import ink.reactor.kernel.event.handler.ListenerPhase;
 
 final class EventStorage {
     private static final int LISTENER_PHASES_SIZE = ListenerPhase.getEntries().size();
@@ -14,20 +15,22 @@ final class EventStorage {
         }
     }
 
-    public void addListener(final RegisteredListener listener) {
-        listenersPerPhase[listener.phase().ordinal()].add(listener);
+    public void addListener(final EventHandler listener) {
+        listenersPerPhase[listener.getPhase().ordinal()].add(listener);
     }
 
-    public void remove(final RegisteredListener listener) {
-        listenersPerPhase[listener.phase().ordinal()].remove(listener);
+    public synchronized boolean removeAndIsEmpty(final EventHandler listener) {
+        final ListenerStorage listenerStorage = listenersPerPhase[listener.getPhase().ordinal()];
+        listenerStorage.remove(listener);
+        return listenerStorage.isEmpty();
     }
 
     public void execute(final Object event) {
         for (final ListenerStorage storage : listenersPerPhase) {
-            final RegisteredListener[] listeners = storage.listeners;
+            final EventHandler[] listeners = storage.listeners;
 
-            for (final RegisteredListener listener : listeners) {
-                listener.executor().execute(event);
+            for (final EventHandler listener : listeners) {
+                listener.getExecutor().execute(event);
             }
         }
     }

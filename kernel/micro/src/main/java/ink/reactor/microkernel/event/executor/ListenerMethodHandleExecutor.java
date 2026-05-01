@@ -2,8 +2,8 @@ package ink.reactor.microkernel.event.executor;
 
 import java.lang.invoke.MethodHandle;
 
-import ink.reactor.kernel.event.EventExecutor;
-import ink.reactor.kernel.event.special.Cancellable;
+import ink.reactor.kernel.event.dispatch.EventExecutor;
+import ink.reactor.kernel.event.Cancellable;
 import ink.reactor.kernel.logger.Logger;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,7 +23,7 @@ public final class ListenerMethodHandleExecutor implements EventExecutor {
 
     @Override
     public void execute(final @NotNull Object event) {
-        if (event instanceof Cancellable cancellable && cancellable.isCancelled() && !ignoreCancelled) {
+        if (!ignoreCancelled && event instanceof Cancellable cancellable && cancellable.getCancelled()) {
             return;
         }
         try {

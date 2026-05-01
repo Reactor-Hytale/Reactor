@@ -1,35 +1,48 @@
 package ink.reactor.microkernel.event.bus;
 
 
+import ink.reactor.kernel.event.handler.EventHandler;
+
 import java.util.Arrays;
 import java.util.Comparator;
 
 final class ListenerStorage {
-    private static final RegisteredListener[] EMPTY_LISTENERS = new RegisteredListener[0];
+    private static final EventHandler[] EMPTY_LISTENERS = new EventHandler[0];
 
-    public volatile RegisteredListener[] listeners;
+    public volatile EventHandler[] listeners;
 
-    public ListenerStorage(RegisteredListener listener) {
-        this.listeners = new RegisteredListener[] {listener};
+    public ListenerStorage(EventHandler listener) {
+        this.listeners = new EventHandler[] {listener};
     }
 
     public ListenerStorage() {
         this.listeners = EMPTY_LISTENERS;
     }
 
-    public synchronized void add(final RegisteredListener listener) {
-        final RegisteredListener[] oldListeners = this.listeners;
-        final RegisteredListener[] newListeners = Arrays.copyOf(oldListeners, oldListeners.length + 1);
+    public synchronized void add(final EventHandler listener) {
+        final EventHandler[] oldListeners = this.listeners;
+        final EventHandler[] newListeners = new EventHandler[oldListeners.length + 1];
 
-        newListeners[oldListeners.length] = listener;
+        int insertIndex = 0;
+        while (insertIndex < oldListeners.length && oldListeners[insertIndex].getPriority() >= listener.getPriority()) {
+            insertIndex++;
+        }
 
-        Arrays.sort(newListeners, Comparator.comparingInt(RegisteredListener::priority).reversed());
+        if (insertIndex > 0) {
+            System.arraycopy(oldListeners, 0, newListeners, 0, insertIndex);
+        }
+
+        newListeners[insertIndex] = listener;
+
+        if (insertIndex < oldListeners.length) {
+            System.arraycopy(oldListeners, insertIndex, newListeners, insertIndex + 1, oldListeners.length - insertIndex);
+        }
 
         this.listeners = newListeners;
     }
 
-    public synchronized void remove(final RegisteredListener listener) {
-        final RegisteredListener[] oldListeners = this.listeners;
+    public synchronized void remove(final EventHandler listener) {
+        final EventHandler[] oldListeners = this.listeners;
         int index = -1;
 
         for (int i = 0; i < oldListeners.length; i++) {
@@ -42,11 +55,11 @@ final class ListenerStorage {
         if (index == -1) return;
 
         if (oldListeners.length == 1) {
-            this.listeners = new RegisteredListener[0];
+            this.listeners = new EventHandler[0];
             return;
         }
 
-        final RegisteredListener[] newListeners = new RegisteredListener[oldListeners.length - 1];
+        final EventHandler[] newListeners = new EventHandler[oldListeners.length - 1];
 
         System.arraycopy(oldListeners, 0, newListeners, 0, index);
 
