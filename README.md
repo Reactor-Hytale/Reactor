@@ -41,5 +41,4 @@ In other words, is an attempt to design the kind of extensible server foundation
 - Any modern OS (Linux, Windows, macOS)
 
 ## Compile
-> ![NOTE]
-> Use the command: `./gradlew :launcher:runtime:build` and execute the generated jar in `launcher/runtime/build/libs/
+Use the command: `./gradlew :launcher:runtime:build` and execute the generated jar in `launcher/runtime/build/libs/
