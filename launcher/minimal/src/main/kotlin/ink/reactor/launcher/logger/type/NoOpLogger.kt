@@ -3,7 +3,7 @@ package ink.reactor.launcher.logger.type
 import ink.reactor.kernel.logger.Logger
 import ink.reactor.microkernel.logger.JavaLoggerFormatter
 
-class NoneLogger(
+class NoOpLogger(
     override val loggerFormatter: JavaLoggerFormatter = JavaLoggerFormatter()
 ) : Logger {
     override fun debug(message: String) {}

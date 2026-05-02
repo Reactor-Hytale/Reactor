@@ -2,12 +2,10 @@ package ink.reactor.launcher.logger
 
 import ink.reactor.kernel.Reactor
 import ink.reactor.kernel.logger.Logger
+import ink.reactor.launcher.logger.console.ConsoleAppender
+import ink.reactor.launcher.logger.file.FileAppender
 import ink.reactor.launcher.logger.file.LogCompressor
-import ink.reactor.launcher.logger.file.FileLogProcessorThread
-import ink.reactor.launcher.logger.file.FileWriter
-import ink.reactor.launcher.logger.type.ConsoleLogger
-import ink.reactor.launcher.logger.type.FileLogger
-import ink.reactor.launcher.logger.type.NoneLogger
+import ink.reactor.launcher.logger.type.NoOpLogger
 import ink.reactor.launcher.logger.type.ReactorLogger
 import ink.reactor.microkernel.logger.JavaLoggerFormatter
 import ink.reactor.sdk.config.ConfigService
@@ -28,29 +26,50 @@ class LoggersLoader(
     fun load(configService: ConfigService): Logger {
         val config = LoggerConfig(configService.createIfAbsentAndLoad("logger"));
         if (!config.enable) {
-            return NoneLogger();
+            return NoOpLogger();
         }
 
+        val ringBuffer = LogRingBuffer(2048)
+        val consoleAppender = loadConsoleLogger(config.console)
+        val fileAppender = loadFileLogger(config.logs)
+        val autoFlush = config.logs.autoFlush
+
         val prefix = config.prefix
+        val loggerFormatter = LogFormatter(DateTimeFormatter.ofPattern(prefix.dateFormatter))
+
+        val processor = LogProcessorThread(
+            ringBuffer,
+            autoFlush.interval.inWholeSeconds,
+            consoleAppender,
+            fileAppender,
+            loggerFormatter
+        )
+
+        processor.start()
+        Reactor.addStopTask{
+            processor.shutdown()
+            try {
+                processor.join(5000)
+            } catch (_: InterruptedException) {}
+        }
+
         return ReactorLogger(
             JavaLoggerFormatter(),
-            loadConsoleLogger(config.console),
-            loadFileLogger(config.logs),
+            ringBuffer,
             prefix.debug,
             prefix.log,
             prefix.info,
             prefix.warn,
-            prefix.error,
-            DateTimeFormatter.ofPattern(prefix.dateFormatter)
+            prefix.error
         )
     }
 
-    private fun loadConsoleLogger(console: ConsoleConfig): ConsoleLogger? {
+    private fun loadConsoleLogger(console: ConsoleConfig): ConsoleAppender? {
         if (!console.enable) {
             return null;
         }
         val styles = console.styles
-        return ConsoleLogger(
+        return ConsoleAppender(
             consoleWriter,
             console.levels,
             styles.debug,
@@ -61,7 +80,7 @@ class LoggersLoader(
         )
     }
 
-    private fun loadFileLogger(logs: FileLogsConfig): FileLogger? {
+    private fun loadFileLogger(logs: FileLogsConfig): FileAppender? {
         if (!logs.enable) {
             return null
         }
@@ -71,20 +90,8 @@ class LoggersLoader(
         compressOldLog(path, logs.compression)
         val channel = createLogChannel(path) ?: return null
 
-        val fileWriter = FileWriter(logs.maxFileSize, logs.bufferSize, channel)
-        val autoFlush = logs.autoFlush
-
-        val processor = FileLogProcessorThread(fileWriter, autoFlush.interval.inWholeSeconds)
-        processor.start()
-        Reactor.addStopTask{
-            processor.shutdown()
-            try {
-                processor.join(5000)
-            } catch (_: InterruptedException) {}
-            fileWriter.close()
-        }
-
-        return FileLogger(logs.levels, fileWriter)
+        val fileAppender = FileAppender(logs.maxFileSize, logs.bufferSize, channel)
+        return fileAppender
     }
 
     private fun compressOldLog(path: Path, compression: Boolean) {
