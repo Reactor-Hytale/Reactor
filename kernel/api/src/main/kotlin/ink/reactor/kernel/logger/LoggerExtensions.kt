@@ -1,6 +1,6 @@
-package ink.reactor.kernel.logger
+package codes.reactor.kernel.logger
 
-import ink.reactor.kernel.Reactor
+import codes.reactor.kernel.Reactor
 import kotlin.reflect.KClass
 
 fun Any.logger(): Logger =

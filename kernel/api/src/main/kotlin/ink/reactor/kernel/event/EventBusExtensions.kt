@@ -1,6 +1,6 @@
-package ink.reactor.kernel.event
+package codes.reactor.kernel.event
 
-import ink.reactor.kernel.event.handler.ListenerPhase
+import codes.reactor.kernel.event.handler.ListenerPhase
 
 inline fun <reified T : Any> EventBus.subscribe(
     phase: ListenerPhase = ListenerPhase.DEFAULT,

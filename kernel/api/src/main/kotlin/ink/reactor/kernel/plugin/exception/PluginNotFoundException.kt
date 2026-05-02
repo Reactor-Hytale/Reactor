@@ -1,6 +1,6 @@
-package ink.reactor.kernel.plugin.exception
+package codes.reactor.kernel.plugin.exception
 
-import ink.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.model.PluginId
 
 class PluginNotFoundException(
     id: PluginId,

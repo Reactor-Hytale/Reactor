@@ -1,8 +1,8 @@
-package ink.reactor.microkernel.plugin.scanner
+package codes.reactor.microkernel.plugin.scanner
 
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.kernel.plugin.model.PluginMetadata
-import ink.reactor.microkernel.plugin.manifest.PluginManifest
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.model.PluginMetadata
+import codes.reactor.microkernel.plugin.manifest.PluginManifest
 import java.io.File
 
 class PluginCandidate(

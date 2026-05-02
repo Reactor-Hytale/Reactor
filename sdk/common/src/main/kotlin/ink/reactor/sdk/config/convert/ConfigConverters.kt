@@ -1,4 +1,4 @@
-package ink.reactor.sdk.config.convert
+package codes.reactor.sdk.config.convert
 
 import kotlin.time.Duration
 

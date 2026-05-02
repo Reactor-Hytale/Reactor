@@ -1,13 +1,13 @@
-package ink.reactor.network.internal.packet
+package codes.reactor.network.internal.packet
 
-import ink.reactor.kernel.Reactor
-import ink.reactor.kernel.logger.logger
-import ink.reactor.network.api.packet.Packet
-import ink.reactor.network.api.packet.PacketsSender
-import ink.reactor.network.api.player.PlayerConnection
-import ink.reactor.network.internal.io.PacketEncoder
-import ink.reactor.network.internal.io.frame.PacketFramer
-import ink.reactor.network.internal.player.NettyPlayerConnection
+import codes.reactor.kernel.Reactor
+import codes.reactor.kernel.logger.logger
+import codes.reactor.network.api.packet.Packet
+import codes.reactor.network.api.packet.PacketsSender
+import codes.reactor.network.api.player.PlayerConnection
+import codes.reactor.network.internal.io.PacketEncoder
+import codes.reactor.network.internal.io.frame.PacketFramer
+import codes.reactor.network.internal.player.NettyPlayerConnection
 
 class PacketSenderInternal: PacketsSender {
 

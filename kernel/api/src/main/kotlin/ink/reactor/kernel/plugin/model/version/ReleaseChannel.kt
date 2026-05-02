@@ -1,4 +1,4 @@
-package ink.reactor.kernel.plugin.model.version
+package codes.reactor.kernel.plugin.model.version
 
 /**
  * Defines the release channel of a version.

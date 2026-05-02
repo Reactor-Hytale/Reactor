@@ -1,11 +1,11 @@
-package ink.reactor.microkernel.plugin.manifest
+package codes.reactor.microkernel.plugin.manifest
 
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.kernel.plugin.model.PluginMetadata
-import ink.reactor.kernel.plugin.model.dependency.DependencyKind
-import ink.reactor.kernel.plugin.model.dependency.PluginDependency
-import ink.reactor.kernel.plugin.model.version.Version
-import ink.reactor.kernel.plugin.exception.PluginDescriptorException
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.model.PluginMetadata
+import codes.reactor.kernel.plugin.model.dependency.DependencyKind
+import codes.reactor.kernel.plugin.model.dependency.PluginDependency
+import codes.reactor.kernel.plugin.model.version.Version
+import codes.reactor.kernel.plugin.exception.PluginDescriptorException
 import java.io.InputStreamReader
 import java.util.Properties
 import java.util.jar.JarFile

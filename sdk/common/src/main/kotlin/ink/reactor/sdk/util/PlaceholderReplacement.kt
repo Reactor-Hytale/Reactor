@@ -1,4 +1,4 @@
-package ink.reactor.sdk.util
+package codes.reactor.sdk.util
 
 /**
  * Utility class for placeholder replacement in strings

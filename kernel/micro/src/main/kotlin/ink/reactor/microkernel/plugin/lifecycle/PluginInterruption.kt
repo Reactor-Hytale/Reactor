@@ -1,4 +1,4 @@
-package ink.reactor.microkernel.plugin.lifecycle
+package codes.reactor.microkernel.plugin.lifecycle
 
 internal object PluginInterruption {
     fun isInterruption(error: Throwable): Boolean {

@@ -1,4 +1,4 @@
-package ink.reactor.kernel.plugin.library
+package codes.reactor.kernel.plugin.library
 
 data class Dependency(
     val alias: String,

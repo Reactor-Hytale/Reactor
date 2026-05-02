@@ -1,7 +1,7 @@
-package ink.reactor.gradle
+package codes.reactor.gradle
 
-import ink.reactor.gradle.extension.ReactorPluginMetadataExtension
-import ink.reactor.gradle.task.GeneratePluginMetadataTask
+import codes.reactor.gradle.extension.ReactorPluginMetadataExtension
+import codes.reactor.gradle.task.GeneratePluginMetadataTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.SourceSetContainer
@@ -30,7 +30,7 @@ class ReactorGradlePlugin : Plugin<Project> {
         project: Project,
         extension: ReactorPluginMetadataExtension
     ) {
-        val key = "ink.reactor.gradle.plugin.configured"
+        val key = "codes.reactor.gradle.plugin.configured"
         if (project.extensions.extraProperties.has(key)) {
             return
         }

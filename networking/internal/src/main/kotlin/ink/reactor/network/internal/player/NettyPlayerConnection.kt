@@ -1,9 +1,9 @@
-package ink.reactor.network.internal.player
+package codes.reactor.network.internal.player
 
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.network.api.packet.Packet
-import ink.reactor.network.api.player.PlayerConnection
-import ink.reactor.network.internal.packet.CachedPacket
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.network.api.packet.Packet
+import codes.reactor.network.api.player.PlayerConnection
+import codes.reactor.network.internal.packet.CachedPacket
 import io.netty.channel.Channel
 
 class NettyPlayerConnection(

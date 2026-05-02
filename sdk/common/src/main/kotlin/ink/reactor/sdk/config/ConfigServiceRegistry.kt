@@ -1,4 +1,4 @@
-package ink.reactor.sdk.config
+package codes.reactor.sdk.config
 
 import java.util.concurrent.ConcurrentHashMap
 

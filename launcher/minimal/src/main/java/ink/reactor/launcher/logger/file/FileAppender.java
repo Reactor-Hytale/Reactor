@@ -1,7 +1,7 @@
-package ink.reactor.launcher.logger.file;
+package codes.reactor.launcher.logger.file;
 
-import ink.reactor.launcher.logger.LogAppender;
-import ink.reactor.launcher.logger.MutableLogEntry;
+import codes.reactor.launcher.logger.LogAppender;
+import codes.reactor.launcher.logger.MutableLogEntry;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

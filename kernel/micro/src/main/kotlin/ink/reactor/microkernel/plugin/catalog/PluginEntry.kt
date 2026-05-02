@@ -1,13 +1,13 @@
-package ink.reactor.microkernel.plugin.catalog
+package codes.reactor.microkernel.plugin.catalog
 
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.kernel.plugin.model.PluginMetadata
-import ink.reactor.kernel.plugin.model.PluginSnapshot
-import ink.reactor.kernel.plugin.model.failure.PluginFailure
-import ink.reactor.kernel.plugin.model.lifecycle.PluginState
-import ink.reactor.kernel.plugin.spi.lifecycle.PluginLifecycle
-import ink.reactor.microkernel.plugin.classloading.PluginClassLoader
-import ink.reactor.microkernel.plugin.scanner.PluginCandidate
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.model.PluginMetadata
+import codes.reactor.kernel.plugin.model.PluginSnapshot
+import codes.reactor.kernel.plugin.model.failure.PluginFailure
+import codes.reactor.kernel.plugin.model.lifecycle.PluginState
+import codes.reactor.kernel.plugin.spi.lifecycle.PluginLifecycle
+import codes.reactor.microkernel.plugin.classloading.PluginClassLoader
+import codes.reactor.microkernel.plugin.scanner.PluginCandidate
 
 internal class PluginEntry(
     val candidate: PluginCandidate,

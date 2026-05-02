@@ -1,10 +1,10 @@
-package ink.reactor.plugin.discordhook
+package codes.reactor.plugin.discordhook
 
-import ink.reactor.plugin.discordhook.config.DiscordHookConfig
-import ink.reactor.plugin.discordhook.webhook.DiscordWebHook
-import ink.reactor.kernel.Reactor
-import ink.reactor.kernel.plugin.spi.lifecycle.BasePluginLifecycle
-import ink.reactor.sdk.plugin.annotation.Plugin
+import codes.reactor.plugin.discordhook.config.DiscordHookConfig
+import codes.reactor.plugin.discordhook.webhook.DiscordWebHook
+import codes.reactor.kernel.Reactor
+import codes.reactor.kernel.plugin.spi.lifecycle.BasePluginLifecycle
+import codes.reactor.sdk.plugin.annotation.Plugin
 
 @Plugin(id = "discord-hook", version = "1.0.0")
 class DiscordHookPlugin: BasePluginLifecycle() {

@@ -1,7 +1,7 @@
-package ink.reactor.network.internal.io.compression
+package codes.reactor.network.internal.io.compression
 
 import com.github.luben.zstd.Zstd
-import ink.reactor.network.internal.NetworkInternalConnector
+import codes.reactor.network.internal.NetworkInternalConnector
 import io.netty.buffer.ByteBuf
 
 import io.netty.buffer.ByteBufAllocator

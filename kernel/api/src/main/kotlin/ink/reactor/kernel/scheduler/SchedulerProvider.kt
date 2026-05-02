@@ -1,7 +1,7 @@
-package ink.reactor.kernel.scheduler
+package codes.reactor.kernel.scheduler
 
-import ink.reactor.kernel.scheduler.tick.TickDrivenScheduler
-import ink.reactor.kernel.scheduler.tick.Ticks
+import codes.reactor.kernel.scheduler.tick.TickDrivenScheduler
+import codes.reactor.kernel.scheduler.tick.Ticks
 import kotlin.time.Duration
 
 interface SchedulerProvider {

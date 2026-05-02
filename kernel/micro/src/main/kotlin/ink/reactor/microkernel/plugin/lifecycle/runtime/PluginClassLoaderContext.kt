@@ -1,4 +1,4 @@
-package ink.reactor.microkernel.plugin.lifecycle.runtime
+package codes.reactor.microkernel.plugin.lifecycle.runtime
 
 internal inline fun <T> withPluginClassLoader(classLoader: ClassLoader, block: () -> T): T {
     val thread = Thread.currentThread()

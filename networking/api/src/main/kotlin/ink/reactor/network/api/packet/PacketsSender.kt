@@ -1,6 +1,6 @@
-package ink.reactor.network.api.packet
+package codes.reactor.network.api.packet
 
-import ink.reactor.network.api.player.PlayerConnection
+import codes.reactor.network.api.player.PlayerConnection
 
 /**
  * A high-performance packet dispatcher optimized for sending packets to multiple connections.

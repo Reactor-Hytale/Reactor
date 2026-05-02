@@ -1,9 +1,9 @@
-package ink.reactor.network.internal.io
+package codes.reactor.network.internal.io
 
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.network.api.packet.PacketRegistry
-import ink.reactor.network.internal.io.frame.PacketFramer
-import ink.reactor.network.protocol.data.DataSize
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.network.api.packet.PacketRegistry
+import codes.reactor.network.internal.io.frame.PacketFramer
+import codes.reactor.network.protocol.data.DataSize
 import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.ByteToMessageDecoder

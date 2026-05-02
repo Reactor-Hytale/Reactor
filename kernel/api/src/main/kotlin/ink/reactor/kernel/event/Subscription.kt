@@ -1,6 +1,6 @@
-package ink.reactor.kernel.event
+package codes.reactor.kernel.event
 
-import ink.reactor.kernel.event.handler.EventHandler
+import codes.reactor.kernel.event.handler.EventHandler
 
 /**
  * Represents a handle to a group of registered listeners.

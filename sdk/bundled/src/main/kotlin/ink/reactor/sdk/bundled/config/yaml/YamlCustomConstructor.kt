@@ -1,6 +1,6 @@
-package ink.reactor.sdk.bundled.config.yaml
+package codes.reactor.sdk.bundled.config.yaml
 
-import ink.reactor.sdk.config.section.MapConfigSection
+import codes.reactor.sdk.config.section.MapConfigSection
 import org.snakeyaml.engine.v2.api.LoadSettings
 import org.snakeyaml.engine.v2.constructor.StandardConstructor
 import org.snakeyaml.engine.v2.nodes.MappingNode

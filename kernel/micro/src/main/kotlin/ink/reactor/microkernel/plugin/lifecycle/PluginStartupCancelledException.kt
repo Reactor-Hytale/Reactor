@@ -1,7 +1,7 @@
-package ink.reactor.microkernel.plugin.lifecycle
+package codes.reactor.microkernel.plugin.lifecycle
 
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.kernel.plugin.model.lifecycle.PluginState
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.model.lifecycle.PluginState
 
 internal class PluginStartupCancelledException(
     val pluginId: PluginId,

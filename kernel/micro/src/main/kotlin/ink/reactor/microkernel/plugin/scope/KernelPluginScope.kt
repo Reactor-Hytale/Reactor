@@ -1,11 +1,11 @@
-package ink.reactor.microkernel.plugin.scope
+package codes.reactor.microkernel.plugin.scope
 
-import ink.reactor.kernel.event.EventBus
-import ink.reactor.kernel.plugin.scope.PluginDependencyProvider
-import ink.reactor.kernel.plugin.scope.PluginScope
-import ink.reactor.microkernel.Microkernel
-import ink.reactor.microkernel.plugin.classloading.PluginClassLoader
-import ink.reactor.microkernel.plugin.scope.extension.KernelPluginEventBusScope
+import codes.reactor.kernel.event.EventBus
+import codes.reactor.kernel.plugin.scope.PluginDependencyProvider
+import codes.reactor.kernel.plugin.scope.PluginScope
+import codes.reactor.microkernel.Microkernel
+import codes.reactor.microkernel.plugin.classloading.PluginClassLoader
+import codes.reactor.microkernel.plugin.scope.extension.KernelPluginEventBusScope
 import java.util.concurrent.ConcurrentHashMap
 
 internal class KernelPluginScope : PluginScope {

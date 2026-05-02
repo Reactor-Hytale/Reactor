@@ -1,6 +1,6 @@
-package ink.reactor.microkernel.logger;
+package codes.reactor.microkernel.logger;
 
-import ink.reactor.kernel.logger.LoggerFormatter;
+import codes.reactor.kernel.logger.LoggerFormatter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Formatter;

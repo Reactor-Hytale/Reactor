@@ -1,12 +1,12 @@
-package ink.reactor.network.internal.io.frame
+package codes.reactor.network.internal.io.frame
 
 import com.github.luben.zstd.Zstd
-import ink.reactor.network.api.packet.Packet
-import ink.reactor.network.internal.io.compression.PacketCompression
-import ink.reactor.network.internal.io.compression.ProtocolException
-import ink.reactor.network.internal.packet.buffer.NettyReadBuffer
-import ink.reactor.network.internal.packet.buffer.NettyWriteBuffer
-import ink.reactor.network.protocol.data.DataSize
+import codes.reactor.network.api.packet.Packet
+import codes.reactor.network.internal.io.compression.PacketCompression
+import codes.reactor.network.internal.io.compression.ProtocolException
+import codes.reactor.network.internal.packet.buffer.NettyReadBuffer
+import codes.reactor.network.internal.packet.buffer.NettyWriteBuffer
+import codes.reactor.network.protocol.data.DataSize
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 

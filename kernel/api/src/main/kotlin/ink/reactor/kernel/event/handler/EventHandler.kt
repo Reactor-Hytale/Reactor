@@ -1,6 +1,6 @@
-package ink.reactor.kernel.event.handler
+package codes.reactor.kernel.event.handler
 
-import ink.reactor.kernel.event.dispatch.EventExecutor
+import codes.reactor.kernel.event.dispatch.EventExecutor
 
 /**
  * Data container representing a registered event listener.

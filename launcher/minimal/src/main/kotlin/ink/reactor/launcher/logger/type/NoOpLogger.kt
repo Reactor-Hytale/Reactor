@@ -1,7 +1,7 @@
-package ink.reactor.launcher.logger.type
+package codes.reactor.launcher.logger.type
 
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.microkernel.logger.JavaLoggerFormatter
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.microkernel.logger.JavaLoggerFormatter
 
 class NoOpLogger(
     override val loggerFormatter: JavaLoggerFormatter = JavaLoggerFormatter()

@@ -1,7 +1,7 @@
-package ink.reactor.microkernel.scheduler
+package codes.reactor.microkernel.scheduler
 
-import ink.reactor.kernel.scheduler.tick.Ticks
-import ink.reactor.microkernel.scheduler.tick.TickScheduler
+import codes.reactor.kernel.scheduler.tick.Ticks
+import codes.reactor.microkernel.scheduler.tick.TickScheduler
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.util.concurrent.atomic.AtomicBoolean

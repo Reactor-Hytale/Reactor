@@ -1,10 +1,10 @@
-package ink.reactor.microkernel.plugin.scope.extension
+package codes.reactor.microkernel.plugin.scope.extension
 
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.kernel.logger.LoggerSpy
-import ink.reactor.kernel.plugin.scope.PluginDependencyProvider
-import ink.reactor.kernel.plugin.scope.PluginScopeFactory
-import ink.reactor.microkernel.plugin.scope.KernelPluginScope
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.kernel.logger.LoggerSpy
+import codes.reactor.kernel.plugin.scope.PluginDependencyProvider
+import codes.reactor.kernel.plugin.scope.PluginScopeFactory
+import codes.reactor.microkernel.plugin.scope.KernelPluginScope
 import java.util.Collections
 
 class KernelLoggerSpyScope(

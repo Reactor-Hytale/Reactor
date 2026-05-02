@@ -1,8 +1,8 @@
-package ink.reactor.gradle.scanner.asm
+package codes.reactor.gradle.scanner.asm
 
-import ink.reactor.gradle.model.DependencyAnnotationData
-import ink.reactor.gradle.model.PluginAnnotationData
-import ink.reactor.gradle.model.ScannedClassInfo
+import codes.reactor.gradle.model.DependencyAnnotationData
+import codes.reactor.gradle.model.PluginAnnotationData
+import codes.reactor.gradle.model.ScannedClassInfo
 import org.objectweb.asm.AnnotationVisitor
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.Opcodes

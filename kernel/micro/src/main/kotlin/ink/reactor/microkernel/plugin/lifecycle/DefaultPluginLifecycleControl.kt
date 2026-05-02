@@ -1,20 +1,20 @@
-package ink.reactor.microkernel.plugin.lifecycle
+package codes.reactor.microkernel.plugin.lifecycle
 
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.kernel.plugin.control.PluginLifecycleControl
-import ink.reactor.kernel.plugin.exception.PluginDependencyException
-import ink.reactor.kernel.plugin.exception.PluginNotFoundException
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.kernel.plugin.model.dependency.DependencyKind
-import ink.reactor.kernel.plugin.model.lifecycle.PluginState
-import ink.reactor.microkernel.config.KernelPluginConfig
-import ink.reactor.microkernel.plugin.lifecycle.runtime.PluginInstanceCreator
-import ink.reactor.microkernel.plugin.lifecycle.runtime.PluginRuntimeReleaser
-import ink.reactor.microkernel.plugin.lifecycle.logger.PluginStartupLogController
-import ink.reactor.microkernel.plugin.catalog.DefaultPluginCatalog
-import ink.reactor.microkernel.plugin.catalog.PluginEntry
-import ink.reactor.microkernel.plugin.graph.PluginLoadGraphBuilder
-import ink.reactor.microkernel.plugin.library.PluginLibraryResolver
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.kernel.plugin.control.PluginLifecycleControl
+import codes.reactor.kernel.plugin.exception.PluginDependencyException
+import codes.reactor.kernel.plugin.exception.PluginNotFoundException
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.model.dependency.DependencyKind
+import codes.reactor.kernel.plugin.model.lifecycle.PluginState
+import codes.reactor.microkernel.config.KernelPluginConfig
+import codes.reactor.microkernel.plugin.lifecycle.runtime.PluginInstanceCreator
+import codes.reactor.microkernel.plugin.lifecycle.runtime.PluginRuntimeReleaser
+import codes.reactor.microkernel.plugin.lifecycle.logger.PluginStartupLogController
+import codes.reactor.microkernel.plugin.catalog.DefaultPluginCatalog
+import codes.reactor.microkernel.plugin.catalog.PluginEntry
+import codes.reactor.microkernel.plugin.graph.PluginLoadGraphBuilder
+import codes.reactor.microkernel.plugin.library.PluginLibraryResolver
 
 internal class DefaultPluginLifecycleControl(
     private val catalog: DefaultPluginCatalog,

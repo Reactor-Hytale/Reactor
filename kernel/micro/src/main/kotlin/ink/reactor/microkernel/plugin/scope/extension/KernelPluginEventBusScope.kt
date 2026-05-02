@@ -1,10 +1,10 @@
-package ink.reactor.microkernel.plugin.scope.extension
+package codes.reactor.microkernel.plugin.scope.extension
 
-import ink.reactor.kernel.event.EventBus
-import ink.reactor.kernel.event.Subscription
-import ink.reactor.kernel.event.handler.EventHandler
-import ink.reactor.kernel.event.handler.ListenerPhase
-import ink.reactor.kernel.plugin.scope.PluginDependencyProvider
+import codes.reactor.kernel.event.EventBus
+import codes.reactor.kernel.event.Subscription
+import codes.reactor.kernel.event.handler.EventHandler
+import codes.reactor.kernel.event.handler.ListenerPhase
+import codes.reactor.kernel.plugin.scope.PluginDependencyProvider
 import java.util.Collections
 
 class KernelPluginEventBusScope(

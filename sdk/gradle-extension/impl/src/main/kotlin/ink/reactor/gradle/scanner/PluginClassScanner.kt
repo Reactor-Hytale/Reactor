@@ -1,8 +1,8 @@
-package ink.reactor.gradle.scanner
+package codes.reactor.gradle.scanner
 
-import ink.reactor.gradle.model.ScanResult
-import ink.reactor.gradle.model.ScannedClassInfo
-import ink.reactor.gradle.scanner.asm.PluginClassAnnotationVisitor
+import codes.reactor.gradle.model.ScanResult
+import codes.reactor.gradle.model.ScannedClassInfo
+import codes.reactor.gradle.scanner.asm.PluginClassAnnotationVisitor
 import org.objectweb.asm.ClassReader
 import java.io.File
 

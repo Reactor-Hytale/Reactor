@@ -1,7 +1,7 @@
-package ink.reactor.microkernel.plugin.graph
+package codes.reactor.microkernel.plugin.graph
 
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.kernel.plugin.model.PluginMetadata
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.model.PluginMetadata
 
 internal class PluginLoadGraphBuilder {
     fun build(plugins: Collection<PluginMetadata>): PluginDependencyGraph {

@@ -1,3 +1,3 @@
-package ink.reactor.network.internal.io.compression
+package codes.reactor.network.internal.io.compression
 
 class ProtocolException(message: String) : RuntimeException(message)

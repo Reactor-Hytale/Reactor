@@ -1,14 +1,14 @@
-package ink.reactor.launcher.logger
+package codes.reactor.launcher.logger
 
-import ink.reactor.kernel.Reactor
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.launcher.logger.console.ConsoleAppender
-import ink.reactor.launcher.logger.file.FileAppender
-import ink.reactor.launcher.logger.file.LogCompressor
-import ink.reactor.launcher.logger.type.NoOpLogger
-import ink.reactor.launcher.logger.type.ReactorLogger
-import ink.reactor.microkernel.logger.JavaLoggerFormatter
-import ink.reactor.sdk.config.ConfigService
+import codes.reactor.kernel.Reactor
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.launcher.logger.console.ConsoleAppender
+import codes.reactor.launcher.logger.file.FileAppender
+import codes.reactor.launcher.logger.file.LogCompressor
+import codes.reactor.launcher.logger.type.NoOpLogger
+import codes.reactor.launcher.logger.type.ReactorLogger
+import codes.reactor.microkernel.logger.JavaLoggerFormatter
+import codes.reactor.sdk.config.ConfigService
 import java.io.IOException
 import java.io.PrintWriter
 import java.nio.channels.FileChannel

@@ -1,6 +1,6 @@
-package ink.reactor.sdk.bundled.config.yaml
+package codes.reactor.sdk.bundled.config.yaml
 
-import ink.reactor.sdk.config.ConfigSection
+import codes.reactor.sdk.config.ConfigSection
 
 class SectionToYamlConverter(private val indentSpaces: Int) {
     private val builder = StringBuilder()

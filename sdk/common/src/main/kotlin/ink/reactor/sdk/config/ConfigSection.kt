@@ -1,9 +1,9 @@
-package ink.reactor.sdk.config
+package codes.reactor.sdk.config
 
-import ink.reactor.sdk.config.convert.ConfigConverters
-import ink.reactor.sdk.config.delegate.ConfigDelegate
-import ink.reactor.sdk.config.delegate.ConfigProperty
-import ink.reactor.sdk.config.section.MapConfigSection
+import codes.reactor.sdk.config.convert.ConfigConverters
+import codes.reactor.sdk.config.delegate.ConfigDelegate
+import codes.reactor.sdk.config.delegate.ConfigProperty
+import codes.reactor.sdk.config.section.MapConfigSection
 import kotlin.time.Duration
 
 

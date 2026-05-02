@@ -1,4 +1,4 @@
-package ink.reactor.kernel.plugin.exception
+package codes.reactor.kernel.plugin.exception
 
 open class PluginLifecycleException(
     message: String,

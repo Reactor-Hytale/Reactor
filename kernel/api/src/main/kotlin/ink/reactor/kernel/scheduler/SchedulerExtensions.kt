@@ -1,4 +1,4 @@
-package ink.reactor.kernel.scheduler
+package codes.reactor.kernel.scheduler
 
 import kotlin.time.Duration
 

@@ -1,7 +1,7 @@
-package ink.reactor.network.api.packet
+package codes.reactor.network.api.packet
 
-import ink.reactor.network.api.buffer.ReadBuffer
-import ink.reactor.network.api.buffer.WriteBuffer
+import codes.reactor.network.api.buffer.ReadBuffer
+import codes.reactor.network.api.buffer.WriteBuffer
 
 interface Packet {
     fun write(buf: WriteBuffer)

@@ -1,4 +1,4 @@
-package ink.reactor.plugin.discordhook.webhook
+package codes.reactor.plugin.discordhook.webhook
 
 data class DiscordMessage(
     val title: String,

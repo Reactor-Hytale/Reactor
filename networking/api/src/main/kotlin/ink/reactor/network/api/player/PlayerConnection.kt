@@ -1,6 +1,6 @@
-package ink.reactor.network.api.player
+package codes.reactor.network.api.player
 
-import ink.reactor.network.api.packet.Packet
+import codes.reactor.network.api.packet.Packet
 
 /**
  * Represents a network connection to a player.
@@ -11,7 +11,7 @@ interface PlayerConnection {
      *
      * This is a convenience method for simple packet sending to a single player.
      * For sending the same packet to multiple players, consider using
-     * [ink.reactor.network.api.packet.PacketsSender] for better performance.
+     * [codes.reactor.network.api.packet.PacketsSender] for better performance.
      *
      * @param packet The packet to send.
      */
@@ -22,7 +22,7 @@ interface PlayerConnection {
      *
      * This is a convenience method for simple packet sending to a single player.
      * For sending the same packets to multiple players, consider using
-     * [ink.reactor.network.api.packet.PacketsSender] for better performance.
+     * [codes.reactor.network.api.packet.PacketsSender] for better performance.
      *
      * @param packets The packets to send.
      */

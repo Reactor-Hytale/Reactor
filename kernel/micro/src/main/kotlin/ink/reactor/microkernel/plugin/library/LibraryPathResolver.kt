@@ -1,7 +1,7 @@
-package ink.reactor.microkernel.plugin.library
+package codes.reactor.microkernel.plugin.library
 
-import ink.reactor.kernel.plugin.library.Dependency
-import ink.reactor.kernel.plugin.library.Repository
+import codes.reactor.kernel.plugin.library.Dependency
+import codes.reactor.kernel.plugin.library.Repository
 import java.nio.file.Path
 import java.net.URI
 

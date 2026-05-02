@@ -1,4 +1,4 @@
-package ink.reactor.network.api.buffer
+package codes.reactor.network.api.buffer
 
 import java.util.*
 

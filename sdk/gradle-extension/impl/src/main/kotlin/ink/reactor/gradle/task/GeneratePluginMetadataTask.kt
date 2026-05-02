@@ -1,8 +1,8 @@
-package ink.reactor.gradle.task
+package codes.reactor.gradle.task
 
-import ink.reactor.gradle.scanner.PluginClassScanner
-import ink.reactor.gradle.validation.Validator
-import ink.reactor.gradle.writer.PluginPropertiesWriter
+import codes.reactor.gradle.scanner.PluginClassScanner
+import codes.reactor.gradle.validation.Validator
+import codes.reactor.gradle.writer.PluginPropertiesWriter
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.file.ConfigurableFileCollection

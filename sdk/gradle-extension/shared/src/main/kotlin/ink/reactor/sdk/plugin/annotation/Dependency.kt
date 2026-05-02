@@ -1,4 +1,4 @@
-package ink.reactor.sdk.plugin.annotation
+package codes.reactor.sdk.plugin.annotation
 
 @Target()
 @Retention(AnnotationRetention.BINARY)

@@ -1,7 +1,7 @@
-package ink.reactor.microkernel.event.bus;
+package codes.reactor.microkernel.event.bus;
 
 
-import ink.reactor.kernel.event.handler.EventHandler;
+import codes.reactor.kernel.event.handler.EventHandler;
 
 import java.util.Arrays;
 import java.util.Comparator;

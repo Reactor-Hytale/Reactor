@@ -1,10 +1,10 @@
-package ink.reactor.microkernel.plugin.library
+package codes.reactor.microkernel.plugin.library
 
-import ink.reactor.kernel.plugin.library.Dependency
-import ink.reactor.kernel.plugin.library.LibrariesRequest
-import ink.reactor.kernel.plugin.library.Repository
-import ink.reactor.microkernel.plugin.library.exception.PluginLibraryResolutionException
-import ink.reactor.microkernel.plugin.validation.JarValidator.isValidJarFile
+import codes.reactor.kernel.plugin.library.Dependency
+import codes.reactor.kernel.plugin.library.LibrariesRequest
+import codes.reactor.kernel.plugin.library.Repository
+import codes.reactor.microkernel.plugin.library.exception.PluginLibraryResolutionException
+import codes.reactor.microkernel.plugin.validation.JarValidator.isValidJarFile
 import java.net.URI
 import java.net.URL
 import java.net.http.HttpClient

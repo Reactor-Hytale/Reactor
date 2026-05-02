@@ -1,6 +1,6 @@
-package ink.reactor.microkernel.logger
+package codes.reactor.microkernel.logger
 
-import ink.reactor.kernel.logger.Logger
+import codes.reactor.kernel.logger.Logger
 
 class PrintlnLogger : Logger {
     override val loggerFormatter: JavaLoggerFormatter = JavaLoggerFormatter()

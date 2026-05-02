@@ -1,10 +1,10 @@
-package ink.reactor.plugin.debug
+package codes.reactor.plugin.debug
 
-import ink.reactor.kernel.logger.logger
-import ink.reactor.kernel.plugin.library.LibrariesRequest
-import ink.reactor.kernel.plugin.library.Repository
-import ink.reactor.kernel.plugin.spi.lifecycle.PluginBoostrap
-import ink.reactor.sdk.plugin.annotation.Bootstrap
+import codes.reactor.kernel.logger.logger
+import codes.reactor.kernel.plugin.library.LibrariesRequest
+import codes.reactor.kernel.plugin.library.Repository
+import codes.reactor.kernel.plugin.spi.lifecycle.PluginBoostrap
+import codes.reactor.sdk.plugin.annotation.Bootstrap
 
 @Bootstrap
 class DebugPluginBoostrap: PluginBoostrap {

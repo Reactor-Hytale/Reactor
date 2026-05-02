@@ -1,4 +1,4 @@
-package ink.reactor.kernel.plugin.spi.lifecycle
+package codes.reactor.kernel.plugin.spi.lifecycle
 
 abstract class BasePluginLifecycle : PluginLifecycle {
     final override fun onLoad() {

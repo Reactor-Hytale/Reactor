@@ -1,9 +1,9 @@
-package ink.reactor.launcher.logger.console;
+package codes.reactor.launcher.logger.console;
 
-import ink.reactor.launcher.logger.ConsoleStyle;
-import ink.reactor.launcher.logger.LogAppender;
-import ink.reactor.launcher.logger.LoggerLevels;
-import ink.reactor.launcher.logger.MutableLogEntry;
+import codes.reactor.launcher.logger.ConsoleStyle;
+import codes.reactor.launcher.logger.LogAppender;
+import codes.reactor.launcher.logger.LoggerLevels;
+import codes.reactor.launcher.logger.MutableLogEntry;
 
 import java.io.PrintWriter;
 

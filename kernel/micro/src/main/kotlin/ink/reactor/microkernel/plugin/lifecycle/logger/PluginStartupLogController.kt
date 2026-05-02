@@ -1,9 +1,9 @@
-package ink.reactor.microkernel.plugin.lifecycle.logger
+package codes.reactor.microkernel.plugin.lifecycle.logger
 
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.microkernel.config.KernelPluginConfig
-import ink.reactor.microkernel.logger.plugin.ControlPluginLoggers
-import ink.reactor.microkernel.plugin.catalog.PluginEntry
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.microkernel.config.KernelPluginConfig
+import codes.reactor.microkernel.logger.plugin.ControlPluginLoggers
+import codes.reactor.microkernel.plugin.catalog.PluginEntry
 
 internal class PluginStartupLogController(
     private val config: KernelPluginConfig,

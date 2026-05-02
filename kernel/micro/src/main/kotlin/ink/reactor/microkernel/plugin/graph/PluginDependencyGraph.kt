@@ -1,7 +1,7 @@
-package ink.reactor.microkernel.plugin.graph
+package codes.reactor.microkernel.plugin.graph
 
-import ink.reactor.kernel.plugin.exception.PluginDependencyException
-import ink.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.exception.PluginDependencyException
+import codes.reactor.kernel.plugin.model.PluginId
 
 internal class PluginDependencyGraph {
     private val outgoing: MutableMap<PluginId, MutableSet<PluginId>> = linkedMapOf()

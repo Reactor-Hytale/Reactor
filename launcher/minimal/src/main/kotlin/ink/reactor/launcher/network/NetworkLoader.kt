@@ -1,12 +1,12 @@
-package ink.reactor.launcher.network
+package codes.reactor.launcher.network
 
-import ink.reactor.kernel.Reactor
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.network.internal.NetworkInternalConnector
-import ink.reactor.network.internal.config.NetworkConfig
-import ink.reactor.network.internal.config.QuicConfig
-import ink.reactor.sdk.config.ConfigService
-import ink.reactor.sdk.util.TimeFormatter
+import codes.reactor.kernel.Reactor
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.network.internal.NetworkInternalConnector
+import codes.reactor.network.internal.config.NetworkConfig
+import codes.reactor.network.internal.config.QuicConfig
+import codes.reactor.sdk.config.ConfigService
+import codes.reactor.sdk.util.TimeFormatter
 import kotlin.math.max
 import kotlin.math.min
 

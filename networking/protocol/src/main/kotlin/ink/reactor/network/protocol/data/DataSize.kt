@@ -1,4 +1,4 @@
-package ink.reactor.network.protocol.data
+package codes.reactor.network.protocol.data
 
 object DataSize {
     const val BYTE = 1

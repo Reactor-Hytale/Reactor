@@ -1,4 +1,4 @@
-package ink.reactor.network.internal.config
+package codes.reactor.network.internal.config
 
 class NetworkConfig(
     val host: String,

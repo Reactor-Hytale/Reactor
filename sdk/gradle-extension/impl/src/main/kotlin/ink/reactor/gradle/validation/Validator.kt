@@ -1,7 +1,7 @@
-package ink.reactor.gradle.validation
+package codes.reactor.gradle.validation
 
-import ink.reactor.gradle.model.DependencyAnnotationData
-import ink.reactor.gradle.model.PluginAnnotationData
+import codes.reactor.gradle.model.DependencyAnnotationData
+import codes.reactor.gradle.model.PluginAnnotationData
 import org.gradle.api.GradleException
 import kotlin.collections.forEach
 

@@ -1,7 +1,7 @@
-package ink.reactor.kernel.plugin.model
+package codes.reactor.kernel.plugin.model
 
-import ink.reactor.kernel.plugin.model.failure.PluginFailure
-import ink.reactor.kernel.plugin.model.lifecycle.PluginState
+import codes.reactor.kernel.plugin.model.failure.PluginFailure
+import codes.reactor.kernel.plugin.model.lifecycle.PluginState
 
 data class PluginSnapshot(
     val state: PluginState,

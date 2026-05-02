@@ -1,4 +1,4 @@
-package ink.reactor.kernel.plugin.model.failure
+package codes.reactor.kernel.plugin.model.failure
 
 data class PluginExceptionDetails(
     val type: String,

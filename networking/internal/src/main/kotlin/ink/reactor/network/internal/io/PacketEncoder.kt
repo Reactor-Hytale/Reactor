@@ -1,8 +1,8 @@
-package ink.reactor.network.internal.io
+package codes.reactor.network.internal.io
 
-import ink.reactor.network.api.packet.Packet
-import ink.reactor.network.internal.io.frame.PacketFramer
-import ink.reactor.network.protocol.data.DataSize
+import codes.reactor.network.api.packet.Packet
+import codes.reactor.network.internal.io.frame.PacketFramer
+import codes.reactor.network.protocol.data.DataSize
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.PooledByteBufAllocator
 import io.netty.channel.ChannelHandler

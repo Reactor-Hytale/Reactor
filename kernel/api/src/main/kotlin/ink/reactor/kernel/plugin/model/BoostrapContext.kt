@@ -1,6 +1,6 @@
-package ink.reactor.kernel.plugin.model
+package codes.reactor.kernel.plugin.model
 
-import ink.reactor.kernel.plugin.library.LibrariesRequest
+import codes.reactor.kernel.plugin.library.LibrariesRequest
 
 data class BoostrapContext(
     val librariesRequest: LibrariesRequest,

@@ -1,4 +1,4 @@
-package ink.reactor.kernel.plugin.scope
+package codes.reactor.kernel.plugin.scope
 
 interface PluginScopeFactory {
     fun acquire(): PluginScope

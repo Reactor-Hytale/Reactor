@@ -1,4 +1,4 @@
-package ink.reactor.runtime;
+package codes.reactor.runtime;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +22,7 @@ public final class ReactorLauncher {
     private static final String EMBEDDED_PUBLIC_JAR = "embedded/public.jar";
     private static final String MAIN_FUNCTION = "start";
     private static final String ENTRYPOINT_CLASS =
-        "ink.reactor.launcher.MinimalReactorLauncherKt";
+        "codes.reactor.launcher.MinimalReactorLauncherKt";
 
     static void main() throws Throwable {
         final Path reactorJar = resolveOwnJar();

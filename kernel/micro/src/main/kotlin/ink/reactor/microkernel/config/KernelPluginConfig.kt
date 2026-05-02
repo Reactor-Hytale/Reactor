@@ -1,7 +1,7 @@
-package ink.reactor.microkernel.config
+package codes.reactor.microkernel.config
 
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.kernel.plugin.model.version.Version
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.model.version.Version
 import java.nio.file.Path
 import kotlin.time.Duration
 

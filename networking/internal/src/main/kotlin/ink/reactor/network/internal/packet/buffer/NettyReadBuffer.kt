@@ -1,6 +1,6 @@
-package ink.reactor.network.internal.packet.buffer
+package codes.reactor.network.internal.packet.buffer
 
-import ink.reactor.network.api.buffer.ReadBuffer
+import codes.reactor.network.api.buffer.ReadBuffer
 import io.netty.buffer.ByteBuf
 import java.util.UUID
 

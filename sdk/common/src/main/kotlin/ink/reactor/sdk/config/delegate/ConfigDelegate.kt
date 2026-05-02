@@ -1,10 +1,10 @@
-package ink.reactor.sdk.config.delegate
+package codes.reactor.sdk.config.delegate
 
-import ink.reactor.sdk.config.ConfigSection
+import codes.reactor.sdk.config.ConfigSection
 import kotlin.reflect.KProperty
 
 /**
- * Property delegate backed by a [ink.reactor.sdk.config.ConfigSection].
+ * Property delegate backed by a [codes.reactor.sdk.config.ConfigSection].
  *
  * <p>If the target key is missing or its value cannot be cast to the expected type,
  * the provided default value is returned instead.</p>

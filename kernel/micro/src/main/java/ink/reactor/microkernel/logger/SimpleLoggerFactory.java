@@ -1,8 +1,8 @@
-package ink.reactor.microkernel.logger;
+package codes.reactor.microkernel.logger;
 
-import ink.reactor.kernel.logger.Logger;
-import ink.reactor.kernel.logger.LoggerBuilder;
-import ink.reactor.kernel.logger.LoggerFactory;
+import codes.reactor.kernel.logger.Logger;
+import codes.reactor.kernel.logger.LoggerBuilder;
+import codes.reactor.kernel.logger.LoggerFactory;
 import org.jetbrains.annotations.NotNull;
 
 public class SimpleLoggerFactory implements LoggerFactory {

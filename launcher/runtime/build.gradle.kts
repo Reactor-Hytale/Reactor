@@ -138,7 +138,7 @@ val reactorJar by tasks.registering(ShadowJar::class) {
 
     manifest {
         attributes(
-            "Main-Class" to "ink.reactor.runtime.ReactorLauncher",
+            "Main-Class" to "codes.reactor.runtime.ReactorLauncher",
             "compile-id" to UUID.randomUUID().toString()
         )
     }

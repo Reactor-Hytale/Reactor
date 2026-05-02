@@ -1,4 +1,4 @@
-package ink.reactor.kernel.logger
+package codes.reactor.kernel.logger
 
 interface LoggerFormatter {
     /**

@@ -1,4 +1,4 @@
-package ink.reactor.launcher.logger;
+package codes.reactor.launcher.logger;
 
 import java.io.IOException;
 

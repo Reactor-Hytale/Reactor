@@ -1,4 +1,4 @@
-package ink.reactor.launcher.console
+package codes.reactor.launcher.console
 
 import org.jline.reader.Candidate
 import org.jline.reader.Completer

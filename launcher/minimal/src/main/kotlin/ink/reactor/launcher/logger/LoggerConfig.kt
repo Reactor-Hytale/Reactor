@@ -1,7 +1,7 @@
-package ink.reactor.launcher.logger
+package codes.reactor.launcher.logger
 
-import ink.reactor.sdk.config.ConfigSection
-import ink.reactor.sdk.util.TimeFormatter
+import codes.reactor.sdk.config.ConfigSection
+import codes.reactor.sdk.util.TimeFormatter
 import kotlin.time.Duration.Companion.seconds
 
 class LoggerConfig(section: ConfigSection) {

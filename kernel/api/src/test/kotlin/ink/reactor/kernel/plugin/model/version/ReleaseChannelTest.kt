@@ -1,4 +1,4 @@
-package ink.reactor.kernel.plugin.model.version
+package codes.reactor.kernel.plugin.model.version
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

@@ -1,4 +1,4 @@
-package ink.reactor.gradle.model
+package codes.reactor.gradle.model
 
 data class DependencyAnnotationData(
     var id: String = "",

@@ -1,4 +1,4 @@
-package ink.reactor.kernel.event.dispatch
+package codes.reactor.kernel.event.dispatch
 
 interface EventExecutor {
     fun execute(event: Any)

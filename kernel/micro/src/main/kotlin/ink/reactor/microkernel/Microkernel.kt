@@ -1,24 +1,24 @@
-package ink.reactor.microkernel
+package codes.reactor.microkernel
 
-import ink.reactor.kernel.Reactor
-import ink.reactor.kernel.event.EventBus
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.kernel.scheduler.SchedulerProvider
-import ink.reactor.microkernel.config.KernelPluginConfig
-import ink.reactor.microkernel.event.bus.DefaultEventBus
-import ink.reactor.microkernel.logger.MicrokernelLoggerFactory
-import ink.reactor.microkernel.plugin.catalog.DefaultPluginCatalog
-import ink.reactor.microkernel.plugin.lifecycle.DefaultPluginLifecycleControl
-import ink.reactor.microkernel.plugin.PluginInstaller
-import ink.reactor.microkernel.plugin.PluginStarter
-import ink.reactor.microkernel.plugin.library.LibraryPathResolver
-import ink.reactor.microkernel.plugin.library.PluginLibraryResolver
-import ink.reactor.microkernel.plugin.manifest.PluginPropertiesReader
-import ink.reactor.microkernel.plugin.scanner.PluginScanner
-import ink.reactor.microkernel.plugin.scope.KernelPluginScopeFactory
-import ink.reactor.microkernel.plugin.scope.extension.KernelLoggerSpyScope
-import ink.reactor.microkernel.plugin.validation.PluginDependencyValidator
-import ink.reactor.microkernel.scheduler.KernelSchedulerProvider
+import codes.reactor.kernel.Reactor
+import codes.reactor.kernel.event.EventBus
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.kernel.scheduler.SchedulerProvider
+import codes.reactor.microkernel.config.KernelPluginConfig
+import codes.reactor.microkernel.event.bus.DefaultEventBus
+import codes.reactor.microkernel.logger.MicrokernelLoggerFactory
+import codes.reactor.microkernel.plugin.catalog.DefaultPluginCatalog
+import codes.reactor.microkernel.plugin.lifecycle.DefaultPluginLifecycleControl
+import codes.reactor.microkernel.plugin.PluginInstaller
+import codes.reactor.microkernel.plugin.PluginStarter
+import codes.reactor.microkernel.plugin.library.LibraryPathResolver
+import codes.reactor.microkernel.plugin.library.PluginLibraryResolver
+import codes.reactor.microkernel.plugin.manifest.PluginPropertiesReader
+import codes.reactor.microkernel.plugin.scanner.PluginScanner
+import codes.reactor.microkernel.plugin.scope.KernelPluginScopeFactory
+import codes.reactor.microkernel.plugin.scope.extension.KernelLoggerSpyScope
+import codes.reactor.microkernel.plugin.validation.PluginDependencyValidator
+import codes.reactor.microkernel.scheduler.KernelSchedulerProvider
 
 class Microkernel private constructor(
     val pluginConfig: KernelPluginConfig,

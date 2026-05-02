@@ -1,4 +1,4 @@
-package ink.reactor.launcher.logger.file;
+package codes.reactor.launcher.logger.file;
 
 import java.io.IOException;
 import java.net.URI;

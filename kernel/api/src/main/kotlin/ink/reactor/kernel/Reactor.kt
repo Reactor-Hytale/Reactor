@@ -1,11 +1,11 @@
-package ink.reactor.kernel
+package codes.reactor.kernel
 
-import ink.reactor.kernel.logger.LoggerFactory
-import ink.reactor.kernel.logger.LoggerSpy
-import ink.reactor.kernel.plugin.control.PluginLifecycleControl
-import ink.reactor.kernel.plugin.query.PluginCatalog
-import ink.reactor.kernel.plugin.scope.PluginScopeFactory
-import ink.reactor.kernel.scheduler.SchedulerProvider
+import codes.reactor.kernel.logger.LoggerFactory
+import codes.reactor.kernel.logger.LoggerSpy
+import codes.reactor.kernel.plugin.control.PluginLifecycleControl
+import codes.reactor.kernel.plugin.query.PluginCatalog
+import codes.reactor.kernel.plugin.scope.PluginScopeFactory
+import codes.reactor.kernel.scheduler.SchedulerProvider
 import java.nio.file.Path
 import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.atomic.AtomicBoolean

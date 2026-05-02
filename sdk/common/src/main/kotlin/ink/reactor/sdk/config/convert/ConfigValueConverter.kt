@@ -1,4 +1,4 @@
-package ink.reactor.sdk.config.convert
+package codes.reactor.sdk.config.convert
 
 /**
  * Converts raw config values to a target type.

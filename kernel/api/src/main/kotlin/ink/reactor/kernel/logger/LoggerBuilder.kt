@@ -1,6 +1,6 @@
-package ink.reactor.kernel.logger
+package codes.reactor.kernel.logger
 
-import ink.reactor.kernel.Reactor
+import codes.reactor.kernel.Reactor
 
 class LoggerBuilder(
     private val factory: LoggerFactory = Reactor.loggerFactory

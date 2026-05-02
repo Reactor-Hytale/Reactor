@@ -1,6 +1,6 @@
-package ink.reactor.kernel.event
+package codes.reactor.kernel.event
 
-import ink.reactor.kernel.event.handler.ListenerPhase
+import codes.reactor.kernel.event.handler.ListenerPhase
 import kotlin.annotation.AnnotationTarget.FUNCTION
 import kotlin.annotation.AnnotationRetention.RUNTIME
 

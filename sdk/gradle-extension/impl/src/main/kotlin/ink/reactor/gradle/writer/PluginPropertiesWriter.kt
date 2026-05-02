@@ -1,6 +1,6 @@
-package ink.reactor.gradle.writer
+package codes.reactor.gradle.writer
 
-import ink.reactor.gradle.model.PluginAnnotationData
+import codes.reactor.gradle.model.PluginAnnotationData
 import java.io.File
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files

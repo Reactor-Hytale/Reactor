@@ -1,4 +1,4 @@
-package ink.reactor.kernel.event.handler
+package codes.reactor.kernel.event.handler
 
 /**
  * Defines the chronological phases for event listener execution.

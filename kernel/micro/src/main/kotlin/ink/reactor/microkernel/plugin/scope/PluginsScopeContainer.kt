@@ -1,7 +1,7 @@
-package ink.reactor.microkernel.plugin.scope
+package codes.reactor.microkernel.plugin.scope
 
-import ink.reactor.kernel.plugin.scope.PluginScope
-import ink.reactor.microkernel.Microkernel
+import codes.reactor.kernel.plugin.scope.PluginScope
+import codes.reactor.microkernel.Microkernel
 import java.util.concurrent.ConcurrentHashMap
 
 object PluginsScopeContainer {

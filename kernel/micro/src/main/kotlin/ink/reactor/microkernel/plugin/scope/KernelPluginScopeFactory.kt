@@ -1,8 +1,8 @@
-package ink.reactor.microkernel.plugin.scope
+package codes.reactor.microkernel.plugin.scope
 
-import ink.reactor.kernel.plugin.scope.PluginScope
-import ink.reactor.kernel.plugin.scope.PluginScopeFactory
-import ink.reactor.microkernel.plugin.classloading.PluginClassLoader
+import codes.reactor.kernel.plugin.scope.PluginScope
+import codes.reactor.kernel.plugin.scope.PluginScopeFactory
+import codes.reactor.microkernel.plugin.classloading.PluginClassLoader
 
 class KernelPluginScopeFactory : PluginScopeFactory {
 

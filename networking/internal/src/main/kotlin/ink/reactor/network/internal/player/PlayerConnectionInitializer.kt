@@ -1,12 +1,12 @@
-package ink.reactor.network.internal.player
+package codes.reactor.network.internal.player
 
-import ink.reactor.kernel.Reactor
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.network.internal.NetworkInternalConnector
-import ink.reactor.network.internal.io.PacketDecoder
-import ink.reactor.network.internal.io.PacketEncoder
-import ink.reactor.network.internal.packet.PacketInboundHandler
-import ink.reactor.network.internal.quic.QuicTransport
+import codes.reactor.kernel.Reactor
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.network.internal.NetworkInternalConnector
+import codes.reactor.network.internal.io.PacketDecoder
+import codes.reactor.network.internal.io.PacketEncoder
+import codes.reactor.network.internal.packet.PacketInboundHandler
+import codes.reactor.network.internal.quic.QuicTransport
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
 import io.netty.handler.timeout.ReadTimeoutHandler

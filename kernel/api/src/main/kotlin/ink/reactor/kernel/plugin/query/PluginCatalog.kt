@@ -1,7 +1,7 @@
-package ink.reactor.kernel.plugin.query
+package codes.reactor.kernel.plugin.query
 
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.kernel.plugin.model.PluginSnapshot
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.model.PluginSnapshot
 
 interface PluginCatalog {
     operator fun get(id: PluginId): PluginSnapshot?

@@ -1,8 +1,8 @@
-package ink.reactor.network.internal.packet.storage
+package codes.reactor.network.internal.packet.storage
 
-import ink.reactor.network.api.packet.Packet
-import ink.reactor.network.api.packet.handler.PacketHandler
-import ink.reactor.network.api.player.PlayerConnection
+import codes.reactor.network.api.packet.Packet
+import codes.reactor.network.api.packet.handler.PacketHandler
+import codes.reactor.network.api.player.PlayerConnection
 
 internal class ArrayHandlerStorage(private var handlers: Array<PacketHandler>) : MutablePacketHandlerStorage {
 

@@ -1,14 +1,14 @@
-package ink.reactor.microkernel.plugin
+package codes.reactor.microkernel.plugin
 
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.kernel.plugin.exception.PluginDependencyException
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.kernel.plugin.model.lifecycle.PluginState
-import ink.reactor.microkernel.config.KernelPluginConfig
-import ink.reactor.microkernel.plugin.catalog.DefaultPluginCatalog
-import ink.reactor.microkernel.plugin.scanner.PluginCandidate
-import ink.reactor.microkernel.plugin.scanner.PluginScanner
-import ink.reactor.microkernel.plugin.validation.PluginDependencyValidator
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.kernel.plugin.exception.PluginDependencyException
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.model.lifecycle.PluginState
+import codes.reactor.microkernel.config.KernelPluginConfig
+import codes.reactor.microkernel.plugin.catalog.DefaultPluginCatalog
+import codes.reactor.microkernel.plugin.scanner.PluginCandidate
+import codes.reactor.microkernel.plugin.scanner.PluginScanner
+import codes.reactor.microkernel.plugin.validation.PluginDependencyValidator
 import java.io.File
 
 internal class PluginInstaller(

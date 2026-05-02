@@ -1,6 +1,6 @@
-package ink.reactor.kernel.plugin.model.failure
+package codes.reactor.kernel.plugin.model.failure
 
-import ink.reactor.kernel.plugin.model.lifecycle.PluginState
+import codes.reactor.kernel.plugin.model.lifecycle.PluginState
 import java.time.Instant
 
 data class PluginFailure(

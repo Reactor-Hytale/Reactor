@@ -1,5 +1,5 @@
 plugins {
-    id("ink.reactor.plugin-metadata")
+    id("codes.reactor.plugin-metadata")
 }
 
 dependencies {
@@ -7,7 +7,7 @@ dependencies {
 }
 
 reactorPluginMetadata {
-    packageName.set("ink.reactor.plugin.discordhook")
+    packageName.set("codes.reactor.plugin.discordhook")
     /*
     * includeSubpackages.set(false)
     * failOnMultiplePlugins.set(true)

@@ -1,13 +1,13 @@
-package ink.reactor.launcher
+package codes.reactor.launcher
 
-import ink.reactor.launcher.console.Console
-import ink.reactor.launcher.console.JLineConsole.createConsole
-import ink.reactor.launcher.logger.LoggersLoader
-import ink.reactor.launcher.network.NetworkLoader
-import ink.reactor.launcher.plugin.PluginConfigLoader
-import ink.reactor.microkernel.Microkernel
-import ink.reactor.sdk.bundled.config.yaml.YamlConfigService
-import ink.reactor.sdk.config.ConfigServiceRegistry
+import codes.reactor.launcher.console.Console
+import codes.reactor.launcher.console.JLineConsole.createConsole
+import codes.reactor.launcher.logger.LoggersLoader
+import codes.reactor.launcher.network.NetworkLoader
+import codes.reactor.launcher.plugin.PluginConfigLoader
+import codes.reactor.microkernel.Microkernel
+import codes.reactor.sdk.bundled.config.yaml.YamlConfigService
+import codes.reactor.sdk.config.ConfigServiceRegistry
 
 fun start(publicClassLoader: ClassLoader) {
     MinimalReactorLauncher.start(publicClassLoader)

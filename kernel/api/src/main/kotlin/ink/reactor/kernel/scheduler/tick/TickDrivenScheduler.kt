@@ -1,7 +1,7 @@
-package ink.reactor.kernel.scheduler.tick
+package codes.reactor.kernel.scheduler.tick
 
-import ink.reactor.kernel.scheduler.Scheduler
-import ink.reactor.kernel.scheduler.Task
+import codes.reactor.kernel.scheduler.Scheduler
+import codes.reactor.kernel.scheduler.Task
 
 interface TickDrivenScheduler : Scheduler {
     val currentTick: Ticks

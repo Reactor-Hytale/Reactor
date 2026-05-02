@@ -1,8 +1,8 @@
-package ink.reactor.sdk.bundled.config
+package codes.reactor.sdk.bundled.config
 
-import ink.reactor.kernel.Reactor
-import ink.reactor.sdk.config.ConfigSection
-import ink.reactor.sdk.config.ConfigService
+import codes.reactor.kernel.Reactor
+import codes.reactor.sdk.config.ConfigSection
+import codes.reactor.sdk.config.ConfigService
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream

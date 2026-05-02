@@ -1,6 +1,6 @@
-package ink.reactor.sdk.logger
+package codes.reactor.sdk.logger
 
-import ink.reactor.kernel.logger.LoggerFormatter
+import codes.reactor.kernel.logger.LoggerFormatter
 
 object DummyLoggerFormatter : LoggerFormatter {
     override fun format(text: String, vararg objects: Any?): String {

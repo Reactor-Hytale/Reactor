@@ -1,6 +1,6 @@
-package ink.reactor.microkernel.scheduler
+package codes.reactor.microkernel.scheduler
 
-import ink.reactor.kernel.scheduler.tick.toTicks
+import codes.reactor.kernel.scheduler.tick.toTicks
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.hours

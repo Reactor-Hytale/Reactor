@@ -1,12 +1,12 @@
-package ink.reactor.plugin.discordhook
+package codes.reactor.plugin.discordhook
 
-import ink.reactor.plugin.discordhook.config.DiscordHookConfig
-import ink.reactor.plugin.discordhook.config.LevelSection
-import ink.reactor.plugin.discordhook.webhook.DiscordMessage
-import ink.reactor.plugin.discordhook.webhook.DiscordWebHook
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.sdk.logger.DummyLoggerFormatter
-import ink.reactor.sdk.util.PlaceholderReplacement
+import codes.reactor.plugin.discordhook.config.DiscordHookConfig
+import codes.reactor.plugin.discordhook.config.LevelSection
+import codes.reactor.plugin.discordhook.webhook.DiscordMessage
+import codes.reactor.plugin.discordhook.webhook.DiscordWebHook
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.sdk.logger.DummyLoggerFormatter
+import codes.reactor.sdk.util.PlaceholderReplacement
 import java.time.LocalDateTime
 
 class DiscordLogger(

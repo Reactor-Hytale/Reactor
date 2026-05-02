@@ -3,7 +3,7 @@ plugins {
     kotlin("jvm") version "2.3.0"
 }
 
-group = "ink.reactor"
+group = "codes.reactor"
 version = "1.0.0"
 
 allprojects {

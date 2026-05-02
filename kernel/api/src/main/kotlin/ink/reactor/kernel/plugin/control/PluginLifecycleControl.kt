@@ -1,9 +1,9 @@
-package ink.reactor.kernel.plugin.control
+package codes.reactor.kernel.plugin.control
 
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.kernel.plugin.exception.PluginNotFoundException
-import ink.reactor.kernel.plugin.exception.PluginOperationInProgressException
-import ink.reactor.kernel.plugin.exception.PluginTransitionNotAllowedException
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.exception.PluginNotFoundException
+import codes.reactor.kernel.plugin.exception.PluginOperationInProgressException
+import codes.reactor.kernel.plugin.exception.PluginTransitionNotAllowedException
 
 interface PluginLifecycleControl {
     @Throws(

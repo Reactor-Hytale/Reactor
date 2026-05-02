@@ -1,7 +1,7 @@
-package ink.reactor.sdk.config.delegate
+package codes.reactor.sdk.config.delegate
 
-import ink.reactor.sdk.config.ConfigSection
-import ink.reactor.sdk.config.convert.ConfigValueConverter
+import codes.reactor.sdk.config.ConfigSection
+import codes.reactor.sdk.config.convert.ConfigValueConverter
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty

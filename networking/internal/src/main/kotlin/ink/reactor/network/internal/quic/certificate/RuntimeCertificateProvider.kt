@@ -1,4 +1,4 @@
-package ink.reactor.network.internal.quic.certificate
+package codes.reactor.network.internal.quic.certificate
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider
 import java.nio.file.Files

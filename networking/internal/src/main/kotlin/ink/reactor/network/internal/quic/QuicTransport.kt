@@ -1,9 +1,9 @@
-package ink.reactor.network.internal.quic
+package codes.reactor.network.internal.quic
 
-import ink.reactor.kernel.Reactor
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.network.internal.config.NetworkConfig
-import ink.reactor.network.internal.quic.certificate.RuntimeCertificateProvider
+import codes.reactor.kernel.Reactor
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.network.internal.config.NetworkConfig
+import codes.reactor.network.internal.quic.certificate.RuntimeCertificateProvider
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.*
 import io.netty.channel.epoll.Epoll

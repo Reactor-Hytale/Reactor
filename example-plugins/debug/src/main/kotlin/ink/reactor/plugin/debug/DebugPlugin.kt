@@ -1,12 +1,12 @@
-package ink.reactor.plugin.debug
+package codes.reactor.plugin.debug
 
-import ink.reactor.kernel.event.handler.ListenerPhase
-import ink.reactor.kernel.event.subscribe
-import ink.reactor.kernel.logger.logger
-import ink.reactor.kernel.plugin.scope.eventbus
-import ink.reactor.kernel.plugin.scope.scope
-import ink.reactor.kernel.plugin.spi.lifecycle.BasePluginLifecycle
-import ink.reactor.sdk.plugin.annotation.Plugin
+import codes.reactor.kernel.event.handler.ListenerPhase
+import codes.reactor.kernel.event.subscribe
+import codes.reactor.kernel.logger.logger
+import codes.reactor.kernel.plugin.scope.eventbus
+import codes.reactor.kernel.plugin.scope.scope
+import codes.reactor.kernel.plugin.spi.lifecycle.BasePluginLifecycle
+import codes.reactor.sdk.plugin.annotation.Plugin
 
 @Plugin(id = "ReactorDebugPlugin", version = "1.0.0-ALPHA")
 class DebugPlugin: BasePluginLifecycle() {

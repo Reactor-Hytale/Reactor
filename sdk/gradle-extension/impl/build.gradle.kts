@@ -17,8 +17,8 @@ dependencies {
 gradlePlugin {
     plugins {
         create("reactorPluginMetadata") {
-            id = "ink.reactor.plugin-metadata"
-            implementationClass = "ink.reactor.gradle.ReactorGradlePlugin"
+            id = "codes.reactor.plugin-metadata"
+            implementationClass = "codes.reactor.gradle.ReactorGradlePlugin"
             displayName = "Reactor Plugin Metadata"
             description = "Generates plugin.properties from @Plugin annotation"
         }

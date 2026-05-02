@@ -1,9 +1,9 @@
-package ink.reactor.microkernel.logger.plugin;
+package codes.reactor.microkernel.logger.plugin;
 
-import ink.reactor.kernel.Reactor;
-import ink.reactor.kernel.logger.Logger;
-import ink.reactor.kernel.plugin.spi.lifecycle.PluginLifecycle;
-import ink.reactor.microkernel.logger.WrappedLogger;
+import codes.reactor.kernel.Reactor;
+import codes.reactor.kernel.logger.Logger;
+import codes.reactor.kernel.plugin.spi.lifecycle.PluginLifecycle;
+import codes.reactor.microkernel.logger.WrappedLogger;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;

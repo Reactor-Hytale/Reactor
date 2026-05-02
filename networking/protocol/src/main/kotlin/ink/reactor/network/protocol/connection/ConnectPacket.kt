@@ -1,8 +1,8 @@
-package ink.reactor.network.protocol.connection
+package codes.reactor.network.protocol.connection
 
-import ink.reactor.network.api.buffer.ReadBuffer
-import ink.reactor.network.api.buffer.WriteBuffer
-import ink.reactor.network.api.packet.Packet
+import codes.reactor.network.api.buffer.ReadBuffer
+import codes.reactor.network.api.buffer.WriteBuffer
+import codes.reactor.network.api.packet.Packet
 
 import java.util.*
 

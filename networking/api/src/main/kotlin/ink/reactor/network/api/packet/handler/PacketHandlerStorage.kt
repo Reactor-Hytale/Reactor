@@ -1,7 +1,7 @@
-package ink.reactor.network.api.packet.handler
+package codes.reactor.network.api.packet.handler
 
-import ink.reactor.network.api.packet.Packet
-import ink.reactor.network.api.player.PlayerConnection
+import codes.reactor.network.api.packet.Packet
+import codes.reactor.network.api.player.PlayerConnection
 
 interface PacketHandlerStorage {
     fun callHandlers(connection: PlayerConnection, packet: Packet)

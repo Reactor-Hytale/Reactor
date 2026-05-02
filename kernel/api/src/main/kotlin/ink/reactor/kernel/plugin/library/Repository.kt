@@ -1,4 +1,4 @@
-package ink.reactor.kernel.plugin.library
+package codes.reactor.kernel.plugin.library
 
 data class Repository(
     val url: String,

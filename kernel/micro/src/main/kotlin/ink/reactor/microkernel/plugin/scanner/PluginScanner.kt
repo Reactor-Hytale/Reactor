@@ -1,7 +1,7 @@
-package ink.reactor.microkernel.plugin.scanner
+package codes.reactor.microkernel.plugin.scanner
 
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.microkernel.plugin.manifest.PluginManifestReader
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.microkernel.plugin.manifest.PluginManifestReader
 import java.io.File
 import java.util.jar.JarFile
 

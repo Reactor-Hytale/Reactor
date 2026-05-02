@@ -1,8 +1,8 @@
-package ink.reactor.network.internal.quic
+package codes.reactor.network.internal.quic
 
-import ink.reactor.kernel.logger.Logger
-import ink.reactor.network.internal.NetworkInternalConnector
-import ink.reactor.network.internal.player.PlayerConnectionInitializer
+import codes.reactor.kernel.logger.Logger
+import codes.reactor.network.internal.NetworkInternalConnector
+import codes.reactor.network.internal.player.PlayerConnectionInitializer
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import io.netty.incubator.codec.quic.*

@@ -1,4 +1,4 @@
-package ink.reactor.microkernel.scheduler.tick
+package codes.reactor.microkernel.scheduler.tick
 
 internal class LaterTasks {
     private var runnables = arrayOfNulls<() -> Unit>(16)

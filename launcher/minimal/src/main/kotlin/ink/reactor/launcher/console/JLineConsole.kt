@@ -1,6 +1,6 @@
-package ink.reactor.launcher.console
+package codes.reactor.launcher.console
 
-import ink.reactor.kernel.Reactor
+import codes.reactor.kernel.Reactor
 import org.jline.reader.LineReaderBuilder
 import org.jline.terminal.Terminal
 import org.jline.terminal.TerminalBuilder

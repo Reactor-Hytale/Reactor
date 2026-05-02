@@ -1,4 +1,4 @@
-package ink.reactor.sdk.config.delegate
+package codes.reactor.sdk.config.delegate
 
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty

@@ -1,4 +1,4 @@
-package ink.reactor.microkernel.plugin.manifest
+package codes.reactor.microkernel.plugin.manifest
 
 import java.util.jar.JarFile
 

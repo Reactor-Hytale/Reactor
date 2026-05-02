@@ -1,6 +1,6 @@
-package ink.reactor.launcher.logger;
+package codes.reactor.launcher.logger;
 
-import ink.reactor.kernel.logger.LogLevel;
+import codes.reactor.kernel.logger.LogLevel;
 
 /**
  * A reusable data container for log entries.

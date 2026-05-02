@@ -1,4 +1,4 @@
-package ink.reactor.kernel.plugin.model.version
+package codes.reactor.kernel.plugin.model.version
 
 /**
  * Represents a semantic plugin version with an optional release channel.

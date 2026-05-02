@@ -1,7 +1,7 @@
-package ink.reactor.plugin.debug
+package codes.reactor.plugin.debug
 
-import ink.reactor.sdk.config.ConfigSection
-import ink.reactor.sdk.config.ConfigServiceRegistry
+import codes.reactor.sdk.config.ConfigSection
+import codes.reactor.sdk.config.ConfigServiceRegistry
 import kotlin.time.Duration.Companion.seconds
 
 class DebugConfig(

@@ -1,4 +1,4 @@
-package ink.reactor.kernel.logger
+package codes.reactor.kernel.logger
 
 /**
  * Registers and monitors loggers to detect every time their logging methods

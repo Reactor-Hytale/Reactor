@@ -1,11 +1,11 @@
-package ink.reactor.microkernel.plugin.validation
+package codes.reactor.microkernel.plugin.validation
 
-import ink.reactor.kernel.plugin.exception.PluginDependencyException
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.kernel.plugin.model.PluginMetadata
-import ink.reactor.kernel.plugin.model.dependency.DependencyKind
-import ink.reactor.kernel.plugin.model.dependency.PluginDependency
-import ink.reactor.microkernel.plugin.scanner.PluginCandidate
+import codes.reactor.kernel.plugin.exception.PluginDependencyException
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.model.PluginMetadata
+import codes.reactor.kernel.plugin.model.dependency.DependencyKind
+import codes.reactor.kernel.plugin.model.dependency.PluginDependency
+import codes.reactor.microkernel.plugin.scanner.PluginCandidate
 
 internal class PluginDependencyValidator {
 

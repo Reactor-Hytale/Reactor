@@ -1,10 +1,10 @@
-package ink.reactor.network.internal
+package codes.reactor.network.internal
 
-import ink.reactor.network.api.NetworkConnector
-import ink.reactor.network.api.packet.PacketRegistry
-import ink.reactor.network.internal.config.NetworkConfig
-import ink.reactor.network.internal.packet.PacketSenderInternal
-import ink.reactor.network.internal.packet.storage.StatePacketHandlerStorage
+import codes.reactor.network.api.NetworkConnector
+import codes.reactor.network.api.packet.PacketRegistry
+import codes.reactor.network.internal.config.NetworkConfig
+import codes.reactor.network.internal.packet.PacketSenderInternal
+import codes.reactor.network.internal.packet.storage.StatePacketHandlerStorage
 
 class NetworkInternalConnector private constructor(
     private val config: NetworkConfig,

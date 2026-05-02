@@ -1,7 +1,7 @@
-package ink.reactor.plugin.discordhook.config
+package codes.reactor.plugin.discordhook.config
 
-import ink.reactor.sdk.config.ConfigSection
-import ink.reactor.sdk.config.ConfigServiceRegistry
+import codes.reactor.sdk.config.ConfigSection
+import codes.reactor.sdk.config.ConfigServiceRegistry
 import java.time.format.DateTimeFormatter
 import java.util.Objects
 import kotlin.Any

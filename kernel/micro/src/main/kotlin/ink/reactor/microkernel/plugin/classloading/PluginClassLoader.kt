@@ -1,7 +1,7 @@
-package ink.reactor.microkernel.plugin.classloading
+package codes.reactor.microkernel.plugin.classloading
 
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.microkernel.plugin.scope.PluginsScopeContainer
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.microkernel.plugin.scope.PluginsScopeContainer
 import java.net.URL
 import java.net.URLClassLoader
 

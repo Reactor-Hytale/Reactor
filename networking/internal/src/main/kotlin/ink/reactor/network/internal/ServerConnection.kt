@@ -1,8 +1,8 @@
-package ink.reactor.network.internal
+package codes.reactor.network.internal
 
-import ink.reactor.kernel.Reactor
-import ink.reactor.network.internal.config.NetworkConfig
-import ink.reactor.network.internal.quic.QuicTransport
+import codes.reactor.kernel.Reactor
+import codes.reactor.network.internal.config.NetworkConfig
+import codes.reactor.network.internal.quic.QuicTransport
 import io.netty.channel.EventLoopGroup
 import io.netty.channel.IoHandlerFactory
 import io.netty.channel.MultiThreadIoEventLoopGroup

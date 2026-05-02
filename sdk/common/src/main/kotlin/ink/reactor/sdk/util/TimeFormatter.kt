@@ -1,4 +1,4 @@
-package ink.reactor.sdk.util
+package codes.reactor.sdk.util
 
 import java.util.concurrent.TimeUnit
 

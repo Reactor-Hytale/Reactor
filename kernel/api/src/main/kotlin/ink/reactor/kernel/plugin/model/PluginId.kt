@@ -1,4 +1,4 @@
-package ink.reactor.kernel.plugin.model
+package codes.reactor.kernel.plugin.model
 
 @JvmInline
 value class PluginId(val value: String) {

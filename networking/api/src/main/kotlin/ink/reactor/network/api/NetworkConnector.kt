@@ -1,7 +1,7 @@
-package ink.reactor.network.api
+package codes.reactor.network.api
 
-import ink.reactor.network.api.packet.PacketsSender
-import ink.reactor.network.api.packet.handler.PacketHandlerStorage
+import codes.reactor.network.api.packet.PacketsSender
+import codes.reactor.network.api.packet.handler.PacketHandlerStorage
 
 class NetworkConnector private constructor(
     private val packetHandlers: PacketHandlerStorage,

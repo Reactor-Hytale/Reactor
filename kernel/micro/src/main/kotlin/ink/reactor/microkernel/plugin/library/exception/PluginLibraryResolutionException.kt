@@ -1,6 +1,6 @@
-package ink.reactor.microkernel.plugin.library.exception
+package codes.reactor.microkernel.plugin.library.exception
 
-import ink.reactor.kernel.plugin.exception.PluginLifecycleException
+import codes.reactor.kernel.plugin.exception.PluginLifecycleException
 
 class PluginLibraryResolutionException(
     message: String,

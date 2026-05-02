@@ -1,10 +1,10 @@
-package ink.reactor.launcher.plugin
+package codes.reactor.launcher.plugin
 
-import ink.reactor.kernel.plugin.model.PluginId
-import ink.reactor.kernel.plugin.model.version.Version
-import ink.reactor.microkernel.config.KernelPluginConfig
-import ink.reactor.sdk.config.ConfigService
-import ink.reactor.sdk.config.ConfigSection
+import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.kernel.plugin.model.version.Version
+import codes.reactor.microkernel.config.KernelPluginConfig
+import codes.reactor.sdk.config.ConfigService
+import codes.reactor.sdk.config.ConfigSection
 import java.nio.file.Path
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds

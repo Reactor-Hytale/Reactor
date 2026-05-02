@@ -1,4 +1,4 @@
-package ink.reactor.kernel.plugin.model.lifecycle
+package codes.reactor.kernel.plugin.model.lifecycle
 
 enum class PluginState {
     /**

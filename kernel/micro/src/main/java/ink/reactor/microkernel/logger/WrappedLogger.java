@@ -1,7 +1,7 @@
-package ink.reactor.microkernel.logger;
+package codes.reactor.microkernel.logger;
 
-import ink.reactor.kernel.logger.Logger;
-import ink.reactor.kernel.logger.LoggerFormatter;
+import codes.reactor.kernel.logger.Logger;
+import codes.reactor.kernel.logger.LoggerFormatter;
 import org.jetbrains.annotations.NotNull;
 
 public final class WrappedLogger implements Logger {

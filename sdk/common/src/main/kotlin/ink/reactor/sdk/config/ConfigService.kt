@@ -1,4 +1,4 @@
-package ink.reactor.sdk.config
+package codes.reactor.sdk.config
 
 import java.io.IOException
 import java.nio.file.Path

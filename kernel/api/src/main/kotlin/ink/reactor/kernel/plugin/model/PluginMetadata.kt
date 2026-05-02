@@ -1,8 +1,8 @@
-package ink.reactor.kernel.plugin.model
+package codes.reactor.kernel.plugin.model
 
-import ink.reactor.kernel.plugin.model.dependency.DependencyKind
-import ink.reactor.kernel.plugin.model.dependency.PluginDependency
-import ink.reactor.kernel.plugin.model.version.Version
+import codes.reactor.kernel.plugin.model.dependency.DependencyKind
+import codes.reactor.kernel.plugin.model.dependency.PluginDependency
+import codes.reactor.kernel.plugin.model.version.Version
 
 data class PluginMetadata(
     val id: PluginId,

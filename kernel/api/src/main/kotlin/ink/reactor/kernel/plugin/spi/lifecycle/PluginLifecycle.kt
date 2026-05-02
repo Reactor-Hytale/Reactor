@@ -1,4 +1,4 @@
-package ink.reactor.kernel.plugin.spi.lifecycle
+package codes.reactor.kernel.plugin.spi.lifecycle
 
 interface PluginLifecycle {
     fun onLoad()

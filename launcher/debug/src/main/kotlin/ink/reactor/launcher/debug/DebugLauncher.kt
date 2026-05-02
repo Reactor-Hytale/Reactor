@@ -1,6 +1,6 @@
-package ink.reactor.launcher.debug
+package codes.reactor.launcher.debug
 
-import ink.reactor.launcher.MinimalReactorLauncher
+import codes.reactor.launcher.MinimalReactorLauncher
 
 fun main() {
     println("Debug Launcher Starting...")
