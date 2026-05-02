@@ -1,7 +1,6 @@
 package ink.reactor.launcher.logger.file;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.LockSupport;
 
 public final class FileLogProcessorThread extends Thread {
     private final FileWriter fileWriter;
@@ -11,7 +10,7 @@ public final class FileLogProcessorThread extends Thread {
     public FileLogProcessorThread(FileWriter fileWriter, long intervalSeconds) {
         super("Log-Processor-Thread");
         this.fileWriter = fileWriter;
-        this.intervalNanos = TimeUnit.SECONDS.toNanos(intervalSeconds);
+        this.intervalNanos = TimeUnit.SECONDS.toNanos(intervalSeconds <= 0 ? 1 : intervalSeconds);
         this.setName("File-log processor thread");
         this.setDaemon(true);
     }
@@ -19,15 +18,12 @@ public final class FileLogProcessorThread extends Thread {
     @Override
     public void run() {
         while (running || !fileWriter.getQueue().isEmpty()) {
-            fileWriter.processQueue();
-            if (running) {
-                LockSupport.parkNanos(intervalNanos);
-            }
+            fileWriter.processNextBlocking(intervalNanos);
         }
     }
 
     public void shutdown() {
         this.running = false;
-        LockSupport.unpark(this);
+        this.interrupt();
     }
 }

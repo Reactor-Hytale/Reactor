@@ -30,6 +30,6 @@ class DebugPlugin: BasePluginLifecycle() {
         }
 
         val config = DebugConfig.load()
-        logger.info("Example config: test-string: ${config.testString} - duration: {${config.exampleDuration}")
+        logger.info("Example config: test-string: ${config.testString} - duration: ${config.exampleDuration}")
     }
 }

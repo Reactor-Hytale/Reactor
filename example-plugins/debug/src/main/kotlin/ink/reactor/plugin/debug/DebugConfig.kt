@@ -7,8 +7,8 @@ import kotlin.time.Duration.Companion.seconds
 class DebugConfig(
     section: ConfigSection
 ) {
-    val testString = section.string("default-String")
-    val exampleDuration = section.duration(20.seconds)
+    val testString by section.string("default-String")
+    val exampleDuration by section.duration(20.seconds)
 
     companion object {
         fun load(): DebugConfig {

@@ -10,48 +10,48 @@ class FileLogger(
 
     fun debug(message: String) {
         if (loggerLevels.debug) {
-            fileWriter.write(message.toByteArray())
+            fileWriter.write(message)
         }
     }
 
     fun log(message: String) {
         if (loggerLevels.log) {
-            fileWriter.write(message.toByteArray())
+            fileWriter.write(message)
         }
     }
 
     fun info(message: String) {
         if (loggerLevels.info) {
-            fileWriter.write(message.toByteArray())
+            fileWriter.write(message)
         }
     }
 
     fun warn(message: String) {
         if (loggerLevels.warn) {
-            fileWriter.write(message.toByteArray())
+            fileWriter.write(message)
         }
     }
 
     fun error(message: String) {
         if (loggerLevels.error) {
-            fileWriter.write(message.toByteArray())
+            fileWriter.write(message)
         }
     }
 
     fun error(message: String, throwable: Throwable) {
         if (loggerLevels.error) {
-            fileWriter.write(message.toByteArray())
-            fileWriter.write(('\n'.toString() + throwable.toString()).toByteArray())
+            fileWriter.write(message)
+            fileWriter.write(('\n'.toString() + throwable.toString()))
 
             for (element in throwable.stackTrace) {
-                fileWriter.write(("\n\tat $element").toByteArray())
+                fileWriter.write(("\n\tat $element"))
             }
 
             var cause = throwable.cause
             while (cause != null) {
-                fileWriter.write(("\nCaused by: $cause").toByteArray())
+                fileWriter.write(("\nCaused by: $cause"))
                 for (element in cause.stackTrace) {
-                    fileWriter.write(("\n\tat $element").toByteArray())
+                    fileWriter.write(("\n\tat $element"))
                 }
                 cause = cause.cause
             }
