@@ -66,10 +66,10 @@ public final class FileWriter {
     }
 
     private void processData(Object data) throws IOException {
-        if (data instanceof byte[]) {
-            processBytes((byte[]) data);
-        } else if (data instanceof String) {
+        if (data instanceof String) {
             processString((String) data);
+        } else if (data instanceof byte[]) {
+            processBytes((byte[]) data);
         }
     }
 

@@ -11,7 +11,6 @@ public final class FileLogProcessorThread extends Thread {
         super("Log-Processor-Thread");
         this.fileWriter = fileWriter;
         this.intervalNanos = TimeUnit.SECONDS.toNanos(intervalSeconds <= 0 ? 1 : intervalSeconds);
-        this.setName("File-log processor thread");
         this.setDaemon(true);
     }
 
