@@ -5,6 +5,7 @@ import ink.reactor.kernel.plugin.control.PluginLifecycleControl
 import ink.reactor.kernel.plugin.query.PluginCatalog
 import ink.reactor.kernel.plugin.scope.PluginScopeFactory
 import ink.reactor.kernel.scheduler.SchedulerProvider
+import java.nio.file.Path
 import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -14,7 +15,10 @@ class Reactor private constructor(
     val schedulerProvider: SchedulerProvider,
     val pluginCatalog: PluginCatalog,
     val pluginLifecycleControl: PluginLifecycleControl,
-    val pluginScopeFactory: PluginScopeFactory
+    val pluginScopeFactory: PluginScopeFactory,
+
+    internal val basePluginDirectory: Path,
+    internal val baseLibraryDirectory: Path
 ) {
 
     companion object {
@@ -32,18 +36,24 @@ class Reactor private constructor(
         val pluginLifecycleControl: PluginLifecycleControl get() = instance.pluginLifecycleControl
         val pluginScopeFactory: PluginScopeFactory get() = instance.pluginScopeFactory
 
+        val pluginDirectory: Path get() = instance.basePluginDirectory
+        val libraryDirectory: Path get() = instance.baseLibraryDirectory
+
         fun init(
             loggerFactory: LoggerFactory,
             schedulerProvider: SchedulerProvider,
             pluginCatalog: PluginCatalog,
             pluginLifecycleControl: PluginLifecycleControl,
-            pluginScopeFactory: PluginScopeFactory
+            pluginScopeFactory: PluginScopeFactory,
+            basePluginDirectory: Path,
+            baseLibraryDirectory: Path
         ) {
             check(ref == null) { "Kernel already initialized." }
 
             ref = Reactor(
                 loggerFactory, schedulerProvider,
-                pluginCatalog, pluginLifecycleControl, pluginScopeFactory
+                pluginCatalog, pluginLifecycleControl, pluginScopeFactory,
+                basePluginDirectory, baseLibraryDirectory
             )
 
             Runtime.getRuntime().addShutdownHook(Thread {

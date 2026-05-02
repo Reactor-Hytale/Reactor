@@ -51,7 +51,9 @@ class Microkernel private constructor(
                 MicrokernelLoggerFactory(logger),
                 schedulerProvider,
                 pluginCatalog, pluginLifecycleControl,
-                KernelPluginScopeFactory()
+                KernelPluginScopeFactory(),
+                kernelPluginConfig.paths.plugins,
+                kernelPluginConfig.paths.libraries
             )
 
             ref = Microkernel(kernelPluginConfig, eventBus, logger)

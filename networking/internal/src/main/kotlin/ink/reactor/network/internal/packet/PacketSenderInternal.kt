@@ -1,6 +1,7 @@
 package ink.reactor.network.internal.packet
 
 import ink.reactor.kernel.Reactor
+import ink.reactor.kernel.logger.logger
 import ink.reactor.network.api.packet.Packet
 import ink.reactor.network.api.packet.PacketsSender
 import ink.reactor.network.api.player.PlayerConnection
@@ -25,7 +26,7 @@ class PacketSenderInternal: PacketsSender {
             PacketFramer.writeFramedPacket(packet, buf)
         } catch (e: Exception) {
             repeat(connections.size) { cachedPacket.onCompleteWrite() }
-            Reactor.globalLogger.error("Failed to write packet to buffer", e)
+            logger().error("Failed to write packet to buffer", e)
             return
         }
 

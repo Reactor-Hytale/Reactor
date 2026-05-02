@@ -1,5 +1,6 @@
 package ink.reactor.sdk.bundled.config
 
+import ink.reactor.kernel.Reactor
 import ink.reactor.sdk.config.ConfigSection
 import ink.reactor.sdk.config.ConfigService
 import java.io.FileNotFoundException
@@ -113,7 +114,15 @@ abstract class AbstractConfigService : ConfigService {
         outputFile: Path,
         classLoader: ClassLoader
     ): ConfigSection {
+        var outputFile = outputFile
         val normalizedResourceName = normalizeFileName(resourceName)
+
+        runCatching { // This code can be run from the launcher, even if the kernel hasn't been loaded yet
+            val snapshot = Reactor.pluginCatalog.getFromCurrentScope()
+            if (snapshot != null) {
+                outputFile = Reactor.pluginDirectory.resolve(snapshot.metadata.id.value).resolve(outputFile)
+            }
+        }
 
         if (outputFile.exists()) {
             return load(outputFile)

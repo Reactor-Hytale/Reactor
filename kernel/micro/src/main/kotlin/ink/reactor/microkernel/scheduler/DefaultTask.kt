@@ -4,7 +4,7 @@ import ink.reactor.kernel.scheduler.Scheduler
 import ink.reactor.kernel.scheduler.Task
 
 class DefaultTask(
-    override val id: Long,
+    override val id: Int,
 
     @Volatile
     override var canceled: Boolean,

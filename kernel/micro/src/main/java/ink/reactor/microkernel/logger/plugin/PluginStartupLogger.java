@@ -41,7 +41,7 @@ public final class PluginStartupLogger implements Logger {
 
     @Override
     public @NotNull LoggerFormatter getLoggerFormatter() {
-        return Reactor.Companion.getGlobalLogger().getLoggerFormatter();
+        return Microkernel.Companion.getInstance().getRootLogger().getLoggerFormatter();
     }
 
     public Logger getInitialLogger() {

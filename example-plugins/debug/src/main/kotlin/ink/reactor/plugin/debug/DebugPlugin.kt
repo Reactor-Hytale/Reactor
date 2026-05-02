@@ -28,5 +28,8 @@ class DebugPlugin: BasePluginLifecycle() {
         ) {
             logger.info("Received $it")
         }
+
+        val config = DebugConfig.load()
+        logger.info("Example config: test-string: ${config.testString} - duration: {${config.exampleDuration}")
     }
 }

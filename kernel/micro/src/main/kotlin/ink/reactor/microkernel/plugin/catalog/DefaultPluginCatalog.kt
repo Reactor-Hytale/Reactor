@@ -5,6 +5,7 @@ import ink.reactor.kernel.plugin.model.PluginId
 import ink.reactor.kernel.plugin.model.PluginSnapshot
 import ink.reactor.kernel.plugin.model.lifecycle.PluginState
 import ink.reactor.kernel.plugin.query.PluginCatalog
+import ink.reactor.microkernel.plugin.classloading.PluginClassLoader
 import ink.reactor.microkernel.plugin.scanner.PluginCandidate
 
 internal class DefaultPluginCatalog : PluginCatalog {
@@ -38,6 +39,14 @@ internal class DefaultPluginCatalog : PluginCatalog {
 
     override operator fun get(id: PluginId): PluginSnapshot? {
         return entry(id)?.snapshot()
+    }
+
+    override fun getFromCurrentScope(): PluginSnapshot? {
+        val loader = Thread.currentThread().contextClassLoader
+        if (loader is PluginClassLoader) {
+            return get(loader.id)
+        }
+        return null
     }
 
     override fun findAll(): Collection<PluginSnapshot> {
