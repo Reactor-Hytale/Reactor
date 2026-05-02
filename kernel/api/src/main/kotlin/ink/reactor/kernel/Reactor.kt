@@ -1,6 +1,7 @@
 package ink.reactor.kernel
 
 import ink.reactor.kernel.logger.LoggerFactory
+import ink.reactor.kernel.logger.LoggerSpy
 import ink.reactor.kernel.plugin.control.PluginLifecycleControl
 import ink.reactor.kernel.plugin.query.PluginCatalog
 import ink.reactor.kernel.plugin.scope.PluginScopeFactory
@@ -11,6 +12,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 class Reactor private constructor(
     val loggerFactory: LoggerFactory,
+    val loggerSpy: LoggerSpy,
 
     val schedulerProvider: SchedulerProvider,
     val pluginCatalog: PluginCatalog,
@@ -29,6 +31,7 @@ class Reactor private constructor(
         private val shuttingDown = AtomicBoolean(false)
 
         val loggerFactory: LoggerFactory get() = instance.loggerFactory
+        val loggerSpy: LoggerSpy get() = instance.loggerSpy
 
         val schedulerProvider: SchedulerProvider get() = instance.schedulerProvider
 
@@ -41,6 +44,7 @@ class Reactor private constructor(
 
         fun init(
             loggerFactory: LoggerFactory,
+            loggerSpy: LoggerSpy,
             schedulerProvider: SchedulerProvider,
             pluginCatalog: PluginCatalog,
             pluginLifecycleControl: PluginLifecycleControl,
@@ -51,7 +55,8 @@ class Reactor private constructor(
             check(ref == null) { "Kernel already initialized." }
 
             ref = Reactor(
-                loggerFactory, schedulerProvider,
+                loggerFactory, loggerSpy,
+                schedulerProvider,
                 pluginCatalog, pluginLifecycleControl, pluginScopeFactory,
                 basePluginDirectory, baseLibraryDirectory
             )

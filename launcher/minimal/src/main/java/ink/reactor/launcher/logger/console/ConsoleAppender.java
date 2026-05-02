@@ -24,28 +24,31 @@ public final class ConsoleAppender implements LogAppender {
 
     @Override
     public void append(MutableLogEntry entry) {
-        switch (entry.level) {
-            case DEBUG -> { if (loggerLevels.getDebug()) append(entry, debugStyle); }
-            case INFO  -> { if (loggerLevels.getInfo()) append(entry, infoStyle); }
-            case LOG   -> { if (loggerLevels.getDebug()) append(entry, logStyle); }
-            case WARN  -> { if (loggerLevels.getWarn()) append(entry, warnStyle); }
-            case ERROR -> { if (loggerLevels.getError()) append(entry, errorStyle); }
-        }
+        final ConsoleStyle style = switch (entry.level) {
+            case DEBUG -> loggerLevels.getDebug() ? debugStyle : null;
+            case INFO -> loggerLevels.getInfo() ? infoStyle : null;
+            case LOG -> loggerLevels.getLog() ? logStyle : null;
+            case WARN -> loggerLevels.getWarn() ? warnStyle : null;
+            case ERROR -> loggerLevels.getError() ? errorStyle : null;
+        };
 
-        if (entry.throwable != null) {
-            entry.throwable.printStackTrace(writer);
+        if (style == null) {
+            return;
         }
-        writer.flush();
-    }
-
-    private void append(final MutableLogEntry entry, final ConsoleStyle style) {
         writer
             .append('\n')
             .append(style.getPrefix())
             .append(entry.prefix)
             .append(style.getText())
-            .append(entry.message)
-            .append(style.getAfterText());
+            .append(entry.message);
+
+        if (entry.throwable != null) {
+            writer.append('\n');
+            entry.throwable.printStackTrace(writer);
+        }
+        writer.append(style.getAfterText());
+
+        writer.flush();
     }
 
     @Override

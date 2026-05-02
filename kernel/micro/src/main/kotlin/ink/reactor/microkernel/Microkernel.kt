@@ -16,6 +16,7 @@ import ink.reactor.microkernel.plugin.library.PluginLibraryResolver
 import ink.reactor.microkernel.plugin.manifest.PluginPropertiesReader
 import ink.reactor.microkernel.plugin.scanner.PluginScanner
 import ink.reactor.microkernel.plugin.scope.KernelPluginScopeFactory
+import ink.reactor.microkernel.plugin.scope.extension.KernelLoggerSpyScope
 import ink.reactor.microkernel.plugin.validation.PluginDependencyValidator
 import ink.reactor.microkernel.scheduler.KernelSchedulerProvider
 
@@ -47,11 +48,12 @@ class Microkernel private constructor(
                 pluginCatalog, libraryResolver, kernelPluginConfig, logger, parentClassLoader
             )
 
+            val pluginScopeFactory = KernelPluginScopeFactory()
             Reactor.init(
-                MicrokernelLoggerFactory(logger),
+                MicrokernelLoggerFactory(logger), KernelLoggerSpyScope(pluginScopeFactory),
                 schedulerProvider,
                 pluginCatalog, pluginLifecycleControl,
-                KernelPluginScopeFactory(),
+                pluginScopeFactory,
                 kernelPluginConfig.paths.plugins,
                 kernelPluginConfig.paths.libraries
             )

@@ -1,0 +1,43 @@
+date-format: 'dd/MM/yyyy HH:mm:ss'
+# See https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html for more info on date formats
+
+# Placeholders:
+# %time%
+# %message%
+
+# I recommend only enable warn and error levels to prevent discord rate-limit
+log:
+  enable: false
+  webhookUrl: "" # See https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks for how to get this URL
+  title: "%time% - LOG"
+  description:
+    - ":file_folder: %message%"
+
+debug:
+  enable: false
+  webhookUrl: ""
+  title: "%time% - DEBUG"
+  description:
+    - ":hot_face: %message%"
+
+info:
+  enable: false
+  webhookUrl: ""
+  title: "%time% - INFO"
+  description:
+    - ":gear: %message%"
+
+warn:
+  enable: true
+  webhookUrl: ""
+  title: "%time% - WARN"
+  description:
+    - ":warning: %message%"
+
+error:
+  enable: true
+  webhookUrl: ""
+  title: "%time% - ERROR"
+  description:
+    - ":scream: %message%"
+    - "@ichocomilk fix pls!"
