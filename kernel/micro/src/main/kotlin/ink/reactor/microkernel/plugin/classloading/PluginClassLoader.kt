@@ -1,6 +1,7 @@
 package ink.reactor.microkernel.plugin.classloading
 
 import ink.reactor.kernel.plugin.model.PluginId
+import ink.reactor.microkernel.plugin.scope.PluginsScopeContainer
 import java.net.URL
 import java.net.URLClassLoader
 
@@ -15,6 +16,11 @@ internal class PluginClassLoader(
         init {
             registerAsParallelCapable()
         }
+    }
+
+    override fun close() {
+        PluginsScopeContainer.closeScope(this)
+        super.close()
     }
 
     override fun loadClass(name: String, resolve: Boolean): Class<*> {
@@ -51,5 +57,9 @@ internal class PluginClassLoader(
             }
             return fromPlugin
         }
+    }
+
+    override fun toString(): String {
+        return "ID: " + id + " - " + super.toString()
     }
 }

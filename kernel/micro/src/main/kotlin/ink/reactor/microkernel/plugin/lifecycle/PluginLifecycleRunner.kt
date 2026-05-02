@@ -14,6 +14,7 @@ import ink.reactor.microkernel.plugin.lifecycle.logger.PluginStartupLogControlle
 import ink.reactor.microkernel.plugin.lifecycle.runtime.StartupLogEnd
 import ink.reactor.microkernel.plugin.catalog.PluginEntry
 import ink.reactor.microkernel.plugin.lifecycle.runtime.withPluginClassLoader
+import ink.reactor.microkernel.plugin.scope.PluginsScopeContainer
 import java.util.concurrent.TimeUnit
 
 internal class PluginLifecycleRunner(
@@ -35,7 +36,10 @@ internal class PluginLifecycleRunner(
 
             synchronized(entry) {
                 if (entry.state == PluginState.CANCELLED) {
-                    runCatching { loadedPlugin.classLoader.close() }
+                    runCatching {
+                        PluginsScopeContainer.closeScope(loadedPlugin.classLoader)
+                        loadedPlugin.classLoader.close()
+                    }
                     throw cancelledException(entry, PluginState.LOADING, "Plugin startup was cancelled before onLoad.")
                 }
 

@@ -1,17 +1,35 @@
 package ink.reactor.microkernel.plugin.scope
 
-import ink.reactor.kernel.plugin.model.PluginId
+import ink.reactor.kernel.event.EventBus
 import ink.reactor.kernel.plugin.scope.PluginDependencyProvider
 import ink.reactor.kernel.plugin.scope.PluginScope
+import ink.reactor.microkernel.Microkernel
+import ink.reactor.microkernel.plugin.classloading.PluginClassLoader
+import ink.reactor.microkernel.plugin.scope.extension.KernelPluginEventBusScope
 import java.util.concurrent.ConcurrentHashMap
 
-class KernelPluginScope(override val pluginId: PluginId) : PluginScope {
+internal class KernelPluginScope : PluginScope {
 
     private val providers = ConcurrentHashMap<Class<*>, PluginDependencyProvider<*>>()
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : Any> get(type: Class<T>): T? {
-        return providers[type]?.provide() as T?
+        var provider = providers[type]
+
+        if (provider != null) {
+            return provider as T
+        }
+
+        provider = when {
+            EventBus::class.java.isAssignableFrom(type) -> KernelPluginEventBusScope(Microkernel.instance.rootBus)
+            else -> null
+        }
+
+        if (provider != null) {
+            providers[type] = provider
+            return provider.provide() as T
+        }
+        return null
     }
 
     override fun <T : PluginDependencyProvider<T>> manage(resource: T): T {
@@ -24,7 +42,14 @@ class KernelPluginScope(override val pluginId: PluginId) : PluginScope {
     }
 
     override fun close() {
-        providers.values.forEach { it.close() }
+        providers.values.forEach {
+            try {
+                it.close()
+            } catch (e: Throwable) {
+                val pluginID = (Thread.currentThread().contextClassLoader as PluginClassLoader).id
+                Microkernel.instance.rootLogger.error("Error on close resource in the plugin $pluginID", e)
+            }
+        }
         providers.clear()
     }
 }

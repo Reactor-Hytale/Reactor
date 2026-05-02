@@ -15,11 +15,14 @@ import ink.reactor.microkernel.plugin.library.LibraryPathResolver
 import ink.reactor.microkernel.plugin.library.PluginLibraryResolver
 import ink.reactor.microkernel.plugin.manifest.PluginPropertiesReader
 import ink.reactor.microkernel.plugin.scanner.PluginScanner
+import ink.reactor.microkernel.plugin.scope.KernelPluginScopeFactory
 import ink.reactor.microkernel.plugin.validation.PluginDependencyValidator
 import ink.reactor.microkernel.scheduler.KernelSchedulerProvider
 
 class Microkernel private constructor(
-    val pluginConfig: KernelPluginConfig
+    val pluginConfig: KernelPluginConfig,
+    val rootBus: EventBus,
+    val rootLogger: Logger
 ) {
 
     companion object {
@@ -45,12 +48,13 @@ class Microkernel private constructor(
             )
 
             Reactor.init(
-                logger, MicrokernelLoggerFactory(logger),
-                eventBus, schedulerProvider,
-                pluginCatalog, pluginLifecycleControl
+                MicrokernelLoggerFactory(logger),
+                schedulerProvider,
+                pluginCatalog, pluginLifecycleControl,
+                KernelPluginScopeFactory()
             )
 
-            ref = Microkernel(kernelPluginConfig)
+            ref = Microkernel(kernelPluginConfig, eventBus, logger)
 
             Reactor.addStopTask {
                 pluginLifecycleControl.shutdown()

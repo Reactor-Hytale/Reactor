@@ -1,8 +1,8 @@
 package ink.reactor.microkernel.event.executor;
 
-import ink.reactor.kernel.Reactor;
 import ink.reactor.kernel.event.dispatch.EventExecutor;
 import ink.reactor.kernel.event.Cancellable;
+import ink.reactor.microkernel.Microkernel;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +26,8 @@ public final class ListenerConsumerFactory {
             try {
                 consumer.invoke((T)event);
             } catch (Throwable e) {
-                Reactor.Companion.getGlobalLogger().error("ListenerConsumerExecutor execute exception", e);
+                Microkernel.Companion.getInstance().getRootLogger()
+                    .error("ListenerConsumerExecutor execute exception", e);
             }
         }
     }
@@ -47,7 +48,8 @@ public final class ListenerConsumerFactory {
             try {
                 consumer.invoke((T)event);
             } catch (Throwable e) {
-                Reactor.Companion.getGlobalLogger().error("ListenerConsumerExecutor execute exception", e);
+                Microkernel.Companion.getInstance().getRootLogger()
+                    .error("ListenerConsumerExecutor execute exception", e);
             }
         }
     }
