@@ -7,6 +7,9 @@
 
 ---
 
+This is a showcase of software architecture and design based on all my years of experience building Minecraft servers from scratch. 
+It's far from perfect, but it's exactly what I would have wanted when I started learning the Spigot and Hytale APIs :)
+
 ## What is?
 
 Reactor is built around a **plugin-first microkernel architecture**.
@@ -28,11 +31,8 @@ In other words, is an attempt to design the kind of extensible server foundation
 
 > [!WARNING]
 > Isn't a production-ready Hytale server.
->
-> This repository is currently used as a practical companion project for the architecture document:
-> [Hytale: Badly Designed?](https://drive.google.com/drive/u/2/folders/1lQ0WfjvvEmYHkqg6k6SCa8gtP4kTRC43?dmr=1&ec=wgc-drive-hero-goto)
->
 > The code is experimental, incomplete, and intended to validate architectural ideas rather than provide a finished runtime.
+> [Click here to see architectural decisions](https://docs.reactor.codes/docs)
 
 ---
 ## Requirements
