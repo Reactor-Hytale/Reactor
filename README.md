@@ -1,44 +1,78 @@
-# Reactor - Experimental Preview
+# Reactor
 
 [![License](https://img.shields.io/github/license/Reactor-Hytale/Reactor?style=for-the-badge&color=F3CB09)](LICENSE)
-![Status](https://img.shields.io/badge/status-development-292929?style=for-the-badge)
+![Status](https://img.shields.io/badge/status-educational-292929?style=for-the-badge)
 ![JDK](https://img.shields.io/badge/JDK-25-1C89CC?style=for-the-badge)
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.3.0-7F52FF?style=for-the-badge)
 
 ---
 
-This is a showcase of software architecture and design based on all my years of experience building Minecraft servers from scratch. 
-It's far from perfect, but it's exactly what I would have wanted when I started learning the Spigot and Hytale APIs :)
+**Reactor is not a server you should use. It's a server you should learn from.**
 
-## What is?
+After 4 years of building Minecraft servers from scratch (and failing), I'm documenting everything I've learned about game server architecture. This is the resource I wish I had when I started.
 
-Reactor is built around a **plugin-first microkernel architecture**.
+**If you're a developer who wants to understand:**
+- How a plugin system really works
+- What a microkernel architecture looks like in practice
+- Why classloaders matter for isolation
+- How to design an SDK that doesn't suck
 
-The core idea is simple:
-
-- keep the kernel small;
-- expose stable public APIs;
-- isolate implementation details;
-- load features as modules or plugins;
-- provide explicit lifecycle control;
-- avoid accidental dependencies on internals;
-- make plugin development easier through an SDK instead of forcing every plugin author to reinvent infrastructure.
-
-In other words, is an attempt to design the kind of extensible server foundation that a large modding ecosystem needs before the ecosystem grows around unstable internals.
+...then Reactor might help you.
 
 ---
-## Documentation
 
-> [!WARNING]
-> Isn't a production-ready Hytale server.
-> The code is experimental, incomplete, and intended to validate architectural ideas rather than provide a finished runtime.
-> [Click here to see architectural decisions](https://docs.reactor.codes/docs)
+## What Reactor is (and isn't)
+
+| **It IS** | **It IS NOT** |
+| :--- | :--- |
+| A documented architecture study | A production-ready Hytale server |
+| A showcase of plugin-first design | A replacement for the official server |
+| An educational resource | A finished product |
+| My best attempt after 4 years of failure | A competition to anyone |
 
 ---
-## Requirements
-- [Java 25](https://adoptium.net/es/temurin/releases?version=25&os=any&arch=any)
-- 256MB RAM minimum (512MB+ recommended)
-- Any modern OS (Linux, Windows, macOS)
 
-## Compile
-Use the command: `./gradlew :launcher:runtime:build` and execute the generated jar in `launcher/runtime/build/runtime/`
+## The core idea
+
+**Plugin-first microkernel architecture:**
+
+- Small, stable kernel
+- Clean public APIs
+- Implementation details hidden
+- Features as plugins
+- Explicit lifecycle control
+- SDK for plugin developers
+
+[Learn more about the architectural decisions →](https://docs.reactor.codes)
+
+---
+
+## For whom?
+
+1. **Students of software architecture** – See a real microkernel in action
+2. **Plugin developers** – Understand what a clean SDK looks like
+3. **Curious programmers** – Learn how game servers work internally
+4. **Future server creators** – Don't make my mistakes
+
+---
+
+## Quick facts
+
+- **Code:** ~16k lines of Kotlin/Java
+- **Architecture:** Microkernel
+- **Plugin isolation:** Classloaders
+- **Status:** Educational preview (not playable)
+- **History:** 4 years of learning from failure
+
+---
+
+## Requirements (to compile and explore the code)
+
+- Java 25
+- 256MB RAM (for the kernel)
+- Curiosity about server architecture
+
+## Compile (for learning, not for playing)
+
+```bash
+./gradlew :launcher:runtime:build
