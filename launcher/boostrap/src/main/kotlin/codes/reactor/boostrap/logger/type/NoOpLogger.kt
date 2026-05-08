@@ -1,4 +1,4 @@
-package codes.reactor.launcher.logger.type
+package codes.reactor.boostrap.logger.type
 
 import codes.reactor.kernel.logger.Logger
 import codes.reactor.microkernel.logger.JavaLoggerFormatter

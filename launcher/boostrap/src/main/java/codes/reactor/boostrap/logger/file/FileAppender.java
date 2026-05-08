@@ -1,7 +1,7 @@
-package codes.reactor.launcher.logger.file;
+package codes.reactor.boostrap.logger.file;
 
-import codes.reactor.launcher.logger.LogAppender;
-import codes.reactor.launcher.logger.MutableLogEntry;
+import codes.reactor.boostrap.logger.LogAppender;
+import codes.reactor.boostrap.logger.MutableLogEntry;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

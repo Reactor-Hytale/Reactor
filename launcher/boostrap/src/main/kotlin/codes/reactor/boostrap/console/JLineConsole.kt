@@ -1,4 +1,4 @@
-package codes.reactor.launcher.console
+package codes.reactor.boostrap.console
 
 import codes.reactor.kernel.Reactor
 import org.jline.reader.LineReaderBuilder

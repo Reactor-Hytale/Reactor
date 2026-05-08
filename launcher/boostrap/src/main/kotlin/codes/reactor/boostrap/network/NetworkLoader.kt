@@ -1,4 +1,4 @@
-package codes.reactor.launcher.network
+package codes.reactor.boostrap.network
 
 import codes.reactor.kernel.Reactor
 import codes.reactor.kernel.logger.Logger

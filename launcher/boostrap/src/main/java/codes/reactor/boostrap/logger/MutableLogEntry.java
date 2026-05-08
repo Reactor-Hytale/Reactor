@@ -1,4 +1,4 @@
-package codes.reactor.launcher.logger;
+package codes.reactor.boostrap.logger;
 
 import codes.reactor.kernel.logger.LogLevel;
 

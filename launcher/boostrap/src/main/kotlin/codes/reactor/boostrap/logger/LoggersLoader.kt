@@ -1,12 +1,12 @@
-package codes.reactor.launcher.logger
+package codes.reactor.boostrap.logger
 
 import codes.reactor.kernel.Reactor
 import codes.reactor.kernel.logger.Logger
-import codes.reactor.launcher.logger.console.ConsoleAppender
-import codes.reactor.launcher.logger.file.FileAppender
-import codes.reactor.launcher.logger.file.LogCompressor
-import codes.reactor.launcher.logger.type.NoOpLogger
-import codes.reactor.launcher.logger.type.ReactorLogger
+import codes.reactor.boostrap.logger.console.ConsoleAppender
+import codes.reactor.boostrap.logger.file.FileAppender
+import codes.reactor.boostrap.logger.file.LogCompressor
+import codes.reactor.boostrap.logger.type.NoOpLogger
+import codes.reactor.boostrap.logger.type.ReactorLogger
 import codes.reactor.microkernel.logger.JavaLoggerFormatter
 import codes.reactor.sdk.config.ConfigService
 import java.io.IOException

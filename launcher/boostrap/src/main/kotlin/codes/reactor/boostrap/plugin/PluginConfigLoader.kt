@@ -1,4 +1,4 @@
-package codes.reactor.launcher.plugin
+package codes.reactor.boostrap.plugin
 
 import codes.reactor.kernel.plugin.model.PluginId
 import codes.reactor.kernel.plugin.model.version.Version

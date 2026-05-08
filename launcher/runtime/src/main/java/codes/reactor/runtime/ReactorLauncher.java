@@ -22,7 +22,7 @@ public final class ReactorLauncher {
     private static final String EMBEDDED_PUBLIC_JAR = "embedded/public.jar";
     private static final String MAIN_FUNCTION = "start";
     private static final String ENTRYPOINT_CLASS =
-        "codes.reactor.launcher.MinimalReactorLauncherKt";
+        "codes.reactor.boostrap.ReactorBoostrapKt";
 
     static void main() throws Throwable {
         final Path reactorJar = resolveOwnJar();

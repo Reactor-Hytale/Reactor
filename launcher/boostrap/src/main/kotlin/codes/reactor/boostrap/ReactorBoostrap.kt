@@ -1,10 +1,10 @@
-package codes.reactor.launcher
+package codes.reactor.boostrap
 
-import codes.reactor.launcher.console.Console
-import codes.reactor.launcher.console.JLineConsole.createConsole
-import codes.reactor.launcher.logger.LoggersLoader
-import codes.reactor.launcher.network.NetworkLoader
-import codes.reactor.launcher.plugin.PluginConfigLoader
+import codes.reactor.boostrap.console.Console
+import codes.reactor.boostrap.console.JLineConsole.createConsole
+import codes.reactor.boostrap.logger.LoggersLoader
+import codes.reactor.boostrap.network.NetworkLoader
+import codes.reactor.boostrap.plugin.PluginConfigLoader
 import codes.reactor.microkernel.Microkernel
 import codes.reactor.sdk.bundled.config.yaml.YamlConfigService
 import codes.reactor.sdk.config.ConfigServiceRegistry

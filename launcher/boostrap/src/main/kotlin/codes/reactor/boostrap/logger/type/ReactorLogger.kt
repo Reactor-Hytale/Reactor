@@ -1,10 +1,10 @@
-package codes.reactor.launcher.logger.type
+package codes.reactor.boostrap.logger.type
 
 import codes.reactor.kernel.Reactor
 import codes.reactor.kernel.logger.LogLevel
 import codes.reactor.kernel.logger.Logger
 import codes.reactor.kernel.logger.LoggerFormatter
-import codes.reactor.launcher.logger.LogRingBuffer
+import codes.reactor.boostrap.logger.LogRingBuffer
 import codes.reactor.microkernel.plugin.scope.extension.KernelLoggerSpyScope
 
 class ReactorLogger(

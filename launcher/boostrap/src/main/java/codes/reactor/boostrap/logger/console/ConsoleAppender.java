@@ -1,9 +1,9 @@
-package codes.reactor.launcher.logger.console;
+package codes.reactor.boostrap.logger.console;
 
-import codes.reactor.launcher.logger.ConsoleStyle;
-import codes.reactor.launcher.logger.LogAppender;
-import codes.reactor.launcher.logger.LoggerLevels;
-import codes.reactor.launcher.logger.MutableLogEntry;
+import codes.reactor.boostrap.logger.ConsoleStyle;
+import codes.reactor.boostrap.logger.LogAppender;
+import codes.reactor.boostrap.logger.LoggerLevels;
+import codes.reactor.boostrap.logger.MutableLogEntry;
 
 import java.io.PrintWriter;
 
