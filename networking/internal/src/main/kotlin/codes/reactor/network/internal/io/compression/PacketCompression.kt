@@ -1,9 +1,8 @@
 package codes.reactor.network.internal.io.compression
 
-import com.github.luben.zstd.Zstd
 import codes.reactor.network.internal.NetworkInternalConnector
+import com.github.luben.zstd.Zstd
 import io.netty.buffer.ByteBuf
-
 import io.netty.buffer.ByteBufAllocator
 
 object PacketCompression {

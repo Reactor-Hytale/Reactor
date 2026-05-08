@@ -1,6 +1,5 @@
 package codes.reactor.network.internal.packet
 
-import codes.reactor.kernel.Reactor
 import codes.reactor.kernel.logger.logger
 import codes.reactor.network.api.packet.Packet
 import codes.reactor.network.api.packet.PacketsSender

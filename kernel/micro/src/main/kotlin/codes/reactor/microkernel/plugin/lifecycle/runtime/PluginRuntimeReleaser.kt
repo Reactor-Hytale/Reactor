@@ -1,8 +1,8 @@
 package codes.reactor.microkernel.plugin.lifecycle.runtime
 
 import codes.reactor.kernel.logger.Logger
-import codes.reactor.microkernel.plugin.lifecycle.logger.PluginStartupLogController
 import codes.reactor.microkernel.plugin.catalog.PluginEntry
+import codes.reactor.microkernel.plugin.lifecycle.logger.PluginStartupLogController
 
 internal enum class StartupLogEnd {
     FLUSH,

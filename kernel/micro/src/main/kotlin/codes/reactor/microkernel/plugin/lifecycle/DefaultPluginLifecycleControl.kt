@@ -8,13 +8,13 @@ import codes.reactor.kernel.plugin.model.PluginId
 import codes.reactor.kernel.plugin.model.dependency.DependencyKind
 import codes.reactor.kernel.plugin.model.lifecycle.PluginState
 import codes.reactor.microkernel.config.KernelPluginConfig
-import codes.reactor.microkernel.plugin.lifecycle.runtime.PluginInstanceCreator
-import codes.reactor.microkernel.plugin.lifecycle.runtime.PluginRuntimeReleaser
-import codes.reactor.microkernel.plugin.lifecycle.logger.PluginStartupLogController
 import codes.reactor.microkernel.plugin.catalog.DefaultPluginCatalog
 import codes.reactor.microkernel.plugin.catalog.PluginEntry
 import codes.reactor.microkernel.plugin.graph.PluginLoadGraphBuilder
 import codes.reactor.microkernel.plugin.library.PluginLibraryResolver
+import codes.reactor.microkernel.plugin.lifecycle.logger.PluginStartupLogController
+import codes.reactor.microkernel.plugin.lifecycle.runtime.PluginInstanceCreator
+import codes.reactor.microkernel.plugin.lifecycle.runtime.PluginRuntimeReleaser
 
 internal class DefaultPluginLifecycleControl(
     private val catalog: DefaultPluginCatalog,

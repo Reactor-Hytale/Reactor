@@ -1,13 +1,13 @@
 package codes.reactor.microkernel.plugin.manifest
 
+import codes.reactor.kernel.plugin.exception.PluginDescriptorException
 import codes.reactor.kernel.plugin.model.PluginId
 import codes.reactor.kernel.plugin.model.PluginMetadata
 import codes.reactor.kernel.plugin.model.dependency.DependencyKind
 import codes.reactor.kernel.plugin.model.dependency.PluginDependency
 import codes.reactor.kernel.plugin.model.version.Version
-import codes.reactor.kernel.plugin.exception.PluginDescriptorException
 import java.io.InputStreamReader
-import java.util.Properties
+import java.util.*
 import java.util.jar.JarFile
 
 /**

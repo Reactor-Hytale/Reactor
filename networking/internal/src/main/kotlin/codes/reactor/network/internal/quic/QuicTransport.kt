@@ -1,6 +1,5 @@
 package codes.reactor.network.internal.quic
 
-import codes.reactor.kernel.Reactor
 import codes.reactor.kernel.logger.Logger
 import codes.reactor.network.internal.config.NetworkConfig
 import codes.reactor.network.internal.quic.certificate.RuntimeCertificateProvider
@@ -16,9 +15,6 @@ import io.netty.handler.ssl.ClientAuth
 import io.netty.incubator.codec.quic.QuicSslContext
 import io.netty.incubator.codec.quic.QuicSslContextBuilder
 import io.netty.util.AttributeKey
-import java.net.Inet4Address
-import java.net.Inet6Address
-import java.net.InetAddress
 import java.net.InetSocketAddress
 import java.nio.file.Path
 import java.security.cert.X509Certificate

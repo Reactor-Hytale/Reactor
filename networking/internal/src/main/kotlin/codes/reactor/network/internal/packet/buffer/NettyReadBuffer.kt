@@ -2,7 +2,7 @@ package codes.reactor.network.internal.packet.buffer
 
 import codes.reactor.network.api.buffer.ReadBuffer
 import io.netty.buffer.ByteBuf
-import java.util.UUID
+import java.util.*
 
 class NettyReadBuffer(
     private val buffer: ByteBuf,

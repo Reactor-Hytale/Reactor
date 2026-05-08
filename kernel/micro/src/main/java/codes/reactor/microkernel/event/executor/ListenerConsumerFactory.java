@@ -1,7 +1,7 @@
 package codes.reactor.microkernel.event.executor;
 
-import codes.reactor.kernel.event.dispatch.EventExecutor;
 import codes.reactor.kernel.event.Cancellable;
+import codes.reactor.kernel.event.dispatch.EventExecutor;
 import codes.reactor.microkernel.Microkernel;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;

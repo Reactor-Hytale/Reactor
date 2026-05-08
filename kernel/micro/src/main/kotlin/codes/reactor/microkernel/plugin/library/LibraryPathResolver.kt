@@ -2,8 +2,8 @@ package codes.reactor.microkernel.plugin.library
 
 import codes.reactor.kernel.plugin.library.Dependency
 import codes.reactor.kernel.plugin.library.Repository
-import java.nio.file.Path
 import java.net.URI
+import java.nio.file.Path
 
 class LibraryPathResolver(val parentPath: Path) {
 

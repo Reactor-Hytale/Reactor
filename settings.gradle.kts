@@ -1,5 +1,5 @@
 pluginManagement {
-    includeBuild("sdk/gradle-extension/impl")
+    includeBuild("sdk/gradle-extension/reactor-gradle-plugin")
 
     repositories {
         mavenCentral()
@@ -20,11 +20,11 @@ include("networking:protocol")
 include("networking:internal")
 
 include("launcher:runtime")
-include("launcher:minimal")
+include("launcher:boostrap")
 include("launcher:debug")
 
 include("sdk:gradle-extension:shared")
-include("sdk:gradle-extension:impl")
+include("sdk:gradle-extension:reactor-gradle-plugin")
 
 file("example-plugins").listFiles()?.forEach { pluginDir ->
     if (pluginDir.isDirectory) {

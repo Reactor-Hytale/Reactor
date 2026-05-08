@@ -1,11 +1,11 @@
 package codes.reactor.microkernel.event.executor;
 
-import java.lang.invoke.MethodHandle;
-
-import codes.reactor.kernel.event.dispatch.EventExecutor;
 import codes.reactor.kernel.event.Cancellable;
+import codes.reactor.kernel.event.dispatch.EventExecutor;
 import codes.reactor.kernel.logger.Logger;
 import org.jetbrains.annotations.NotNull;
+
+import java.lang.invoke.MethodHandle;
 
 public final class ListenerMethodHandleExecutor implements EventExecutor {
 

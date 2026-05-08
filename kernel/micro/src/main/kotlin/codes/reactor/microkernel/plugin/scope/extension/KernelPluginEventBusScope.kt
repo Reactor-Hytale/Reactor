@@ -5,7 +5,7 @@ import codes.reactor.kernel.event.Subscription
 import codes.reactor.kernel.event.handler.EventHandler
 import codes.reactor.kernel.event.handler.ListenerPhase
 import codes.reactor.kernel.plugin.scope.PluginDependencyProvider
-import java.util.Collections
+import java.util.*
 
 class KernelPluginEventBusScope(
     private val delegate: EventBus,

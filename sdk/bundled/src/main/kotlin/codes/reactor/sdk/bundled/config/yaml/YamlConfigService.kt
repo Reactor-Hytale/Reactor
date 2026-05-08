@@ -2,8 +2,8 @@ package codes.reactor.sdk.bundled.config.yaml
 
 import codes.reactor.sdk.bundled.config.AbstractConfigService
 import codes.reactor.sdk.config.ConfigSection
-import codes.reactor.sdk.config.section.MapConfigSection
 import codes.reactor.sdk.config.SaveOptions
+import codes.reactor.sdk.config.section.MapConfigSection
 import org.snakeyaml.engine.v2.api.Load
 import org.snakeyaml.engine.v2.api.LoadSettings
 import java.nio.file.Files

@@ -7,12 +7,12 @@ import codes.reactor.kernel.scheduler.SchedulerProvider
 import codes.reactor.microkernel.config.KernelPluginConfig
 import codes.reactor.microkernel.event.bus.DefaultEventBus
 import codes.reactor.microkernel.logger.MicrokernelLoggerFactory
-import codes.reactor.microkernel.plugin.catalog.DefaultPluginCatalog
-import codes.reactor.microkernel.plugin.lifecycle.DefaultPluginLifecycleControl
 import codes.reactor.microkernel.plugin.PluginInstaller
 import codes.reactor.microkernel.plugin.PluginStarter
+import codes.reactor.microkernel.plugin.catalog.DefaultPluginCatalog
 import codes.reactor.microkernel.plugin.library.LibraryPathResolver
 import codes.reactor.microkernel.plugin.library.PluginLibraryResolver
+import codes.reactor.microkernel.plugin.lifecycle.DefaultPluginLifecycleControl
 import codes.reactor.microkernel.plugin.manifest.PluginPropertiesReader
 import codes.reactor.microkernel.plugin.scanner.PluginScanner
 import codes.reactor.microkernel.plugin.scope.KernelPluginScopeFactory

@@ -5,7 +5,7 @@ import codes.reactor.kernel.logger.LoggerSpy
 import codes.reactor.kernel.plugin.scope.PluginDependencyProvider
 import codes.reactor.kernel.plugin.scope.PluginScopeFactory
 import codes.reactor.microkernel.plugin.scope.KernelPluginScope
-import java.util.Collections
+import java.util.*
 
 class KernelLoggerSpyScope(
     private val pluginScopeFactory: PluginScopeFactory

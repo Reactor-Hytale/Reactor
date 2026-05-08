@@ -1,6 +1,5 @@
 package codes.reactor.microkernel.logger.plugin;
 
-import codes.reactor.kernel.Reactor;
 import codes.reactor.kernel.logger.LogLevel;
 import codes.reactor.kernel.logger.Logger;
 import codes.reactor.kernel.logger.LoggerFormatter;

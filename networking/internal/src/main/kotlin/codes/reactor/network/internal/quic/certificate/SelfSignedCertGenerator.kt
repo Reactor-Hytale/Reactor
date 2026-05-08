@@ -9,7 +9,7 @@ import java.math.BigInteger
 import java.security.KeyPair
 import java.security.cert.X509Certificate
 import java.time.Duration
-import java.util.Date
+import java.util.*
 
 object SelfSignedCertGenerator {
 

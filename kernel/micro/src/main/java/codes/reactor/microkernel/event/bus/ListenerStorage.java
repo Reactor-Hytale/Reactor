@@ -3,9 +3,6 @@ package codes.reactor.microkernel.event.bus;
 
 import codes.reactor.kernel.event.handler.EventHandler;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
 final class ListenerStorage {
     private static final EventHandler[] EMPTY_LISTENERS = new EventHandler[0];
 
