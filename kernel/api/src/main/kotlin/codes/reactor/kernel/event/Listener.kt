@@ -1,8 +1,8 @@
 package codes.reactor.kernel.event
 
 import codes.reactor.kernel.event.handler.ListenerPhase
-import kotlin.annotation.AnnotationTarget.FUNCTION
 import kotlin.annotation.AnnotationRetention.RUNTIME
+import kotlin.annotation.AnnotationTarget.FUNCTION
 
 @Target(FUNCTION)
 @Retention(RUNTIME)

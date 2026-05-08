@@ -1,9 +1,9 @@
 package codes.reactor.kernel.plugin.control
 
-import codes.reactor.kernel.plugin.model.PluginId
 import codes.reactor.kernel.plugin.exception.PluginNotFoundException
 import codes.reactor.kernel.plugin.exception.PluginOperationInProgressException
 import codes.reactor.kernel.plugin.exception.PluginTransitionNotAllowedException
+import codes.reactor.kernel.plugin.model.PluginId
 
 interface PluginLifecycleControl {
     @Throws(
