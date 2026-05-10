@@ -5,7 +5,7 @@ import codes.reactor.kernel.logger.LogLevel
 import codes.reactor.kernel.logger.Logger
 import codes.reactor.kernel.logger.LoggerFormatter
 import codes.reactor.boostrap.logger.LogRingBuffer
-import codes.reactor.microkernel.plugin.scope.extension.KernelLoggerSpyScope
+import codes.reactor.microkernel.plugin.scope.provider.ScopedLoggerSpy
 
 class ReactorLogger(
     override val loggerFormatter: LoggerFormatter,
@@ -18,7 +18,7 @@ class ReactorLogger(
 ) : Logger {
 
     private fun getSpyLoggers(): Set<Logger> {
-        val spy = Reactor.loggerSpy as KernelLoggerSpyScope
+        val spy = Reactor.loggerSpy as ScopedLoggerSpy
         return spy.getLoggers()
     }
 

@@ -6,5 +6,6 @@ import codes.reactor.kernel.plugin.model.lifecycle.PluginState
 data class PluginSnapshot(
     val state: PluginState,
     val failure: PluginFailure? = null,
-    val metadata: PluginMetadata
+    val metadata: PluginMetadata,
+    val runtime: PluginRuntimeInfo,
 )

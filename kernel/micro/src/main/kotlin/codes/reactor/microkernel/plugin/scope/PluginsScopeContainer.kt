@@ -11,10 +11,7 @@ object PluginsScopeContainer {
         return scopes.computeIfAbsent(classLoader) { supplyFunction() }
     }
 
-    fun closeScope(classLoader: ClassLoader) {
-        val scope = scopes.remove(classLoader) ?: return
-        runCatching { scope.close() }.onFailure {
-            Microkernel.instance.rootLogger.error("Failed to close root scope for classloader: $classLoader", it)
-        }
+    fun removeScope(classLoader: ClassLoader): PluginScope? {
+        return scopes.remove(classLoader)
     }
 }

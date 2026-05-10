@@ -6,7 +6,9 @@ import codes.reactor.boostrap.logger.LoggersLoader
 import codes.reactor.boostrap.network.NetworkLoader
 import codes.reactor.boostrap.plugin.PluginConfigLoader
 import codes.reactor.microkernel.Microkernel
+import codes.reactor.microkernel.plugin.scope.KernelPluginScopeFactory
 import codes.reactor.sdk.bundled.config.yaml.YamlConfigService
+import codes.reactor.sdk.bundled.scanner.ScannerProvider
 import codes.reactor.sdk.config.ConfigServiceRegistry
 
 fun start(publicClassLoader: ClassLoader) {
@@ -32,6 +34,8 @@ class ReactorBoostrap internal constructor() {
 
         val logger = LoggersLoader(console.terminal.writer()).load(yamlConfigService)
 
+        startSDKFeatures()
+
         Microkernel.init(
             logger = logger,
             kernelPluginConfig = PluginConfigLoader().load(yamlConfigService),
@@ -42,5 +46,9 @@ class ReactorBoostrap internal constructor() {
 
         logger.info("Server started in ${System.currentTimeMillis() - startTime}ms")
         return console
+    }
+
+    private fun startSDKFeatures() {
+        KernelPluginScopeFactory.registerDefaultProvider(ScannerProvider())
     }
 }

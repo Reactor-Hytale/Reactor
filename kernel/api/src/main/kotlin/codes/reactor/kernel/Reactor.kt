@@ -1,5 +1,6 @@
 package codes.reactor.kernel
 
+import codes.reactor.kernel.event.EventBus
 import codes.reactor.kernel.logger.LoggerFactory
 import codes.reactor.kernel.logger.LoggerSpy
 import codes.reactor.kernel.plugin.control.PluginLifecycleControl
@@ -11,6 +12,8 @@ import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.atomic.AtomicBoolean
 
 class Reactor private constructor(
+    val bus: EventBus,
+
     val loggerFactory: LoggerFactory,
     val loggerSpy: LoggerSpy,
 
@@ -30,6 +33,8 @@ class Reactor private constructor(
         private val stopTasks = CopyOnWriteArrayList<() -> Unit>()
         private val shuttingDown = AtomicBoolean(false)
 
+        val bus: EventBus get() = instance.bus
+
         val loggerFactory: LoggerFactory get() = instance.loggerFactory
         val loggerSpy: LoggerSpy get() = instance.loggerSpy
 
@@ -43,6 +48,7 @@ class Reactor private constructor(
         val libraryDirectory: Path get() = instance.baseLibraryDirectory
 
         fun init(
+            eventBus: EventBus,
             loggerFactory: LoggerFactory,
             loggerSpy: LoggerSpy,
             schedulerProvider: SchedulerProvider,
@@ -55,6 +61,7 @@ class Reactor private constructor(
             check(ref == null) { "Kernel already initialized." }
 
             ref = Reactor(
+                eventBus,
                 loggerFactory, loggerSpy,
                 schedulerProvider,
                 pluginCatalog, pluginLifecycleControl, pluginScopeFactory,

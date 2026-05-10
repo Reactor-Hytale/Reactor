@@ -16,13 +16,12 @@ import codes.reactor.microkernel.plugin.lifecycle.DefaultPluginLifecycleControl
 import codes.reactor.microkernel.plugin.manifest.PluginPropertiesReader
 import codes.reactor.microkernel.plugin.scanner.PluginScanner
 import codes.reactor.microkernel.plugin.scope.KernelPluginScopeFactory
-import codes.reactor.microkernel.plugin.scope.extension.KernelLoggerSpyScope
+import codes.reactor.microkernel.plugin.scope.provider.ScopedLoggerSpy
 import codes.reactor.microkernel.plugin.validation.PluginDependencyValidator
 import codes.reactor.microkernel.scheduler.KernelSchedulerProvider
 
 class Microkernel private constructor(
     val pluginConfig: KernelPluginConfig,
-    val rootBus: EventBus,
     val rootLogger: Logger
 ) {
 
@@ -48,17 +47,18 @@ class Microkernel private constructor(
                 pluginCatalog, libraryResolver, kernelPluginConfig, logger, parentClassLoader
             )
 
-            val pluginScopeFactory = KernelPluginScopeFactory()
             Reactor.init(
-                MicrokernelLoggerFactory(logger), KernelLoggerSpyScope(pluginScopeFactory),
+                eventBus,
+                MicrokernelLoggerFactory(logger),
+                ScopedLoggerSpy,
                 schedulerProvider,
                 pluginCatalog, pluginLifecycleControl,
-                pluginScopeFactory,
+                KernelPluginScopeFactory,
                 kernelPluginConfig.paths.plugins,
                 kernelPluginConfig.paths.libraries
             )
 
-            ref = Microkernel(kernelPluginConfig, eventBus, logger)
+            ref = Microkernel(kernelPluginConfig, logger)
 
             Reactor.addStopTask {
                 pluginLifecycleControl.shutdown()

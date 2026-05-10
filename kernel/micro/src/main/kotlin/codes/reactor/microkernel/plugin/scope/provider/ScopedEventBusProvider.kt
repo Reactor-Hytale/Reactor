@@ -1,16 +1,32 @@
-package codes.reactor.microkernel.plugin.scope.extension
+package codes.reactor.microkernel.plugin.scope.provider
 
+import codes.reactor.kernel.Reactor
 import codes.reactor.kernel.event.EventBus
 import codes.reactor.kernel.event.Subscription
 import codes.reactor.kernel.event.handler.EventHandler
 import codes.reactor.kernel.event.handler.ListenerPhase
-import codes.reactor.kernel.plugin.scope.PluginDependencyProvider
+import codes.reactor.kernel.plugin.scope.provider.CloseableDependencyProvider
+import codes.reactor.kernel.plugin.scope.provider.LazyProvider
+import codes.reactor.kernel.plugin.scope.provider.ProtectedDependencyProvider
 import java.util.*
 
-class KernelPluginEventBusScope(
+class ScopedEventBusProvider(
     private val delegate: EventBus,
     val subscriptions: MutableList<Subscription> = Collections.synchronizedList(mutableListOf()),
-) : EventBus, PluginDependencyProvider<EventBus> {
+
+    override val type: Class<EventBus> = EventBus::class.java,
+) : EventBus, CloseableDependencyProvider<EventBus>, ProtectedDependencyProvider {
+
+    companion object {
+        fun fromLazy(): LazyProvider<EventBus> {
+            val supplier: () -> EventBus = { ScopedEventBusProvider(Reactor.bus) }
+
+            return LazyProvider(
+                type = EventBus::class.java,
+                supplier = supplier,
+            )
+        }
+    }
 
     private fun addSubscription(subscription: Subscription) {
         if (!subscription.handlers.isEmpty()) {

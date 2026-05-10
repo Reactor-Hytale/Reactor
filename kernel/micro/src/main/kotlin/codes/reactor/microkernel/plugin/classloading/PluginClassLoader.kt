@@ -1,6 +1,8 @@
 package codes.reactor.microkernel.plugin.classloading
 
 import codes.reactor.kernel.plugin.model.PluginId
+import codes.reactor.microkernel.Microkernel
+import codes.reactor.microkernel.plugin.scope.KernelPluginScope
 import codes.reactor.microkernel.plugin.scope.PluginsScopeContainer
 import java.net.URL
 import java.net.URLClassLoader
@@ -19,7 +21,14 @@ internal class PluginClassLoader(
     }
 
     override fun close() {
-        PluginsScopeContainer.closeScope(this)
+        val scope = PluginsScopeContainer.removeScope(this)
+        if (scope is KernelPluginScope) {
+            runCatching {
+                scope.close()
+            }.onFailure {
+                Microkernel.instance.rootLogger.error("Failed to close scope for id: $id", it)
+            }
+        }
         super.close()
     }
 

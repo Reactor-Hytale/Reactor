@@ -3,9 +3,10 @@ package codes.reactor.plugin.debug
 import codes.reactor.kernel.event.handler.ListenerPhase
 import codes.reactor.kernel.event.subscribe
 import codes.reactor.kernel.logger.logger
-import codes.reactor.kernel.plugin.scope.eventbus
-import codes.reactor.kernel.plugin.scope.scope
+import codes.reactor.sdk.extension.eventbus
+import codes.reactor.sdk.extension.scope
 import codes.reactor.kernel.plugin.spi.lifecycle.BasePluginLifecycle
+import codes.reactor.sdk.extension.scan
 import codes.reactor.sdk.plugin.annotation.Plugin
 
 @Plugin(id = "ReactorDebugPlugin", version = "1.0.0-ALPHA")
@@ -28,6 +29,14 @@ class DebugPlugin: BasePluginLifecycle() {
         ) {
             logger.info("Received $it")
         }
+
+        scope.scan {
+            provideWithHierarchy(this@DebugPlugin)
+            listeners() // Use plugin main package + ".listeners"
+            // Same as: listeners("codes.reactor.plugin.debug.listeners")
+        }
+
+        eventbus.publish("test")
 
         val config = DebugConfig.load()
         logger.info("Example config: test-string: ${config.testString} - duration: ${config.exampleDuration}")

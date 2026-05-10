@@ -14,7 +14,6 @@ import codes.reactor.microkernel.plugin.lifecycle.runtime.PluginInstanceCreator
 import codes.reactor.microkernel.plugin.lifecycle.runtime.PluginRuntimeReleaser
 import codes.reactor.microkernel.plugin.lifecycle.runtime.StartupLogEnd
 import codes.reactor.microkernel.plugin.lifecycle.runtime.withPluginClassLoader
-import codes.reactor.microkernel.plugin.scope.PluginsScopeContainer
 import java.util.concurrent.TimeUnit
 
 internal class PluginLifecycleRunner(
@@ -37,7 +36,6 @@ internal class PluginLifecycleRunner(
             synchronized(entry) {
                 if (entry.state == PluginState.CANCELLED) {
                     runCatching {
-                        PluginsScopeContainer.closeScope(loadedPlugin.classLoader)
                         loadedPlugin.classLoader.close()
                     }
                     throw cancelledException(entry, PluginState.LOADING, "Plugin startup was cancelled before onLoad.")

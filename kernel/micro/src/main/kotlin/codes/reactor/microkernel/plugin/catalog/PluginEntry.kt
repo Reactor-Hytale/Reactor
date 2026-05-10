@@ -2,6 +2,7 @@ package codes.reactor.microkernel.plugin.catalog
 
 import codes.reactor.kernel.plugin.model.PluginId
 import codes.reactor.kernel.plugin.model.PluginMetadata
+import codes.reactor.kernel.plugin.model.PluginRuntimeInfo
 import codes.reactor.kernel.plugin.model.PluginSnapshot
 import codes.reactor.kernel.plugin.model.failure.PluginFailure
 import codes.reactor.kernel.plugin.model.lifecycle.PluginState
@@ -32,7 +33,8 @@ internal class PluginEntry(
     var classLoader: PluginClassLoader? = null
 
     fun snapshot(): PluginSnapshot {
-        return PluginSnapshot(state, failure, metadata)
+        val rootPackage = candidate.manifest.mainClass.substringBeforeLast('.')
+        return PluginSnapshot(state, failure, metadata, PluginRuntimeInfo(rootPackage))
     }
 
     override fun toString(): String = id.toString()
